@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
-export type UserDocument = User & Document;
+export type AccountDocument = Account & Document;
 
 /*
   The @Schema() decorator marks a class as a schema definition. 
@@ -12,30 +12,22 @@ export type UserDocument = User & Document;
   For additional info, visit: https://docs.nestjs.com/techniques/mongodb
 */
 @Schema()
-export class User {
+export class Account {
   @Prop({ required: true })
-  name: string;
+  status: string;
 
   @Prop({ required: true })
-  email: string;
+  accountid: string;
+
+  @Prop({ required: true })
+  userid:string;
 
   @Prop({ required: true })
   password:string;
 
   @Prop({ required: true })
-  userName:string;
-
-  @Prop({ required: true })
-  phone:number;
-
-  @Prop({ required: true })
   giuEmail:string;
-
-  @Prop({ required: true })
-  giuId:number;
-
-  
 
 }
 
-export const UserSchema = SchemaFactory.createForClass(User);
+export const AccountSchema = SchemaFactory.createForClass(Account);

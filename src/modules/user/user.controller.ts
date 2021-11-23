@@ -23,4 +23,6 @@ export class UserController {
   users(): any {
     return this.userService.findAll();
   }
+
+  
 }
