@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import internal from 'stream';
 
 @Injectable()
 export class TransactionService {
@@ -13,4 +14,10 @@ export class TransactionService {
    getTrancation(accountid:string): Promise<Transaction[]> {
     return this.userModel.find().exec();
   }
+
+  
+  PostTransaction(Display_date: string, name: string, debit: number, credit: number, amount: number, accountid: string): any {
+    return this.transactionModel.insert({Display_date: Display_date, name: name, debit: debit, credit: credit, amount:amount, accountid: accountid});
+  }
+
 }

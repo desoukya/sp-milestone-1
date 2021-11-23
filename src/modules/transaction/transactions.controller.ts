@@ -1,4 +1,4 @@
-import { Controller, Get, Request, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Request, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { TransactionService } from './transaction.service';
 
@@ -23,5 +23,10 @@ export class TransactionController {
   @Get('list')
   transactions(): any {
     return this.transactionService.findAll();
+  }
+
+  @Post()
+  PostTransaction(Display_date: string, name: string, debit: number, credit: number, amount: number, accountid: string): any {
+    return this.transactionService. PostTransaction(Display_date, name, debit, credit, amount, accountid);
   }
 }
