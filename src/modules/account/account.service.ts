@@ -17,8 +17,8 @@ export class AccountService {
 /**
  *  Returns all account that has the userid, expects userid a parameter
  */
-//   find(uid: string): Promise<Account[]> {
-//     return this.accountModel.find({userid:uid}).exec();
-//  }
+  findAccount(uid: string): Promise<Account[]> {
+    return this.accountModel.find({userid:uid}).exec();
+  }
 }
 
