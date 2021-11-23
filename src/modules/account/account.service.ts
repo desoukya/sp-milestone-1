@@ -5,12 +5,20 @@ import { Model } from 'mongoose';
 
 @Injectable()
 export class AccountService {
-  constructor(@InjectModel(Account.userid) private accountModel: Model<AccountDocument>) {}
+  constructor(@InjectModel(Account.accountid) private accountModel: Model<AccountDocument>) {}
 
   /**
-   * Returns all users from mongo database
+   * Returns all accounts from mongo database
    */
   findAll(): Promise<Account[]> {
     return this.accountModel.find().exec();
   }
+
+/**
+ *  Returns all account that has the userid, expects userid a parameter
+ */
+//   find(uid: string): Promise<Account[]> {
+//     return this.accountModel.find({userid:uid}).exec();
+//  }
 }
+
