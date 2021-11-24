@@ -44,12 +44,12 @@ export const UserSchema = new mongoose.Schema({
   name: {
     type: String,
     unique: true,
-    required: true
+    required: false
   },
    username: {
     type: String,
     unique: true,
-    required: true
+    required: false
   },
    email: {
     type: String,
@@ -59,7 +59,7 @@ export const UserSchema = new mongoose.Schema({
    phone: {
     type: Number,
     unique: true,
-    required: true
+    required: false
   },
   password: {
     type: String,
