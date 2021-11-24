@@ -19,7 +19,7 @@
     "noFallthroughCasesInSwitch": false,
     "resolveJsonModule": true,
     "paths": {
-      "@sp/schemas": ["src/schemas"],
+      "@sp/schemas": ["src/modules/schemas"],
     }    
   }
 }
