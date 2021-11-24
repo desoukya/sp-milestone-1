@@ -1,6 +1,7 @@
-import { Controller, Get, Request, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Request, UseGuards , Post} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AccountService } from './account.service';
+import { AccountDto } from './dtos/account.dto';
 
 @Controller('accounts')
 export class AccountController {
@@ -20,13 +21,18 @@ export class AccountController {
    * API endpoint handler returns all users from mongo database
    */
   //@UseGuards(AuthGuard('jwt'))
-  @Get('list')
-  accounts(): any {
-    return this.accountService.findAll();
+  // @Get('list')
+  // accounts(): any {
+  //   return this.accountService.findAll();
+  // }
+
+  @Get(':id')
+  GetAccount(@Param('userid') userid: string): any {
+    return this.accountService.findAccounts(userid);
   }
 
-  @Get('account')
-  GetAccount(userid: string): any {
-    return this.accountService.findAccounts(userid);
+  @Post()
+  CreateAccount(@Body() dto:AccountDto):any{
+      const accountId = this.accountService.createAccount(dto);
   }
 }
