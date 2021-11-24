@@ -1,16 +1,29 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { AuthDto } from './dtos/auth.dto';
+import { User, UserDocument } from '@sp/schemas';
+import { Model } from 'mongoose';
 
-@Injectable()
+@Injectable() 
 export class AuthService {
   constructor(private jwtService: JwtService) {}
+  private userModel: Model <UserDocument>;
 
   /**
    * Determines if the user credentials provided are correct
    * @param dto
    */
-  login(dto: AuthDto) {
+  login(dto: AuthDto) { 
+   
+    if (dto.email!=null && dto.password!=null) {
+      const payload = this.userModel.findOne({'email':dto.email,'password':dto.password});
+      if (payload != null) {
+          return {
+            access_token: this.jwtService.sign(payload),
+          }
+      }
+    }
+    return UnauthorizedException;
     /* 
       TODO: Add your login logic here to return
       appropriate exceptions when a user/password
@@ -25,3 +38,4 @@ export class AuthService {
     */
   }
 }
+
