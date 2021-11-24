@@ -19,7 +19,6 @@ export class TransactionService {
   }
 
   
-  
   PostTransaction(
     Display_date: string,
     name: string,
