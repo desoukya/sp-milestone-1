@@ -11,12 +11,13 @@ export class AccountController {
 
   /**
    * API endpoint handler returns the authenticated user from JWT payload
-   */    
+     
   //@UseGuards(AuthGuard('jwt'))
   @Get()
   account(@Request() req: any): any {//might not need this method
     return req.account;
-  }
+  } 
+   */
 
   /**
    * API endpoint handler returns all users from mongo database
@@ -27,11 +28,14 @@ export class AccountController {
   //   return this.accountService.findAll();
   // }
 
-  @Get(':id')
+  @UseGuards(AuthGuard('jwt'))
+  @Get(':userid')
   GetAccount(@Param('userid') userid: string): any {
     return this.accountService.findAccounts(userid);
   }
 
+
+  @UseGuards(AuthGuard('jwt'))
   @Post()
   CreateAccount(@Body() dto:AccountDto):any{
       const accountId = this.accountService.createAccount(dto);
