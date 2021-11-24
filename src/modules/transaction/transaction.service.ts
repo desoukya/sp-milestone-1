@@ -30,17 +30,7 @@ export class TransactionService {
     return createdTransaction.save();
   }
 
-  /**
-   * import { TransactionDto } from './dto/create-cat.dto';
-
-@Injectable()
-export class CatsService {
-  constructor(@InjectModel(Transaction.name) private transactionModel: Model<TransactionDocument>) {}
-
-  async create(dto: TransactionDto): Promise<Cat> {
-    const createdTransaction = new this.TransactionModel(TransactionDto);
-    return createdTransaction.save();
-  }
-   */
+ 
+   
 
 }

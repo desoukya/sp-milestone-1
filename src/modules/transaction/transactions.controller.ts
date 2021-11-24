@@ -21,11 +21,11 @@ export class TransactionController {
    */
   //@UseGuards(AuthGuard('jwt'))
   
-  @UseGuards(AuthGuard('jwt'))
-  @Post()
-  PostTransaction(Display_date: string, name: string, debit: number, credit: number, amount: number, accountid: string): any {
-    return this.transactionService.PostTransaction(Display_date, name, debit, credit, amount, accountid);
-  }
+  //@UseGuards(AuthGuard('jwt'))
+  // @Post()
+  // PostTransaction(Display_date: string, name: string, debit: number, credit: number, amount: number, accountid: string): any {
+  //   return this.transactionService.PostTransaction(Display_date, name, debit, credit, amount, accountid);
+  // }
 
   @Post()
   addTransaction(

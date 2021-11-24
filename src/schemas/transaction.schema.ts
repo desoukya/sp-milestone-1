@@ -22,11 +22,6 @@ export class Transaction {
   @Prop({ required: true })
   accountid: string;
 
-  @Prop({ required: true })
-  password:string;
-
-  @Prop({ required: true })
-  giuEmail:string;
 
 }
 
