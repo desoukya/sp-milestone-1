@@ -8,6 +8,7 @@ import {
 } from "reactstrap";
 import { useState } from "react";
 import styles from "../styles/Home.module.css";
+import Navbar from "./Navbar/Navbar";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -43,39 +44,42 @@ export default function Login() {
   };
 
   return (
-    <div className={styles.App}>
-      <h2>Sign In</h2>
-      <Form className={styles.form} onSubmit={handleSubmit}>
-        <FormGroup>
-          <Label className={styles.label} for="email">
-            Username
-          </Label>
+    <div>
+      <Navbar />
+      <div className={styles.App}>
+        <h2>Sign In</h2>
+        <Form className={styles.form} onSubmit={handleSubmit}>
+          <FormGroup>
+            <Label className={styles.label} for="email">
+              Username
+            </Label>
 
-          <Input
-            type="text"
-            name="email"
-            id="email"
-            placeholder="example@example.com"
-            onChange={handleChange}
-            valid={emailState === "has-success"}
-            invalid={emailState === "has-danger"}
-          />
-          <FormFeedback>Please input a correct email.</FormFeedback>
-        </FormGroup>
-        <FormGroup>
-          <Label className={styles.label} for="password">
-            Password
-          </Label>
-          <Input
-            type="password"
-            name="password"
-            id="password"
-            placeholder="********"
-            onChange={handleChange}
-          />
-        </FormGroup>
-        <Button color="primary">Submit</Button>
-      </Form>
+            <Input
+              type="text"
+              name="email"
+              id="email"
+              placeholder="example@example.com"
+              onChange={handleChange}
+              valid={emailState === "has-success"}
+              invalid={emailState === "has-danger"}
+            />
+            <FormFeedback>Please input a correct email.</FormFeedback>
+          </FormGroup>
+          <FormGroup>
+            <Label className={styles.label} for="password">
+              Password
+            </Label>
+            <Input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="********"
+              onChange={handleChange}
+            />
+          </FormGroup>
+          <Button color="primary">Submit</Button>
+        </Form>
+      </div>
     </div>
   );
 }
