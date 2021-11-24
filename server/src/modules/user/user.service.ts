@@ -1,13 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { User, UserDocument } from '@sp/schemas';
 import { Model } from 'mongoose';
 import { UserDto } from './dtos/user.dto';
+import { User } from './user.interface';
+
 
 
 @Injectable()
 export class UserService {
-  constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) { }
+  constructor(@InjectModel('User') private userModel: Model<User>) { }
 
   /**
    * Returns all users from mongo database
@@ -21,7 +22,9 @@ export class UserService {
     return await user.save();
   }
 
-  async findOneByEmail(email): Promise<User[]> {
-    return await this.userModel.find({ email : email }).exec();
+  async findOneByEmail(email): Promise<User> {
+
+    return await this.userModel.findOne({email: email});
+
   }
 }

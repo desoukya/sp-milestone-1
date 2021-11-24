@@ -11,7 +11,11 @@ export class AuthController {
    * @param dto
    */
   @Post('/login')
-  login(@Body() dto: AuthDto) {
+  async login(@Body() dto: AuthDto) {
     // TODO: Add your login logic here
+    return await this.authService.login(dto);
+
   }
+
+  
 }
