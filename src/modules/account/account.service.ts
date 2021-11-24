@@ -1,8 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Account,AccountDocument } from '@sp/schemas';
+import { Account,AccountDocument, Transaction } from '@sp/schemas';
 import { Model } from 'mongoose';
 import { AccountDto } from './dtos/account.dto';
+import { TransactionService } from '../transaction/transaction.service';
+
 
 @Injectable()
 export class AccountService {
@@ -26,6 +28,9 @@ export class AccountService {
      const createdAccount = new this.accountModel(dto);
       return createdAccount.save();
      }
+
+
+     
    
 }
 

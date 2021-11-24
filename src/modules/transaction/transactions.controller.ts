@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Request, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Request, UseGuards , Param } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { TransactionService } from './transaction.service';
 
@@ -10,21 +10,18 @@ export class TransactionController {
   /**
    * API endpoint handler returns the authenticated user from JWT payload
    */    
-  //@UseGuards(AuthGuard('jwt'))
-  @Get()
-  transaction(@Request() req: any): any {
-    return req.transaction;
+  @UseGuards(AuthGuard('jwt'))
+  @Get(':accountId')
+  transaction(@Param() accountId: string): any {
+    return this.transactionService.getTrancation(accountId);
   }
 
   /**
    * API endpoint handler returns all users from mongo database
    */
   //@UseGuards(AuthGuard('jwt'))
-  @Get('list')
-  transactions(accountid:string): any {
-    return this.transactionService.getTrancation(accountid);
-  }
-
+  
+  @UseGuards(AuthGuard('jwt'))
   @Post()
   PostTransaction(Display_date: string, name: string, debit: number, credit: number, amount: number, accountid: string): any {
     return this.transactionService.PostTransaction(Display_date, name, debit, credit, amount, accountid);

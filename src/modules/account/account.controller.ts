@@ -1,12 +1,13 @@
 import { Body, Controller, Get, Param, Request, UseGuards , Post} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { TransactionService } from '../transaction/transaction.service';
 import { AccountService } from './account.service';
 import { AccountDto } from './dtos/account.dto';
 
 @Controller('accounts')
 export class AccountController {
   // TODO: Define your account Endpoints
-  constructor(private accountService: AccountService) {}
+  constructor(private accountService: AccountService,private transactionService:TransactionService) {}
 
   /**
    * API endpoint handler returns the authenticated user from JWT payload
@@ -35,4 +36,5 @@ export class AccountController {
   CreateAccount(@Body() dto:AccountDto):any{
       const accountId = this.accountService.createAccount(dto);
   }
+
 }
