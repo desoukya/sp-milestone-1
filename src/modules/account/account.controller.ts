@@ -12,7 +12,7 @@ export class AccountController {
    */    
   //@UseGuards(AuthGuard('jwt'))
   @Get()
-  account(@Request() req: any): any {
+  account(@Request() req: any): any {//might not need this method
     return req.account;
   }
 

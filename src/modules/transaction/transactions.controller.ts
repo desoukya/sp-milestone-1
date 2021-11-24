@@ -21,12 +21,12 @@ export class TransactionController {
    */
   //@UseGuards(AuthGuard('jwt'))
   @Get('list')
-  transactions(): any {
-    return this.transactionService.findAll();
+  transactions(accountid:string): any {
+    return this.transactionService.getTrancation(accountid);
   }
 
   @Post()
   PostTransaction(Display_date: string, name: string, debit: number, credit: number, amount: number, accountid: string): any {
-    return this.transactionService. PostTransaction(Display_date, name, debit, credit, amount, accountid);
+    return this.transactionService.PostTransaction(Display_date, name, debit, credit, amount, accountid);
   }
 }
