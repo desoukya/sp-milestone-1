@@ -23,9 +23,6 @@ export class User {
   password:string;
 
   @Prop({ required: true })
-  userName:string;
-
-  @Prop({ required: true })
   phone:number;
 
   @Prop({ required: true })
@@ -34,7 +31,7 @@ export class User {
   @Prop({ required: true })
   giuId:number;
 
-  
+
 
 }
 
