@@ -27,6 +27,6 @@ export class AccountController {
 
   @Get('account')
   GetAccount(userid: string): any {
-    return this.accountService.findAccount(userid);
+    return this.accountService.findAccounts(userid);
   }
 }
