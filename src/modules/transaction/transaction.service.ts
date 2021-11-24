@@ -19,8 +19,16 @@ export class TransactionService {
   }
 
   
-  PostTransaction(Display_date: string, name: string, debit: number, credit: number, amount: number, accountid: string): any {
-    return this.transactionModel.create({Display_date: Display_date, name: name, debit: debit, credit: credit, amount:amount, accountid: accountid});
+  
+  PostTransaction(
+    Display_date: string,
+    name: string,
+    debit: number, 
+    credit: number, 
+    amount: number, 
+    accountid: string): any {
+    const createdTransaction = new this.transactionModel({Display_date: Display_date, name: name, debit: debit, credit: credit, amount:amount, accountid: accountid});
+    return createdTransaction.save();
   }
 
   /**

@@ -23,7 +23,10 @@ export class AccountService {
     return this.accountModel.find({userid:uid}).exec();
   }
 
-  
+  /**
+   *userId 
+   *
+   */
    createAccount(dto: AccountDto): Promise<Account> {
      const createdAccount = new this.accountModel(dto);
       return createdAccount.save();
