@@ -8,22 +8,30 @@ import { Transaction } from './transaction.interface';
 
 @Injectable()
 export class TransactionService {
-  constructor(@InjectModel('Account') private accountModel: Model<Account> , @InjectModel('Transaction') private transactionModel : Model<Transaction> ) {}
+  constructor(@InjectModel('Account') private accountModel: Model<Account>, 
+  @InjectModel('Transaction') private transactionModel : Model<Transaction> ) {}
   
   findAll(): Promise<Account[]> {
     return this.accountModel.find().exec();
   }
   //FIND ACCOUNT BY ID
   async findAccountById(id): Promise<Account> {
-
     return await this.accountModel.findById({id: id});
 
   }
 
   async findTransaction(id): Promise<Transaction> {
-
     return await this.transactionModel.findById({id: id});
 
+  }
+  async newAccount(accountDto: accountDto) {
+    let account = new this.accountModel(accountDto);
+    return await account.save();
+  }
+
+  async newTransaction(accountDto: accountDto) {
+    let transaction = new this.transactionModel(accountDto);
+    return await transaction.save();
   }
 
 
