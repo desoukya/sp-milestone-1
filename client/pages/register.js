@@ -10,7 +10,7 @@ import { useState } from "react";
 import styles from "../styles/Home.module.css";
 
 export default function Register() {
-  const [fullName, setFullNamel] = useState("");
+  const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
@@ -32,7 +32,7 @@ export default function Register() {
     } else {
       phoneState = "has-danger";
     }
-    setPhoneState(PhoneState);
+    setPhoneState(phoneState);
   };
 
   const validatestudentId = (value) => {
@@ -45,9 +45,18 @@ export default function Register() {
     setstudentIdState(studentIdState);
   };
 
+  const validateFullName = (value) => {
+    let fullNameState;
+    if (value.length < 24) {
+      fullNameState = "has-success";
+    } else {
+      fullNameState = "has-danger";
+    }
+    setFullNameState(fullNameState);
+  }
   const validateUserName = (value) => {
     let userNameState;
-    if (value.length <= 16 && value.length >= 4) {
+    if (value.length < 17) {
       userNameState = "has-success";
     } else {
       userNameState = "has-danger";
@@ -96,7 +105,22 @@ export default function Register() {
       validateConfirmPassword(value);
       setConfirmPassword(value);
     }
-    // else if (){
+    else if (name === "studentId"){
+    validatestudentId(value);
+    setstudentId(value);
+    }
+    else if (name === "phone"){
+      validatePhone(value);
+      setPhone(value);
+    }
+    else if (name === "userName"){
+      validateUserName(value);
+      setUserName(value);
+    }
+    else if (name === "fullName"){
+      validateFullName(value);
+      setFullName(value);
+    }
     else {
       validatePassword(value);
       setPassword(value);
@@ -111,6 +135,7 @@ export default function Register() {
     validateUserName(userName);
     validatestudentId(studentId);
     validatePhone(phone);
+    validateFullName(fullName);
 
     if (
       emailState === "has-success" &&
@@ -118,7 +143,8 @@ export default function Register() {
       confirmPasswordState === "has-success" &&
       phoneState === "has-success" &&
       userNameState === "has-success" &&
-      studentIdState === "has-success"
+      studentIdState === "has-success" &&
+      fullNameState === "has-success"
     ) {
       // Call User Register Adapter
     }
@@ -135,7 +161,7 @@ export default function Register() {
 
           <Input
             type="text"
-            name="email"
+            name="email" required
             id="email"
             placeholder="example@example.com"
             onChange={handleChange}
@@ -150,8 +176,10 @@ export default function Register() {
           </Label>
           <Input
             type="text"
-            name="userName"
+            name="userName" required
             id="userName"
+            minlength="4" 
+            maxlength="16"
             placeholder="ex. homelessKing"
             onChange={handleChange}
             valid={userNameState === "has-success"}
@@ -167,7 +195,7 @@ export default function Register() {
           </Label>
           <Input
             type="text"
-            name="fullName"
+            name="fullName" required
             id="fullName"
             placeholder="First and Last Name"
             onChange={handleChange}
@@ -181,10 +209,11 @@ export default function Register() {
             Phone Number
           </Label>
           <Input
-            type="number"
-            step="0"
-            name="phone"
+            type="tel"
+            name="phone" required
             id="phone"
+            minlength="11" 
+            maxlength="11"
             placeholder="ex. 01223456789"
             onChange={handleChange}
             valid={phoneState === "has-success"}
@@ -200,10 +229,11 @@ export default function Register() {
             GIU Student ID
           </Label>
           <Input
-            type="number"
-            step="0"
-            name="studentId"
+            type="tel"
+            name="studentId" required
             id="studentId"
+            minlength="7" 
+            maxlength="7"
             placeholder="ex. 1002397"
             onChange={handleChange}
             valid={studentIdState === "has-success"}
@@ -211,7 +241,7 @@ export default function Register() {
           />
           <FormFeedback>
             {" "}
-            Please input a valid 11 digit phone number .
+            Please input a valid 7 digit GIU student ID .
           </FormFeedback>
         </FormGroup>
         <FormGroup>
@@ -220,15 +250,17 @@ export default function Register() {
           </Label>
           <Input
             type="password"
-            name="password"
+            name="password" required
             id="password"
+            minlength="6" 
+            maxlength="20"
             placeholder="********"
             onChange={handleChange}
             valid={passwordState === "has-success"}
             invalid={passwordState === "has-danger"}
           />
           <FormFeedback>
-            Password must be at least 6 characters long.
+            Password must be at least 6 characters long and at most 20 characters long.
           </FormFeedback>
         </FormGroup>
         <FormGroup>
@@ -237,8 +269,10 @@ export default function Register() {
           </Label>
           <Input
             type="password"
-            name="confirm_password"
+            name="confirm_password" required
             id="password"
+            minlength="6" 
+            maxlength="20"
             placeholder="********"
             onChange={handleChange}
             valid={confirmPasswordState === "has-success"}
