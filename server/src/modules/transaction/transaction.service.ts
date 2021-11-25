@@ -2,8 +2,8 @@ import { Get, Injectable, Post } from '@nestjs/common';
 import { NestApplicationContext } from '@nestjs/core';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { accountDto } from './account.dto';
-import { Account } from './account.interface';
+import { accountDto } from './transaction.dto';
+import { Account } from '../account/account.interface';
 import { Transaction } from './transaction.interface';
 
 @Injectable()
