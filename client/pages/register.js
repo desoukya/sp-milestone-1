@@ -10,13 +10,51 @@ import { useState } from "react";
 import styles from "../styles/Home.module.css";
 
 export default function Register() {
+  const [fullName, setFullNamel] = useState("");
+  const [phone, setPhone] = useState("");
+  const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
+  const [accountId, setAccountId] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [fullNameState, setFullNameState] = useState("");
+  const [phoneState, setPhoneState] = useState("");
+  const [userNameState, setUserNameState] = useState("");
   const [emailState, setEmailState] = useState("");
+  const [accountIdState, setAccountIdState] = useState("");
   const [passwordState, setPasswordState] = useState("");
   const [confirmPasswordState, setConfirmPasswordState] = useState("");
 
+
+  const validatePhone = (value) => {
+    let phoneState;
+    if (value.length == 11) {
+      phoneState = "has-success";
+    } else {
+      phoneState = "has-danger";
+    }
+    setPhoneState(PhoneState);
+  };
+
+  const validateAccountId = (value) => {
+    let accountIdState;
+    if (value.length == 7) {
+      accountIdState = "has-success";
+    } else {
+      accountIdState = "has-danger";
+    }
+    setAccountIdState(accountIdState);
+  };
+
+  const validateUserName = (value) => {
+    let userNameState;
+    if (value.length == 16) {
+      userNameState = "has-success";
+    } else {
+      userNameState = "has-danger";
+    }
+    setUserNameState(userNameState);
+  };
   const validateEmail = (value) => {
     const emailRegex =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -69,11 +107,18 @@ export default function Register() {
     validateEmail(email);
     validatePassword(password);
     validateConfirmPassword(confirmPassword);
+    validateUserName(userName);
+    validateAccountId(accountId);
+    validatePhone(phone);
 
     if (
       emailState === "has-success" &&
       passwordState === "has-success" &&
-      confirmPasswordState === "has-success"
+      confirmPasswordState === "has-success" &&
+      phoneState === "has-success" &&
+      userNameState === "has-success" &&
+      accountIdState === "has-success" 
+      
     ) {
       // Call User Register Adapter
     }
@@ -85,7 +130,7 @@ export default function Register() {
       <Form className={styles.form} onSubmit={handleSubmit}>
         <FormGroup>
           <Label className={styles.label} for="email">
-            Username
+            Email
           </Label>
 
           <Input

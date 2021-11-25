@@ -9,7 +9,7 @@ export default function Navbar() {
       <a class="navbar-brand" href="#">SafeMonii</a>
       </ul>
       <u1 class="navbar-nav ">
-      <li class="nav-item" justify-content-center>
+      <li class="nav-item" justify-content-center = "true">
           <a class="nav-link" href="#">
             No
           </a>
