@@ -1,14 +1,14 @@
 import { Get, Injectable, Post } from '@nestjs/common';
 import { NestApplicationContext } from '@nestjs/core';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 import { accountDto } from './account.dto';
+import { Account } from './account.interface';
 
 
 @Injectable()
 export class TransactionService {
-  constructor(public id: number, public debit: number, public transactionName: string, 
-    public date: Date, public credit: number, public activebankaccount: boolean, public totalAmount: number ){
-      this.totalAmount = 100;
-    }
+  constructor(@InjectModel('Account') private accountModel: Model<Account>) {}
 
     _isPositive(amount: number): boolean{
       
@@ -23,7 +23,7 @@ export class TransactionService {
     _isAllowed(amount: number): boolean{
       if(!this._isPositive(amount))
         return false;
-      const isAllowed = this.totalAmount - amount >= 0;
+      //const isAllowed = this.accountModel - amount >= 0;
       if(!isAllowed){
         console.error('You have insufficient funds!');
         return false;
