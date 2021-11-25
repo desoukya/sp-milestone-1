@@ -6,6 +6,6 @@ export class accountDto {
   totalAmount : number;
   
   id:number;
-  activeBankAccount : boolean;
+  active : boolean;
 
 }

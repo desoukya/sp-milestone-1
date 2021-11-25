@@ -4,15 +4,33 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { accountDto } from './account.dto';
 import { Account } from './account.interface';
-
+import { Transaction } from './transaction.interface';
 
 @Injectable()
 export class TransactionService {
-  constructor(@InjectModel('Account') private accountModel: Model<Account>) {}
+  constructor(@InjectModel('Account') private accountModel: Model<Account> , @InjectModel('Transaction') private transactionModel : Model<Transaction> ) {}
+  
+  findAll(): Promise<Account[]> {
+    return this.accountModel.find().exec();
+  }
+  //FIND ACCOUNT BY ID
+  async findAccountById(id): Promise<Account> {
+
+    return await this.accountModel.findById({id: id});
+
+  }
+
+  async findTransaction(id): Promise<Transaction> {
+
+    return await this.transactionModel.findById({id: id});
+
+  }
+
+
 
     
-
-   /* _isPositive(amount: number): boolean{
+   /*
+    _isPositive(amount: number): boolean{
       
       const isPositive = amount > 0;
       if(!isPositive){
@@ -22,10 +40,10 @@ export class TransactionService {
       return true;
     }
 
-    _isAllowed(amount: number): boolean{
+    _isAllowed(amount: number , account : accountDto): boolean{
       if(!this._isPositive(amount))
         return false;
-      //const isAllowed = this.accountModel - amount >= 0;
+      const isAllowed = account.totalAmount - amount >= 0;
       if(!isAllowed){
         console.error('You have insufficient funds!');
         return false;
@@ -33,34 +51,34 @@ export class TransactionService {
       return true;  
     }
   
-    getLedgerDate(): string {
+    getLedgerDate(account : Account): string {
 
       let options: Intl.DateTimeFormatOptions = {
           day: "numeric", month: "numeric", year: "numeric",
           hour: "2-digit", minute: "2-digit"
       };
 
-      return this.date.toLocaleDateString("en-GB", options) + " " + this.date.toLocaleTimeString("en-GB", options);
+      return account.date.toLocaleDateString("en-GB", options) + " " + account.date.toLocaleTimeString("en-GB", options);
    }
    
-   getTheDeposite(amount : number): boolean {
+   getTheDeposite(amount : number , account : Account): boolean {
      if(this._isPositive(amount)){
-       this.totalAmount += amount;
-       console.info(`Deposite: ${this.activebankaccount , this.id} new balance is ${this.totalAmount}`);
+       account.balance += amount;
+       console.info(`Deposite: ${account.active , account.id} new balance is ${account.balance}`);
        return true;
      }
      return false;
    }
-   withDraw(amount : number) : boolean{
-     if(this._isAllowed(amount)){
-       this.totalAmount -= amount;
-       console.info(`Withdraw: ${this.activebankaccount , this.id} new balance is ${this.totalAmount}`)
+   withDraw(amount : number , account : accountDto ) : boolean{
+     if(this._isAllowed(amount , account)){
+        account.totalAmount -= amount;
+       console.info(`Withdraw: ${this.accountModel , this.accountModel} new balance is ${this.accountModel}`)
        return true;
      }
      return false;
    }
    MakeTransaction(amount: number , account : accountDto) : boolean{ 
-     this.withDraw(amount); 
+     this.withDraw(amount , account); 
      account.totalAmount += amount;
      return true; 
    }*/
