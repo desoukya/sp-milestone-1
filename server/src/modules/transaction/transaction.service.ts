@@ -10,7 +10,9 @@ import { Account } from './account.interface';
 export class TransactionService {
   constructor(@InjectModel('Account') private accountModel: Model<Account>) {}
 
-    _isPositive(amount: number): boolean{
+    
+
+   /* _isPositive(amount: number): boolean{
       
       const isPositive = amount > 0;
       if(!isPositive){
@@ -61,7 +63,7 @@ export class TransactionService {
      this.withDraw(amount); 
      account.totalAmount += amount;
      return true; 
-   }
+   }*/
 
    
   }
