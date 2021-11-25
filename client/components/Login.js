@@ -8,7 +8,6 @@ import {
 } from "reactstrap";
 import { useState } from "react";
 import styles from "../styles/Home.module.css";
-import Navbar from "./Navbar/Navbar";
 
 export default function Login() {
   const [email, setEmail] = useState("");
