@@ -15,9 +15,10 @@ export const AccountSchema = new mongoose.Schema({
         unique: true,
         required: true
     },
-    password: {
-        type: String,
-        required: true
+    active: {
+        type: Boolean,
+        required: true,
+        default : true
     },
     id:
     {

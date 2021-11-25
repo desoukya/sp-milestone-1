@@ -19,7 +19,7 @@ export class UserController {
   /**
    * API endpoint handler returns all users from mongo database
    */
-  @UseGuards(AuthGuard('jwt'))
+  //@UseGuards(AuthGuard('jwt'))
   @Get('list')
   users(): any {
     return this.userService.findAll();

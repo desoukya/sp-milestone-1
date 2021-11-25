@@ -11,10 +11,10 @@ export class Transaction {
   transactionName: String;
 
   @Prop({ required: true })
-  debit: Number;
+  debit: Boolean;
 
   @Prop({ required: true })
-  credit: Number;
+  credit: Boolean;
 
   @Prop({ required: true })
   totalAmount: Number;
