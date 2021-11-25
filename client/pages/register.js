@@ -14,17 +14,16 @@ export default function Register() {
   const [phone, setPhone] = useState("");
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
-  const [accountId, setAccountId] = useState("");
+  const [studentId, setstudentId] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [fullNameState, setFullNameState] = useState("");
   const [phoneState, setPhoneState] = useState("");
   const [userNameState, setUserNameState] = useState("");
   const [emailState, setEmailState] = useState("");
-  const [accountIdState, setAccountIdState] = useState("");
+  const [studentIdState, setstudentIdState] = useState("");
   const [passwordState, setPasswordState] = useState("");
   const [confirmPasswordState, setConfirmPasswordState] = useState("");
-
 
   const validatePhone = (value) => {
     let phoneState;
@@ -36,19 +35,19 @@ export default function Register() {
     setPhoneState(PhoneState);
   };
 
-  const validateAccountId = (value) => {
-    let accountIdState;
+  const validatestudentId = (value) => {
+    let studentIdState;
     if (value.length == 7) {
-      accountIdState = "has-success";
+      studentIdState = "has-success";
     } else {
-      accountIdState = "has-danger";
+      studentIdState = "has-danger";
     }
-    setAccountIdState(accountIdState);
+    setstudentIdState(studentIdState);
   };
 
   const validateUserName = (value) => {
     let userNameState;
-    if (value.length == 16) {
+    if (value.length <= 16 && value.length >= 4) {
       userNameState = "has-success";
     } else {
       userNameState = "has-danger";
@@ -96,7 +95,9 @@ export default function Register() {
     } else if (name === "confirm_password") {
       validateConfirmPassword(value);
       setConfirmPassword(value);
-    } else {
+    }
+    // else if (){
+    else {
       validatePassword(value);
       setPassword(value);
     }
@@ -108,7 +109,7 @@ export default function Register() {
     validatePassword(password);
     validateConfirmPassword(confirmPassword);
     validateUserName(userName);
-    validateAccountId(accountId);
+    validatestudentId(studentId);
     validatePhone(phone);
 
     if (
@@ -117,8 +118,7 @@ export default function Register() {
       confirmPasswordState === "has-success" &&
       phoneState === "has-success" &&
       userNameState === "has-success" &&
-      accountIdState === "has-success" 
-      
+      studentIdState === "has-success"
     ) {
       // Call User Register Adapter
     }
@@ -143,6 +143,76 @@ export default function Register() {
             invalid={emailState === "has-danger"}
           />
           <FormFeedback>Please input a correct email.</FormFeedback>
+        </FormGroup>
+        <FormGroup>
+          <Label className={styles.label} for="username">
+            Username
+          </Label>
+          <Input
+            type="text"
+            name="userName"
+            id="userName"
+            placeholder="ex. homelessKing"
+            onChange={handleChange}
+            valid={userNameState === "has-success"}
+            invalid={userNameState === "has-danger"}
+          />
+          <FormFeedback>
+            Please input a valid username containing 4 to 16 characters .
+          </FormFeedback>
+        </FormGroup>
+        <FormGroup>
+          <Label className={styles.label} for="fullName">
+            Full Name
+          </Label>
+          <Input
+            type="text"
+            name="fullName"
+            id="fullName"
+            placeholder="First and Last Name"
+            onChange={handleChange}
+            valid={fullNameState === "has-success"}
+            invalid={fullNameState === "has-danger"}
+          />
+          {/* <FormFeedback>Please input a a valid username containing 4 to 16 characters .</FormFeedback> */}
+        </FormGroup>
+        <FormGroup>
+          <Label className={styles.label} for="phone">
+            Phone Number
+          </Label>
+          <Input
+            type="number"
+            step="0"
+            name="phone"
+            id="phone"
+            placeholder="ex. 01223456789"
+            onChange={handleChange}
+            valid={phoneState === "has-success"}
+            invalid={phoneState === "has-danger"}
+          />
+          <FormFeedback>
+            {" "}
+            Please input a valid 11 digit phone number .
+          </FormFeedback>
+        </FormGroup>
+        <FormGroup>
+          <Label className={styles.label} for="studentId">
+            GIU Student ID
+          </Label>
+          <Input
+            type="number"
+            step="0"
+            name="studentId"
+            id="studentId"
+            placeholder="ex. 1002397"
+            onChange={handleChange}
+            valid={studentIdState === "has-success"}
+            invalid={studentIdState === "has-danger"}
+          />
+          <FormFeedback>
+            {" "}
+            Please input a valid 11 digit phone number .
+          </FormFeedback>
         </FormGroup>
         <FormGroup>
           <Label className={styles.label} for="password">
