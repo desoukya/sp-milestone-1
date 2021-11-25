@@ -44,8 +44,7 @@ export default function Login() {
   };
 
   return (
-    <div>
-      <Navbar />
+    
       <div className={styles.App}>
         <h2>Sign In</h2>
         <Form className={styles.form} onSubmit={handleSubmit}>
@@ -80,6 +79,6 @@ export default function Login() {
           <Button color="primary">Submit</Button>
         </Form>
       </div>
-    </div>
+    
   );
 }
