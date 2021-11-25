@@ -178,8 +178,8 @@ export default function Register() {
             type="text"
             name="userName" required
             id="userName"
-            minlength="4" 
-            maxlength="16"
+            minLength="4" 
+            maxLength="16"
             placeholder="ex. homelessKing"
             onChange={handleChange}
             valid={userNameState === "has-success"}
@@ -197,6 +197,8 @@ export default function Register() {
             type="text"
             name="fullName" required
             id="fullName"
+            minLength="2" 
+            maxLength="24"
             placeholder="First and Last Name"
             onChange={handleChange}
             valid={fullNameState === "has-success"}
@@ -212,8 +214,8 @@ export default function Register() {
             type="tel"
             name="phone" required
             id="phone"
-            minlength="11" 
-            maxlength="11"
+            minLength="11" 
+            maxLength="11"
             placeholder="ex. 01223456789"
             onChange={handleChange}
             valid={phoneState === "has-success"}
@@ -232,8 +234,8 @@ export default function Register() {
             type="tel"
             name="studentId" required
             id="studentId"
-            minlength="7" 
-            maxlength="7"
+            minLength="7" 
+            maxLength="7"
             placeholder="ex. 1002397"
             onChange={handleChange}
             valid={studentIdState === "has-success"}
@@ -252,8 +254,8 @@ export default function Register() {
             type="password"
             name="password" required
             id="password"
-            minlength="6" 
-            maxlength="20"
+            minLength="6" 
+            maxLength="20"
             placeholder="********"
             onChange={handleChange}
             valid={passwordState === "has-success"}
@@ -271,8 +273,8 @@ export default function Register() {
             type="password"
             name="confirm_password" required
             id="password"
-            minlength="6" 
-            maxlength="20"
+            minLength="6" 
+            maxLength="20"
             placeholder="********"
             onChange={handleChange}
             valid={confirmPasswordState === "has-success"}
