@@ -4,13 +4,20 @@ import { User, UserDocument } from '@sp/schemas';
 import { Model } from 'mongoose';
 import passport from 'passport';
 import {UserDto} from './dtos/user.dto';
+import { AuthDto } from '../auth/dtos/auth.dto';
+import { AnyFilesInterceptor } from '@nestjs/platform-express';
 
 @Injectable()
 export class UserService {
   constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
 
-  
+   findOne(dto:AuthDto){
+     
+     return this.userModel.find({ email: dto.email,password:dto.password}).exec();
+
+  }
+
   /**
    * Returns all users from mongo database
    */
