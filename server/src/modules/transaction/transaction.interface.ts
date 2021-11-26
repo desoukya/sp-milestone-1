@@ -7,7 +7,8 @@ export interface Transaction {
   totalAmount: Number;
   id: [
       {
-          type: mongoose.Schema.Types.ObjectId, ref: 'User'
+          type: Number
+          //type: mongoose.Schema.Types.ObjectId, ref: 'User'
       }
   ]
 

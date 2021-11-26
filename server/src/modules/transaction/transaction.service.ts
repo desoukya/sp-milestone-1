@@ -15,7 +15,10 @@ export class TransactionService {
   }
 
   async findTransaction(id): Promise<Transaction> {
-    return await this.transactionModel.findById({id: id});
+    console.log("l id aho lli da5el serfise: " + id);
+    let meow = this.transactionModel.findOne({id : id});
+    console.log("alndfqewhfouihweoifp;ejw;"+ meow)
+    return await this.transactionModel.findOne({id : id});
 
   }
 
@@ -89,4 +92,3 @@ export class TransactionService {
 
 
   // TODO: Define your Transaction Service Logic
-

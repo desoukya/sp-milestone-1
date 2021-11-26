@@ -13,7 +13,8 @@ export class TransactionController {
   }
 
   @Get('/transactionList')
-  transaction(id): any {
-    return this.transactionService.findTransaction(id);
+  async transaction(id: transactionDto) {
+    console.log("l id aho lli da5el: " + id);
+    return await this.transactionService.findTransaction(id);
   }
 }

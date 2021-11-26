@@ -5,7 +5,7 @@ export class transactionDto {
   transactionName: String;
   credit:  Boolean;
   debit: Boolean;
-  totalAmount : number;
-  id:number;
+  totalAmount : Number;
+  id:Number;
 
 }

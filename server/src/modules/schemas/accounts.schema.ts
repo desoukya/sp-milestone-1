@@ -7,12 +7,11 @@ export const AccountSchema = new mongoose.Schema({
     balance: {
         type: Number,
         required: true,
-        default: 100
     },
     accountNumber: {
-        type: Number
-        //unique: true,
-        //required: true
+        type: Number,
+        unique: true,
+        required: true
     },
     active: {
         type: Boolean,
@@ -20,9 +19,9 @@ export const AccountSchema = new mongoose.Schema({
         default : true
     },
     id: {
-        type: Number
+        type: Number,
         //type: mongoose.Schema.Types.ObjectId, ref: 'User',
-        //required: true
+        required: true
     }
 
 });
