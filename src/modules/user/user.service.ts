@@ -12,8 +12,7 @@ export class UserService {
   constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
 
-   findOne(dto:AuthDto){
-     
+     findOne(dto:AuthDto){
      return this.userModel.find({ email: dto.email,password:dto.password}).exec();
 
   }

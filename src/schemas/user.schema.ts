@@ -13,8 +13,8 @@ export type UserDocument = User & Document;
 */
 @Schema()
 export class User {
-  @Prop({ required: true })
-  name: string;
+  // @Prop({ required: true })
+  // name: string;
 
   @Prop({ required: true })
   email: string;
@@ -22,14 +22,14 @@ export class User {
   @Prop({ required: true })
   password:string;
 
-  @Prop({ required: true })
-  phone:number;
+  // @Prop({ required: true })
+  // phone:number;
 
-  @Prop({ required: true })
-  giuEmail:string;
+  // @Prop({ required: true })
+  // giuEmail:string;
 
-  @Prop({ required: true })
-  giuId:number;
+  // @Prop({ required: true })
+  // giuId:number;
 
 
 
