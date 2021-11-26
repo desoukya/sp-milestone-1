@@ -13,13 +13,15 @@ export class UserService {
   constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
 
+
    async findOneUser(dto:AuthDto):Promise<User>{
      
      // const yallaUser=this.userModel.find({ email: dto.email,password:dto.password}).exec();
      
       return await this.userModel.findOne({ email: dto.email,password:dto.password}).exec();
      
-  }
+   }
+    
 
   /**
    * Returns all users from mongo database
