@@ -30,7 +30,7 @@ export class AccountService {
    *
    */
    createAccount(userid: string): Promise<Account> {
-     const createdAccount = new this.accountModel({"userid":userid});
+     const createdAccount = new this.accountModel({"userid":userid,"status":"active"});
       return createdAccount.save();
   }
  

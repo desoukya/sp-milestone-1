@@ -19,15 +19,7 @@ export class Account {
   @Prop({ required: true })
   status: string;
 
-  @Prop({ required: true })
-  accountid: string;
-
-  @Prop({ required: true })
-  password:string;
-
-  @Prop({ required: true })
-  giuEmail:string;
-
+  
 }
 
 export const AccountSchema = SchemaFactory.createForClass(Account);

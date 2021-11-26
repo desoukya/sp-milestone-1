@@ -36,8 +36,8 @@ export class AccountController {
 
 
   //@UseGuards(AuthGuard('jwt'))
-  @Post('')
-  CreateAccount(userid:string):any{
+  @Post(':userid')
+  CreateAccount(@Param('userid')userid:string):any{
       const accountId = this.accountService.createAccount(userid);
   }
 
