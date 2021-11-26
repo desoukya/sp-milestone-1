@@ -27,15 +27,20 @@ export class TransactionController {
   //   return this.transactionService.PostTransaction(Display_date, name, debit, credit, amount, accountid);
   // }
 
+  // @Post()
+  // addTransaction(
+	//   @Body('transactionDate') trDate:string,
+	//   @Body('transactionName') trName:string,
+	//   @Body('debit') debit:number,
+	//   @Body('credit')credit:number,
+	//   @Body('amount') amount:number,
+  //   @Body('accounid') accountid:string,
+	// ){
+	//   const newTransaction=this.transactionService.PostTransaction(trDate,trName,debit,credit,amount,accountid)
+	// }
+  @UseGuards(AuthGuard('jwt'))
   @Post()
-  addTransaction(
-	  @Body('transactionDate') trDate:string,
-	  @Body('transactionName') trName:string,
-	  @Body('debit') debit:number,
-	  @Body('credit')credit:number,
-	  @Body('amount') amount:number,
-    @Body('accounid') accountid:string,
-	){
-	  const newTransaction=this.transactionService.PostTransaction(trDate,trName,debit,credit,amount,accountid)
-	}
+  CreateTransaction(@Body() dto:TransactionDto):any{
+      const accountId = this.transactionService.createTransaction(dto);
+  }
 }
