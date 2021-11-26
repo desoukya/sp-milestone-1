@@ -12,7 +12,7 @@ export class TransactionController {
       return await this.transactionService.newTransaction(transaction);
   }
 
-  @Get('/:id/transactionList')
+  @Get('/transactionList/:id')
   async transaction(@Param('id') id: string){
     console.log("l id aho lli da5el: " + id);
     return await this.transactionService.findTransaction(id);

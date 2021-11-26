@@ -1,12 +1,10 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
-import * as bcrypt from 'bcrypt';
 import * as mongoose from 'mongoose';
 
 export const AccountSchema = new mongoose.Schema({
     balance: {
         type: Number,
         required: true,
+        unique: false
     },
     accountNumber: {
         type: Number,
