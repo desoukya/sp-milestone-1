@@ -7,7 +7,7 @@ import { AccountDto } from './dtos/account.dto';
 @Controller('accounts')
 export class AccountController {
   // TODO: Define your account Endpoints
-  constructor(private accountService: AccountService,private transactionService:TransactionService) {}
+  constructor(private accountService: AccountService) {}
 
   /**
    * API endpoint handler returns the authenticated user from JWT payload
@@ -28,17 +28,17 @@ export class AccountController {
   //   return this.accountService.findAll();
   // }
 
-  @UseGuards(AuthGuard('jwt'))
+  //@UseGuards(AuthGuard('jwt'))
   @Get(':userid')
   GetAccount(@Param('userid') userid: string): any {
     return this.accountService.findAccounts(userid);
   }
 
 
-  @UseGuards(AuthGuard('jwt'))
-  @Post()
-  CreateAccount(@Body() dto:AccountDto):any{
-      const accountId = this.accountService.createAccount(dto);
+  //@UseGuards(AuthGuard('jwt'))
+  @Post('')
+  CreateAccount(userid:string):any{
+      const accountId = this.accountService.createAccount(userid);
   }
 
 }

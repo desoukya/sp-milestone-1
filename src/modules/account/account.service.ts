@@ -29,8 +29,8 @@ export class AccountService {
    *userId 
    *
    */
-   createAccount(dto: AccountDto): Promise<Account> {
-     const createdAccount = new this.accountModel(dto);
+   createAccount(userid: string): Promise<Account> {
+     const createdAccount = new this.accountModel({"userid":userid});
       return createdAccount.save();
   }
  

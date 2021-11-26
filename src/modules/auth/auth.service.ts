@@ -16,8 +16,8 @@ export class AuthService {
   login(dto: AuthDto) { 
    
     if (dto.email!=null && dto.password!=null) {
-      const payload = this.userModel.findOne({'email':dto.email,'password':dto.password});
-      if (payload != null) {
+      const payload = this.userModel.find({'email':dto.email,'password':dto.password}).exec();
+      if (payload != null ) {
           return {
             access_token: this.jwtService.sign(payload),
           }

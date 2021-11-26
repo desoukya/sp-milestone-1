@@ -7,24 +7,26 @@ export  function useFetchUser(userId) {
   );
 }
 
-export function useMutateLoginUser() {
-
-  const data = new FormData(); 
-  const user=apiService.post(`user/login`, data);
-  data.append("email", user.email);
-  data.append("password", user.password);
-  return useMutation( user,
-    {
-      // When mutate is called:
-      onSuccess: (responseData) => {
-        // Store Token in local storage--->
-        const mytoken= window.localStorage.setItem("jwt", user);
+  export function useMutateLoginUser() {
+    return useMutation(
+      (user) => {
+        const data = new FormData();
+        data.append("email", user.email);
+        data.append("password", user.password);
+        return apiService.post(`auth/login`, data);
       },
-      onError: (e) => console.log(e.message),
-    }
-  );
-}
+      {
+        // When mutate is called:
+        onSuccess: (responseData) => {
+          // Store Token in local storage  
+          const mytoken= window.localStorage.setItem("jwt", user);
 
+        },
+        onError: (e) => console.log(e.message),
+      }
+    );
+  }
+  
 
 export  function useMutateRegisterUser() {
   return useMutation(
