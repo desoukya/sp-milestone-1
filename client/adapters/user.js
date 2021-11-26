@@ -8,24 +8,17 @@ export  function useFetchUser(userId) {
 }
 
 export function useMutateLoginUser() {
-  return useMutation(
-    (user) => {
-      const data = new FormData();
-      data.append("email", user.email);
-      data.append("password", user.password);
-      return apiService.post(`user/login`, data);
-    },
+
+  const data = new FormData(); 
+  const user=apiService.post(`user/login`, data);
+  data.append("email", user.email);
+  data.append("password", user.password);
+  return useMutation( user,
     {
       // When mutate is called:
       onSuccess: (responseData) => {
         // Store Token in local storage--->
         const mytoken= window.localStorage.setItem("jwt", user);
-        /**
-         *
-            To save a string in Local Storage you use
-            You can get the value later with:
-            window.localStorage.getItem(key);
-         */
       },
       onError: (e) => console.log(e.message),
     }

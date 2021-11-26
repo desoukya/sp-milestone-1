@@ -1,6 +1,8 @@
 import { Body, Controller, Get, Post, Request, UseGuards,Param } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { TransactionService } from './transaction.service';
+import {TransactionDto} from './dto/transaction.dto'
+
 
 @Controller('transactions')
 export class TransactionController {
