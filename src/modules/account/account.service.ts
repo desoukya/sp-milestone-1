@@ -1,9 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Account,AccountDocument, Transaction } from '@sp/schemas';
+import { Account,AccountDocument, Transaction, TransactionSchema } from '@sp/schemas';
 import { Model } from 'mongoose';
 import { AccountDto } from './dtos/account.dto';
 import { TransactionService } from '../transaction/transaction.service';
+import { AccountController } from './account.controller';
+import { TransactionModule } from '../transaction/transaction.module';
 
 
 @Injectable()
@@ -30,10 +32,5 @@ export class AccountService {
    createAccount(dto: AccountDto): Promise<Account> {
      const createdAccount = new this.accountModel(dto);
       return createdAccount.save();
-     }
-
-
-     
-   
 }
-
+}

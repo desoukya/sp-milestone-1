@@ -30,7 +30,12 @@ export class TransactionService {
     const createdTransaction = new this.transactionModel({Display_date: Display_date, name: name, debit: debit, credit: credit, amount:amount, accountid: accountid});
     return createdTransaction.save();
   }
-
+  
+  createTransaction(dto: TransactionDto):Promise<Transaction>{
+     
+    const newTransaction = new this.transactionModel(dto);
+    return newTransaction.save();  
+  }
  
 
 }
