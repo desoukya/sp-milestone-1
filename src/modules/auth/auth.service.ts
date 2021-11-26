@@ -7,19 +7,19 @@ import {UserService} from '../user/user.service'
 
 @Injectable() 
 export class AuthService {
-  constructor(private jwtService: JwtService) {}
-  private userModel: Model <UserDocument>;
-  private userService: UserService;
+  constructor(private userService: UserService,private jwtService: JwtService) {}
+  
+  
 
   /**
    * Determines if the user credentials provided are correct
    * @param dto
    */
-  login(dto: AuthDto) { 
+  async login(dto: AuthDto) { 
    
     if (dto.email!=null && dto.password!=null) {
-      const payload = this.userService.findOne(dto);
-      if (payload != null ) {
+      const payload = await this.userService.findOneUser(dto);
+      if (payload != null) {
           return {
             access_token: this.jwtService.sign(payload),
           }
