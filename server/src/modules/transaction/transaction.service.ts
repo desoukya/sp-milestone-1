@@ -16,8 +16,8 @@ export class TransactionService {
 
   async findTransaction(id): Promise<Transaction> {
     console.log("l id aho lli da5el serfise: " + id);
-    let meow = this.transactionModel.findOne({id : id});
-    console.log("alndfqewhfouihweoifp;ejw;"+ meow)
+    const meow = this.transactionModel.findOne({id : id});
+    console.log((await meow).transactionName);
     return await this.transactionModel.findOne({id : id});
 
   }
