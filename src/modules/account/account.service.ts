@@ -32,5 +32,6 @@ export class AccountService {
    createAccount(dto: AccountDto): Promise<Account> {
      const createdAccount = new this.accountModel(dto);
       return createdAccount.save();
-}
+  }
+ 
 }

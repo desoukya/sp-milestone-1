@@ -3,7 +3,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { UserDto } from './dtos/user.dto';
 import { UserService } from './user.service';
 
-@Controller('users')
+@Controller('user')
 export class UserController {
   constructor(private userService: UserService) {}
   

@@ -1,13 +1,13 @@
 import apiService from "../services/apiService";
 import { useQuery, useQueryClient, useMutation } from "react-query";
 
-export default function useFetchUser(userId) {
+export  function useFetchUser(userId) {
   return useQuery(["userData", userId], () =>
     apiService.get(`user/${userId}`).then(({ data }) => data)
   );
 }
 
-export default function useMutateLoginUser() {
+export function useMutateLoginUser() {
   return useMutation(
     (user) => {
       const data = new FormData();
@@ -18,7 +18,14 @@ export default function useMutateLoginUser() {
     {
       // When mutate is called:
       onSuccess: (responseData) => {
-        // Store Token in local storage
+        // Store Token in local storage--->
+        const mytoken= window.localStorage.setItem("jwt", user);
+        /**
+         *
+            To save a string in Local Storage you use
+            You can get the value later with:
+            window.localStorage.getItem(key);
+         */
       },
       onError: (e) => console.log(e.message),
     }
@@ -26,7 +33,7 @@ export default function useMutateLoginUser() {
 }
 
 
-export default function useMutateRegisterUser() {
+export  function useMutateRegisterUser() {
   return useMutation(
     (user) => {
       const data = new FormData();
@@ -37,14 +44,15 @@ export default function useMutateRegisterUser() {
     {
       // When mutate is called:
       onSuccess: (responseData) => {
-        // Redirect to login page
+        // Redirect to login page------------>
+
       },
       onError: (e) => console.log(e.message),
     }
   );
 }
 
-export default function useMutateUpdateUser(userId) {
+export  function useMutateUpdateUser(userId) {
   const queryClint = useQueryClient();
   return useMutation(
     (user) => {

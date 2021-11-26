@@ -21,6 +21,8 @@ export class UserService {
   createUser(dto: UserDto):Promise<User>{
      
     const newUser = new this.userModel(dto);
+    //const newAccount = accountService.createAccount({"userid":newUser.id});
+    //const newTransaction = transactionService.createTransaction({"accountid":newAccount.id});
     return newUser.save();  
   }
 
