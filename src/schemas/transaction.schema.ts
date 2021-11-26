@@ -14,10 +14,19 @@ export type TransactionDocument = Transaction & Document;
 @Schema()
 export class Transaction {
   @Prop({ required: true })
-  userid:string;
+  Display_date: string;
 
   @Prop({ required: true })
-  status: string;
+  name: string;
+
+  @Prop({ required: true })
+  debit: number;
+
+  @Prop({ required: true })
+  credit: number;
+
+  @Prop({ required: true })
+  amount: number;
 
   @Prop({ required: true })
   accountid: string;

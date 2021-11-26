@@ -8,10 +8,10 @@ export class TransactionDto{
   @IsNotEmpty()
   name: string;
 
-  @IsNotEmpty()
+  
   debit: number;
 
-  @IsNotEmpty()
+ 
   credit: number;
 
   @IsNotEmpty()
