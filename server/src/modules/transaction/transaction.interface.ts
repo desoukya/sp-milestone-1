@@ -2,8 +2,8 @@ import * as mongoose from 'mongoose';
 export interface Transaction { 
   date: Date;
   transactionName: String;
+  credit:  Boolean;
   debit: Boolean;
-  credit: Boolean;
   totalAmount: Number;
   id: [
       {

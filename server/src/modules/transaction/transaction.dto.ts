@@ -1,8 +1,11 @@
 import {  IsNotEmpty } from 'class-validator';
 
-export class accountDto {
+export class transactionDto {
+  date: Date;
+  transactionName: String;
+  credit:  Boolean;
+  debit: Boolean;
   totalAmount : number;
   id:number;
-  active : boolean;
 
 }

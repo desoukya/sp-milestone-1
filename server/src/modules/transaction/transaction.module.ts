@@ -3,12 +3,10 @@ import { TransactionController } from './transactions.controller';
 import { TransactionService } from './transaction.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { TransactionSchema, UserSchema } from '@sp/schemas';
-import { AccountSchema } from '../schemas/accounts.schema';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{name: 'Account', schema: TransactionSchema}]),
-    MongooseModule.forFeature([{name: 'Transaction', schema: AccountSchema}])
+    MongooseModule.forFeature([{name: 'Transaction', schema: TransactionSchema}])
   ],
 
   exports: [TransactionService],

@@ -1,40 +1,30 @@
 import { Get, Injectable, Post } from '@nestjs/common';
 import { NestApplicationContext } from '@nestjs/core';
 import { InjectModel } from '@nestjs/mongoose';
+//import { Transaction } from '@sp/schemas';
 import { Model } from 'mongoose';
-import { accountDto } from './transaction.dto';
-import { Account } from '../account/account.interface';
-import { Transaction } from './transaction.interface';
+import { transactionDto } from './transaction.dto';
+import { Transaction } from '../transaction/transaction.interface';
 
 @Injectable()
-export class TransactionService {
-  constructor(@InjectModel('Account') private accountModel: Model<Account>, 
-  @InjectModel('Transaction') private transactionModel : Model<Transaction> ) {}
+export class TransactionService { 
+  constructor(@InjectModel('Transaction') private transactionModel : Model<Transaction>) {}
   
-  findAll(): Promise<Account[]> {
-    return this.accountModel.find().exec();
-  }
-  //FIND ACCOUNT BY ID
-  async findAccountById(id): Promise<Account> {
-    return await this.accountModel.findById({id: id});
-
+  findAll(): Promise<Transaction[]> {
+    return this.transactionModel.find().exec();
   }
 
   async findTransaction(id): Promise<Transaction> {
     return await this.transactionModel.findById({id: id});
 
   }
-  async newAccount(accountDto: accountDto) {
-    let account = new this.accountModel(accountDto);
-    return await account.save();
-  }
 
-  async newTransaction(accountDto: accountDto) {
-    let transaction = new this.transactionModel(accountDto);
+  async newTransaction(transactionDto: transactionDto) {
+    let transaction = new this.transactionModel(transactionDto);
     return await transaction.save();
   }
 
-
+}
 
     
    /*
@@ -90,9 +80,6 @@ export class TransactionService {
      account.totalAmount += amount;
      return true; 
    }*/
-
-   
-  }
    /*function Account(name:string , balance : number) {
 
      this.name = name;
