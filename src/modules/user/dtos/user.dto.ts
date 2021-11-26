@@ -1,9 +1,13 @@
-import { IsEmail, IsNotEmpty } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsNumber } from 'class-validator';
 
 export class UserDto {
 
-  @IsNotEmpty()
-  name: string;
+  
+  //@IsNotEmpty()
+  //name: string;
+
+  @IsNumber()
+  userId:Number;
 
   @IsEmail()
   email: string;
@@ -14,13 +18,13 @@ export class UserDto {
   @IsNotEmpty()
   password: string;
 
-  @IsNotEmpty()
-  phone: Number;
+  //@IsNotEmpty()
+  //phone: Number;
 
-  @IsEmail()
-  giuEmail: string;
+  //@IsEmail()
+  //giuEmail: string;
 
-  @IsNotEmpty()
-  giuId: Number;
+  //@IsNotEmpty()
+  //giuId: Number;
 
 }
