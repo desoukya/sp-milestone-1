@@ -1,5 +1,6 @@
 import { Controller, Get, Post, Body, UseGuards, Request, Param } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { ObjectId } from 'mongoose';
 import { transactionDto } from './transaction.dto';
 import { TransactionService } from './transaction.service';
 
@@ -13,7 +14,7 @@ export class TransactionController {
   }
 
   @Get('/transactionList/:id')
-  async transaction(@Param('id') id: string){
+  async transaction(@Param('id') id: ObjectId){
     console.log("l id aho lli da5el: " + id);
     return await this.transactionService.findTransaction(id);
   }

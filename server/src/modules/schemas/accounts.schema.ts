@@ -9,17 +9,12 @@ export const AccountSchema = new mongoose.Schema({
     accountNumber: {
         type: Number,
         unique: true,
-        required: true
     },
     active: {
         type: Boolean,
         required: true,
         default : true
     },
-    id: {
-        type: Number,
-        //type: mongoose.Schema.Types.ObjectId, ref: 'User',
-        required: true
-    }
+    
 
 });

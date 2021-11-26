@@ -2,7 +2,7 @@ import { Get, Injectable, Post } from '@nestjs/common';
 import { NestApplicationContext } from '@nestjs/core';
 import { InjectModel } from '@nestjs/mongoose';
 //import { Transaction } from '@sp/schemas';
-import { Model } from 'mongoose';
+import { connection, Model } from 'mongoose';
 import { transactionDto } from './transaction.dto';
 import { Transaction } from '../transaction/transaction.interface';
 
@@ -14,11 +14,11 @@ export class TransactionService {
     return this.transactionModel.find().exec();
   }
 
-  async findTransaction(id): Promise<Transaction> {
+  async findTransaction(id): Promise<Transaction[]> {
     console.log("l id aho lli da5el serfise: " + id);
-    const meow = this.transactionModel.findOne({transactionName : id});
+    const meow = this.transactionModel.find({accountNumber : id});
     console.log((await meow));
-    return await this.transactionModel.findOne({transactionName : id});
+    return await this.transactionModel.find({accountNumber : id});
 
   }
 

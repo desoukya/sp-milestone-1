@@ -50,10 +50,9 @@ export const TransactionSchema = new mongoose.Schema({
     type: Number,
     required : true
   },
-  id: {
+  accountNumber: {
     type: Number,
-    //type: mongoose.Schema.Types.ObjectId, ref: 'User',
-    required: true
+    
   }
 
 });
