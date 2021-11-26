@@ -3,11 +3,13 @@ import { JwtService } from '@nestjs/jwt';
 import { AuthDto } from './dtos/auth.dto';
 import { User, UserDocument } from '@sp/schemas';
 import { Model } from 'mongoose';
+import {UserService} from '../user/user.service'
 
 @Injectable() 
 export class AuthService {
   constructor(private jwtService: JwtService) {}
   private userModel: Model <UserDocument>;
+  private userService: UserService;
 
   /**
    * Determines if the user credentials provided are correct
@@ -16,7 +18,7 @@ export class AuthService {
   login(dto: AuthDto) { 
    
     if (dto.email!=null && dto.password!=null) {
-      const payload = this.userModel.find({'email':dto.email,'password':dto.password}).exec();
+      const payload = this.userService.findOne(dto);
       if (payload != null ) {
           return {
             access_token: this.jwtService.sign(payload),
