@@ -36,7 +36,7 @@ export function useMutateRegisterUser() {
     {
       // When mutate is called:
       onSuccess: (responseData) => {
-        // Redirect to login page
+        <form action="/home" class="inline"></form>
       },
       onError: (e) => console.log(e.message),
     }

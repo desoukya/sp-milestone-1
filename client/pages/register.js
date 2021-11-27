@@ -8,7 +8,7 @@ import {
 } from "reactstrap";
 import { useState } from "react";
 import styles from "../styles/Home.module.css";
-import {useMutateRegisterUser} from "adapters";
+import { useMutateRegisterUser } from "../adapters/user.js";
 
 export default function Register() {
   const [email, setEmail] = useState("");
@@ -76,7 +76,7 @@ export default function Register() {
       passwordState === "has-success" &&
       confirmPasswordState === "has-success"
     ) {
-      return useMutateRegisterUser.call();
+      useMutateRegisterUser({email, password});
     }
   };
 
