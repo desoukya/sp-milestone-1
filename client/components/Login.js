@@ -8,6 +8,7 @@ import {
 } from "reactstrap";
 import { useState } from "react";
 import styles from "../styles/Home.module.css";
+import axios from "axios";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -40,7 +41,8 @@ export default function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
     // Call User Login Adapter
-    
+    console.log("aaa" + email);
+    axios.post("http://localhost:8000/auth/login",email).then((res) => console.log(res.data));
   };
 
   return (
@@ -76,7 +78,7 @@ export default function Login() {
               onChange={handleChange}
             />
           </FormGroup>
-          <Button color="primary">Submit</Button>
+          <Button color="primary" onSubmit = {handleSubmit}>Submit</Button>
         </Form>
       </div>
     
