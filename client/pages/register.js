@@ -81,7 +81,7 @@ export default function Register() {
 
   return (
     <div className={styles.App}>
-      <h2>Register</h2>
+      <h2 >Register</h2>
       <Form className={styles.form} onSubmit={handleSubmit}>
         <FormGroup>
           <Label className={styles.label} for="email">
