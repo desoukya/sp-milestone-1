@@ -1,19 +1,19 @@
 import apiService from "../services/apiService";
 import { useQuery, useQueryClient, useMutation } from "react-query";
 
-export default function useFetchUser(userId) {
+export function useFetchUser(userId) {
   return useQuery(["userData", userId], () =>
     apiService.get(`user/${userId}`).then(({ data }) => data)
   );
 }
 
-export default function useMutateLoginUser() {
+export function useMutateLoginUser() {
   return useMutation(
     (user) => {
       const data = new FormData();
       data.append("email", user.email);
       data.append("password", user.password);
-      return apiService.post(`user/login`, data);
+      return apiService.post(`/auth/login`, data);
     },
     {
       // When mutate is called:
@@ -26,7 +26,7 @@ export default function useMutateLoginUser() {
 }
 
 
-export default function useMutateRegisterUser() {
+export function useMutateRegisterUser() {
   return useMutation(
     (user) => {
       const data = new FormData();
@@ -44,7 +44,7 @@ export default function useMutateRegisterUser() {
   );
 }
 
-export default function useMutateUpdateUser(userId) {
+export function useMutateUpdateUser(userId) {
   const queryClint = useQueryClient();
   return useMutation(
     (user) => {

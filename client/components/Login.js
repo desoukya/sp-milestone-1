@@ -9,12 +9,13 @@ import {
 import { useState } from "react";
 import styles from "../styles/Home.module.css";
 import axios from "axios";
+import {useMutateLoginUser} from '../adapters/user'
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailState, setEmailState] = useState("");
-
+  const useLoginMutations = useMutateLoginUser();
   const validateEmail = (value) => {
     const emailRegex =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -41,49 +42,48 @@ export default function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
     // Call User Login Adapter
-    const req = {
-      email : email,
-      password : password
-    };
-    axios.post("http://localhost:8000/auth/login",req).then((res) => console.log(res.data));
+    useLoginMutations.mutate({
+      email: email,
+      password: password,
+    });
   };
 
   return (
-    
-      <div className={styles.App}>
-        <h2>Sign In</h2>
-        <Form className={styles.form} onSubmit={handleSubmit}>
-          <FormGroup>
-            <Label className={styles.label} for="email">
-              Username
-            </Label>
+    <div className={styles.App}>
+      <h2>Sign In</h2>
+      <Form className={styles.form} onSubmit={handleSubmit}>
+        <FormGroup>
+          <Label className={styles.label} for="email">
+            Username
+          </Label>
 
-            <Input
-              type="text"
-              name="email"
-              id="email"
-              placeholder="example@example.com"
-              onChange={handleChange}
-              valid={emailState === "has-success"}
-              invalid={emailState === "has-danger"}
-            />
-            <FormFeedback>Please input a correct email.</FormFeedback>
-          </FormGroup>
-          <FormGroup>
-            <Label className={styles.label} for="password">
-              Password
-            </Label>
-            <Input
-              type="password"
-              name="password"
-              id="password"
-              placeholder="********"
-              onChange={handleChange}
-            />
-          </FormGroup>
-          <Button color="primary" onSubmit = {handleSubmit}>Submit</Button>
-        </Form>
-      </div>
-    
+          <Input
+            type="text"
+            name="email"
+            id="email"
+            placeholder="example@example.com"
+            onChange={handleChange}
+            valid={emailState === "has-success"}
+            invalid={emailState === "has-danger"}
+          />
+          <FormFeedback>Please input a correct email.</FormFeedback>
+        </FormGroup>
+        <FormGroup>
+          <Label className={styles.label} for="password">
+            Password
+          </Label>
+          <Input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="********"
+            onChange={handleChange}
+          />
+        </FormGroup>
+        <Button color="primary" onSubmit={handleSubmit}>
+          Submit
+        </Button>
+      </Form>
+    </div>
   );
 }
