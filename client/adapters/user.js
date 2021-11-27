@@ -1,3 +1,4 @@
+import Dashboard from "../components/Dashboard";
 import apiService from "../services/apiService";
 import {
   useQuery,
@@ -30,7 +31,8 @@ export function useMutateLoginUser() {
         const user = window.localStorage.getItem("myUser");
         const myToken = window.localStorage.setItem("jwt", user);
         //window.localStorage.getItem("jwt");
-
+        window.location.reload(false);
+        
       },
       onError: (e) => console.log(e.message),
     }
