@@ -1,4 +1,4 @@
-import { Controller, Get, Request, UseGuards } from '@nestjs/common';
+import { Controller, Get, Request, UseGuards, Post, Body } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { UserService } from './user.service';
 
@@ -22,5 +22,17 @@ export class UserController {
   @Get('list')
   users(): any {
     return this.userService.findAll();
+  }
+
+  @Post()
+  async addUser(
+    @Body('name') prodName: string,
+    @Body('email') prodEEmail: string,
+    @Body('password') prodPassword: string,
+  ){
+    const generatedId = await this.userService.addUser(
+      prodName, prodEEmail, prodPassword
+    );
+    return generatedId;
   }
 }
