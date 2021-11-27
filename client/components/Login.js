@@ -41,17 +41,7 @@ export default function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
     // Call User Login Adapter
-    useLoginMutations.mutate({
-      "email" : email,
-      "password" : password
-    });
-  };
-
-  return (
-    <div className={styles.App}>
-      <h2>Sign In</h2>
       <Form className={styles.form} onSubmit={handleSubmit}>
-        <FormGroup>
           <Label className={styles.label} for="email">
             Username
           </Label>
