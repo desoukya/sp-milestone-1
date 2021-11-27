@@ -2,22 +2,25 @@ import styles from "../styles/Home.module.css";
 import axios from "axios";
 import Table from "react-bootstrap/Table";
 import { Component } from "react";
-import { UserService } from "../../server/src/modules/user/user.service.ts"
 import MyApp from "../pages/_app";
 
-
-
-export default class Dashboard extends Component() {
-  constructor(props) {
-    super(props);
+export default class Dashboard extends Component {
+  constructor() {
+    super();
     this.state = {
       user: [],
     };
   }
 
   componentDidMount() {
-    userService.findOneByEmail(localStorage.getItem(myUser))
-      .then((data) => {
+    console.log(window.localStorage.getItem("myUser"));
+    axios
+      .get(
+        "http://localhost:8000/accountList/:" +
+          toString(localStorage.getItem("myUser").studentId)
+      )
+      .then((response) => {
+        console.log("success");
         this.setState({
           user: data,
         });
@@ -27,30 +30,30 @@ export default class Dashboard extends Component() {
       });
   }
 
-
   DataTable() {
     return this.state.user.map((res, i) => {
       return <accountlist obj={res} key={i} />;
     });
   }
 
-  render()
-  {
-    return(
-      <div className="table-wrapper">
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Balance</th>
-            </tr>
-          </thead>
-          <tbody>{this.DataTable()}</tbody>
-        </Table>
+  render() {
+    return (
+      <div>
+        <div className="table-wrapper">
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Balance</th>
+              </tr>
+            </thead>
+            <tbody>{this.DataTable()}</tbody>
+          </Table>
+        </div>
       </div>
     );
   }
-    
+
   /*render (
     <div
       className={styles.App}

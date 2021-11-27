@@ -5,8 +5,8 @@ import Button from "react-bootstrap/Button";
 import transactions from "../pages/transactions";
 
 export default class accountlist extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
   }
 
   render() {
