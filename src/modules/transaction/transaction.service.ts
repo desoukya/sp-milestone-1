@@ -17,7 +17,7 @@ export class TransactionService {
    * Returns all users from mongo database
    */
    getTrancation(accountid:string): Promise<Transaction[]> {
-    return this.transactionModel.find().exec();
+    return this.transactionModel.find({accountid:accountid}).exec();
   }
 
   

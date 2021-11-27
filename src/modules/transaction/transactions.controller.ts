@@ -12,7 +12,7 @@ export class TransactionController {
   /**
    * API endpoint handler returns the authenticated user from JWT payload
    */    
-  @UseGuards(AuthGuard('jwt'))
+  //@UseGuards(AuthGuard('jwt'))
   @Get(':accountId')
   transaction(@Param() accountId: string): any {
     return this.transactionService.getTrancation(accountId);
