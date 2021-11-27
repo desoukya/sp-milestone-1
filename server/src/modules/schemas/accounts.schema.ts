@@ -15,6 +15,8 @@ export const AccountSchema = new mongoose.Schema({
         required: true,
         default : true
     },
-    
+    userId: {
+        type: Number
+    }
 
 });

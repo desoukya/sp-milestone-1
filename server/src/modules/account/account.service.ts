@@ -13,8 +13,8 @@ export class AccountService {
     return this.accountModel.find().exec();
   }
   //FIND ACCOUNT BY ID
-  async findAccountById(id): Promise<Account> {
-    return await this.accountModel.findById({id: id});
+  async findAccountById(id): Promise<Account[]> {
+    return await this.accountModel.find({userId: id});
 
   }
   async newAccount(accountDto: accountDto) {

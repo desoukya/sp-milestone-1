@@ -1,4 +1,4 @@
-import { Controller, Post, Body} from '@nestjs/common';
+import { Controller, Post, Body, Get, Param} from '@nestjs/common';
 import { accountDto } from './account.dto'
 import { AccountService } from './account.service';
 
@@ -9,5 +9,10 @@ export class AccountController {
   @Post('/newAccount') 
   async createAccount(@Body() account: accountDto) {
       return await this.accountService.newAccount(account);
+  }
+
+  @Get('/accountList/:id')
+  async transaction(@Param('id') id: Number){
+    return await this.accountService.findAccountById(id);
   }
 }

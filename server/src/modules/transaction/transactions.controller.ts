@@ -14,8 +14,7 @@ export class TransactionController {
   }
 
   @Get('/transactionList/:id')
-  async transaction(@Param('id') id: ObjectId){
-    console.log("l id aho lli da5el: " + id);
+  async transaction(@Param('id') id: Number){
     return await this.transactionService.findTransaction(id);
   }
 }

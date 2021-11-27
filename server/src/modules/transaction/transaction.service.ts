@@ -15,9 +15,6 @@ export class TransactionService {
   }
 
   async findTransaction(id): Promise<Transaction[]> {
-    console.log("l id aho lli da5el serfise: " + id);
-    const meow = this.transactionModel.find({accountNumber : id});
-    console.log((await meow));
     return await this.transactionModel.find({accountNumber : id});
 
   }
