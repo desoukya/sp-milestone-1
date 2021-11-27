@@ -11,14 +11,27 @@ export function useMutateLoginUser() {
   return useMutation(
     (user) => {
       const data = new FormData();
-      data.append("email", user.email);
-      data.append("password", user.password);
-      return apiService.post(`/auth/login`, data);
+      data = {
+        email : user.email,
+        password : user.password
+      }
+      //const myUser = window.localStorage.setItem("myUser", user);
+      return apiService.post(`http://localhost:8000/auth/login`, data);
     },
     {
       // When mutate is called:
       onSuccess: (responseData) => {
         // Store Token in local storage
+        //console.log("tweety was here : ");
+        //const user = window.localStorage.getItem("myUser");
+        //console.log(user);
+      
+        const myToken= window.localStorage.setItem("jwt", user);
+        
+        //window.localStorage.getItem("jwt");
+        //this.props.history.push("/home")
+
+
       },
       onError: (e) => console.log(e.message),
     }
@@ -38,6 +51,7 @@ export function useMutateRegisterUser() {
       // When mutate is called:
       onSuccess: (responseData) => {
         // Redirect to login page
+        this.props.history.push("/")
       },
       onError: (e) => console.log(e.message),
     }
