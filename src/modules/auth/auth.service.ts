@@ -4,10 +4,14 @@ import { AuthDto } from './dtos/auth.dto';
 import { User, UserDocument } from '@sp/schemas';
 import { Model } from 'mongoose';
 import {UserService} from '../user/user.service'
+import { Response as Res } from 'express';
 
 @Injectable() 
 export class AuthService {
-  constructor(private userService: UserService,private jwtService: JwtService) {}
+  constructor(private userService: UserService,private jwtService: JwtService) {
+
+
+  }
   
   
 
@@ -15,16 +19,19 @@ export class AuthService {
    * Determines if the user credentials provided are correct
    * @param dto
    */
-  async login(dto: AuthDto) { 
+  async login(dto: AuthDto, res:Res) { 
    
     if (dto.email!=null && dto.password!=null) {
-      var payload = await this.userService.findOneUser(dto);
+      var payload:User = await this.userService.findOneUser(dto);
       console.log(payload);
       if (payload != null) {
           const myToken={ email: payload.email, sub: payload.userId };
+          console.log(myToken);
           //const payload = { username: user.username, sub: user.userId };
-            const access_token=this.jwtService.sign(myToken)
-            return payload;
+            const access_token=this.jwtService.sign(myToken,{"secret":process.env.JWT_SECRET,"expiresIn":"1h"})
+            console.log(access_token)
+            res.set({ 'x-access-token': access_token }).json(payload)
+            return res;
           
       }
     }
