@@ -26,13 +26,13 @@ export function useMutateLoginUser() {
         email: user.email,
         password: user.password
       }
-      const myUser = window.localStorage.setItem("myUser", user);
+      const myUser = window.localStorage.setItem("myUser",JSON.stringify(user));
       return apiService.post(`http://localhost:8000/auth/login`, data);
     }, {
       // When mutate is called:
       onSuccess: (responseData) => {
         // Store Token in local storage
-        const user = window.localStorage.getItem("myUser");
+        const user = JSON.parse(window.localStorage.getItem("myUser")); ;
         const myToken = window.localStorage.setItem("jwt", user);
         //window.localStorage.getItem("jwt");
         window.location.reload(false);

@@ -3,6 +3,7 @@ import axios from "axios";
 import Table from "react-bootstrap/Table";
 import { Component } from "react";
 import MyApp from "../pages/_app";
+import apiService from "../services/apiService";
 
 export default class Dashboard extends Component {
   constructor() {
@@ -13,7 +14,29 @@ export default class Dashboard extends Component {
   }
 
   componentDidMount() {
-    console.log(window.localStorage.getItem("myUser"));
+    const current = "";
+    const user = JSON.parse(window.localStorage.getItem("myUser"));
+    const email = encodeURI(user.email);
+    console.log(user.email);
+    console.log(email);
+
+    const url = `http://localhost:8000/users/email/${email}`;
+    console.log(url);
+    console.log('http://localhost:8000/users/email/baz@abdo.com');
+
+    const x = apiService.get(url);
+    console.log(x);
+
+    axios.get(url).then((response) => { 
+      console.log("hgh "+response);
+      current = response;
+    }).catch((error) => console.log("maaaa2 " + error));
+
+
+    console.log("sss " + current);
+
+    
+
     axios
       .get(
         "http://localhost:8000/accountList/:" +

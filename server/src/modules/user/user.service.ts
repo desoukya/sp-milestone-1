@@ -23,8 +23,16 @@ export class UserService {
   }
 
   async findOneByEmail(email): Promise<User> {
-
+    
     return await this.userModel.findOne({email: email});
+
+  }
+
+  async findOneWithEmail(email): Promise<User[]> {
+    console.log("aaaa " + email)
+    const meow = await this.userModel.find({email: email});
+    console.log(meow);
+    return await this.userModel.find({email: email});
 
   }
 }

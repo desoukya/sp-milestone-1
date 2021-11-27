@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, UseGuards, Request } from '@nestjs/common';
+import { Controller, Get, Post, Body, UseGuards, Request, Param } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { UserDto } from './dtos/user.dto';
 import { UserService } from './user.service';
@@ -23,6 +23,12 @@ export class UserController {
   @Get('list')
   users(): any {
     return this.userService.findAll();
+  }
+
+  @Get('/email/:email')
+  async getByEmail(@Param('email') email: String) {
+    console.log(email)
+    return await this.userService.findOneWithEmail(email);
   }
 
 
