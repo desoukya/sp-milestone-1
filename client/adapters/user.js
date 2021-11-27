@@ -1,5 +1,9 @@
+import Login from "../components/Login";
 import Dashboard from "../components/Dashboard";
+import loginpage from "../pages/loginpage";
 import apiService from "../services/apiService";
+import  { Redirect } from 'react-router-dom'
+
 import {
   useQuery,
   useQueryClient,
@@ -44,14 +48,25 @@ export function useMutateRegisterUser() {
   return useMutation(
     (user) => {
       const data = new FormData();
-      data.append("email", user.email);
-      data.append("password", user.password);
-      return apiService.post(`user/register`, data);
+      data = {
+        email: user.email,
+        password: user.password,
+        userName: user.userName,
+        studentId: user.studentId,
+        phone: user.phone,
+        fullName: user.fullName
+
+      }
+      //const myUser = window.localStorage.setItem("myUser", user);
+      return apiService.post(`http://localhost:8000/users/register`, data);
+      //data.append("email", user.email);
+      //data.append("password", user.password);
+      //return apiService.post(`user/register`, data);
     }, {
       // When mutate is called:
       onSuccess: (responseData) => {
         // Redirect to login page
-        this.props.history.push("/")
+        window.location="http://localhost:3000/";
       },
       onError: (e) => console.log(e.message),
     }

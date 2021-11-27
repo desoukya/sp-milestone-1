@@ -41,12 +41,12 @@ export class User {
 
 
 export const UserSchema = new mongoose.Schema({
-  name: {
+  fullName: {
     type: String,
     unique: true,
     required: false
   },
-   username: {
+   userName: {
     type: String,
     unique: true,
     required: false
@@ -65,6 +65,10 @@ export const UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  studentId: {
+    type: Number,
+    required: true
+  }
   
 });
 

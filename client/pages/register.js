@@ -7,6 +7,7 @@ import {
   FormFeedback,
 } from "reactstrap";
 import { useState } from "react";
+import {useMutateRegisterUser} from '../adapters/user'
 import styles from "../styles/Home.module.css";
 
 export default function Register() {
@@ -23,6 +24,7 @@ export default function Register() {
   const [emailState, setEmailState] = useState("");
   const [studentIdState, setstudentIdState] = useState("");
   const [passwordState, setPasswordState] = useState("");
+  const useRegisterMutations = useMutateRegisterUser();
   const [confirmPasswordState, setConfirmPasswordState] = useState("");
 
   const validatePhone = (value) => {
@@ -146,7 +148,14 @@ export default function Register() {
       studentIdState === "has-success" &&
       fullNameState === "has-success"
     ) {
-      
+      useRegisterMutations.mutate({
+        email: email,
+        password: password,
+        userName: userName,
+        studentId: studentId,
+        phone: phone,
+        fullName: fullName,
+      });
       // Call User Register Adapter
     }
   };
