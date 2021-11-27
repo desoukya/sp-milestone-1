@@ -40,6 +40,7 @@ export default function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
     // Call User Login Adapter
+    
   };
 
   return (
