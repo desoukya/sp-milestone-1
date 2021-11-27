@@ -1,13 +1,25 @@
-import React from "react";
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import Button from "react-bootstrap/Button";
+import transactions from "../pages/transactions";
 
-export default function AccountList() {
-  return (
-    <ul class="list-group">
-      <li class="list-group-item">Accounts</li>
-      <li class="list-group-item">Account1</li>
-      <li class="list-group-item">Account3</li>
-      <li class="list-group-item">Account4</li>
-      <li class="list-group-item">Account5</li>
-    </ul>
-  );
+export default class accountlist extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <tr>
+        <td>{this.props.obj.id}</td>
+        <td>{this.props.obj.balance}</td>
+        <td>
+          <Link  to={"/transactions"}>
+            transactions
+          </Link>
+        </td>
+     </tr>
+    );
+    }
 }
