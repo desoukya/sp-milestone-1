@@ -8,8 +8,7 @@ export  function useFetchUser(userId) {
 }
 
   export function useMutateLoginUser() {
-    return useMutation(
-      (user) => {
+    const tmp= useMutation(user => {
         const data = new FormData();
         data.append("email", user.email);
         data.append("password", user.password);
@@ -25,12 +24,12 @@ export  function useFetchUser(userId) {
         onError: (e) => console.log(e.message),
       }
     );
+    return tmp;
   }
   
 
-export  function useMutateRegisterUser() {
-  return useMutation(
-    (user) => {
+export function useMutateRegisterUser() {
+  const tmp=useMutation(user => {
       const data = new FormData();
       data.append("email", user.email);
       data.append("password", user.password);
@@ -43,8 +42,9 @@ export  function useMutateRegisterUser() {
 
       },
       onError: (e) => console.log(e.message),
-    }
-  );
+    });
+  return tmp;
+  
 }
 
 export  function useMutateUpdateUser(userId) {

@@ -41,7 +41,7 @@ export default function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
     // Call User Login Adapter
-    useMutateLoginUser();
+    useMutateLoginUser({email,password});
   };
 
   return (
