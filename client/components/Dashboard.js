@@ -9,7 +9,8 @@ export default function Dashboard() {
   const [accounts, viewAccounts] = useState([]);
   useEffect(() => {
     console.log("Mounting!");
-    apiService.get(`http://localhost:5000/accounts/"12"`)
+    const userid="12";
+    axios.get(`http://localhost:5000/accounts/${userid}`)
          .then(res => viewAccounts(res.data));
 },[]);
  
