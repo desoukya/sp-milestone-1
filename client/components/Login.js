@@ -41,8 +41,11 @@ export default function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
     // Call User Login Adapter
-    console.log("aaa" + email);
-    axios.post("http://localhost:8000/auth/login",email).then((res) => console.log(res.data));
+    const req = {
+      email : email,
+      password : password
+    };
+    axios.post("http://localhost:8000/auth/login",req).then((res) => console.log(res.data));
   };
 
   return (
