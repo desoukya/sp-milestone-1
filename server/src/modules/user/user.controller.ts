@@ -24,15 +24,4 @@ export class UserController {
     return this.userService.findAll();
   }
 
-  @Post()
-  async addUser(
-    @Body('name') prodName: string,
-    @Body('email') prodEEmail: string,
-    @Body('password') prodPassword: string,
-  ){
-    const generatedId = await this.userService.addUser(
-      prodName, prodEEmail, prodPassword
-    );
-    return generatedId;
-  }
 }
