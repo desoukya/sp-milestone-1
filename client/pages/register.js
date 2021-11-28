@@ -76,7 +76,7 @@ export default function Register() {
       passwordState === "has-success" &&
       confirmPasswordState === "has-success"
     ) {
-      useMutateRegisterUser({email, password});
+      useMutateRegisterUser({email, password, confirmPassword});
     }
   };
 
