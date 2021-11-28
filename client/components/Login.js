@@ -40,8 +40,8 @@ export default function Login() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Call User Login Adapter
-    // useMutateLoginUser({ email, password });
+    //Call User Login Adapter
+    //useMutateLoginUser({ email, password });
   };
 
   return (
