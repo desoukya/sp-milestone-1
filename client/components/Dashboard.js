@@ -9,52 +9,46 @@ export default class Dashboard extends Component {
   constructor() {
     super();
     this.state = {
-      user: [],
+      account: [],
     };
   }
 
-  componentDidMount() {
-    const current = "";
-    const user = JSON.parse(window.localStorage.getItem("myUser"));
-    const email = encodeURI(user.email);
-    console.log(user.email);
-    console.log(email);
+  async componentDidMount() {
+    const currentID = "";
+    const currentUser = JSON.parse(window.localStorage.getItem("myUser"));
+    const email = encodeURI(currentUser.email);
+    
 
     const url = `http://localhost:8000/users/email/${email}`;
-    console.log(url);
-    console.log('http://localhost:8000/users/email/baz@abdo.com');
+    
+    await axios.get(url).then((response) => { 
+      currentID = response.data[0].studentId;
+    }).catch((error) => console.log(error));
 
-    const x = apiService.get(url);
-    console.log(x);
-
-    axios.get(url).then((response) => { 
-      console.log("hgh "+response);
-      current = response;
-    }).catch((error) => console.log("maaaa2 " + error));
-
-
-    console.log("sss " + current);
+    
+    console.log(currentID);
 
     
 
-    axios
+     axios
       .get(
-        "http://localhost:8000/accountList/:" +
-          toString(localStorage.getItem("myUser").studentId)
+        "http://localhost:8000/accounts/accountList/" +
+          currentID
       )
       .then((response) => {
-        console.log("success");
-        this.setState({
-          user: data,
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+       console.log("success");
+       console.log(response.data);
+         this.setState({
+           account: response.data,
+         });
+       })
+       .catch((error) => {
+         console.log(error);
+       });
   }
 
   DataTable() {
-    return this.state.user.map((res, i) => {
+    return this.state.account.map((res, i) => {
       return <accountlist obj={res} key={i} />;
     });
   }

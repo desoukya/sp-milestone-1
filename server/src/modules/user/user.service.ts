@@ -29,9 +29,6 @@ export class UserService {
   }
 
   async findOneWithEmail(email): Promise<User[]> {
-    console.log("aaaa " + email)
-    const meow = await this.userModel.find({email: email});
-    console.log(meow);
     return await this.userModel.find({email: email});
 
   }

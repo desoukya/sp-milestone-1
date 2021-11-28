@@ -27,7 +27,6 @@ export class UserController {
 
   @Get('/email/:email')
   async getByEmail(@Param('email') email: String) {
-    console.log(email)
     return await this.userService.findOneWithEmail(email);
   }
 
