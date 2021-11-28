@@ -18,7 +18,9 @@ export class Account {
 
   @Prop({ required: true })
   status: string;
-
+  
+  @Prop({ required: true })
+  accountid: string;
   
 }
 

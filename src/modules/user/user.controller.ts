@@ -29,6 +29,7 @@ export class UserController {
   register(@Body() dto:UserDto):any{
     console.log('Entered post');
       return this.userService.createUser(dto);
+      
   }
 
   

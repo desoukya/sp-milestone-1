@@ -19,10 +19,10 @@ export class Transaction {
   @Prop({ required: true })
   name: string;
 
-  @Prop({ required: true })
+  @Prop({ required: false })
   debit: number;
 
-  @Prop({ required: true })
+  @Prop({ required: false })
   credit: number;
 
   @Prop({ required: true })

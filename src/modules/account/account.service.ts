@@ -15,9 +15,9 @@ export class AccountService {
   /**
    * Returns all accounts from mongo database
    */
-  // findAll(): Promise<Account[]> {
-  //   return this.accountModel.find().exec();
-  // }
+  findAll(): Promise<Account[]> {
+    return this.accountModel.find().exec();
+  }
 
   /**
    *  Returns all account that has the userid, expects userid a parameter
@@ -25,7 +25,22 @@ export class AccountService {
   findAccounts(uid: string): Promise<Account[]> {
     return this.accountModel.find({ userid: uid }).exec();
   }
-  async calculateBalance(accountId: string): Promise<any> {
+ 
+  /**
+   *userId 
+   *
+   */
+  createAccount(userid: string): Promise<Account> {
+    const newId=(Math.floor(Math.random()*50) + 1).toString();
+    const newId2=(Math.floor(Math.random()*17) + 1).toString();
+    const createdAccount = new this.accountModel({ "userid": userid, "status": "active","accountid":newId+userid+newId2 });
+    return createdAccount.save();
+  }
+
+
+
+
+ async calculateBalance(accountId: string): Promise<any> {
     //get all transactions for account
     const transaction: Transaction[] =
       await this.transactionService.getTrancation(accountId);
@@ -56,15 +71,6 @@ export class AccountService {
     //return total
     return total;
 
-  }
-
-  /**
-   *userId 
-   *
-   */
-  createAccount(userid: string): Promise<Account> {
-    const createdAccount = new this.accountModel({ "userid": userid, "status": "active" });
-    return createdAccount.save();
   }
 
 }

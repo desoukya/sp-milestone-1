@@ -9,26 +9,10 @@ export class AccountController {
   // TODO: Define your account Endpoints
   constructor(private accountService: AccountService) {}
 
-  /**
-   * API endpoint handler returns the authenticated user from JWT payload
-     
-  //@UseGuards(AuthGuard('jwt'))
   @Get()
-  account(@Request() req: any): any {//might not need this method
-    return req.account;
-  } 
-   */
-
-  /**
-   * API endpoint handler returns all users from mongo database
-   */
-  //@UseGuards(AuthGuard('jwt'))
-  // @Get('list')
-  // accounts(): any {
-  //   return this.accountService.findAll();
-  // }
-
-  //@UseGuards(AuthGuard('jwt'))
+  findAll():any{
+    return this.accountService.findAll();
+  }
   @Get(':userid')
   GetAccount(@Param('userid') userid: string): any {
     return this.accountService.findAccounts(userid);
@@ -39,6 +23,13 @@ export class AccountController {
   @Post(':userid')
   CreateAccount(@Param('userid')userid:string):any{
       const accountId = this.accountService.createAccount(userid);
+      return accountId;
+  }
+
+  @Get('/balance')
+  getAccountBalance(@Body()accountid:string):any{
+      console.log("Money");
+      return this.accountService.calculateBalance(accountid);
   }
 
 }
