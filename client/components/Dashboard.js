@@ -4,6 +4,7 @@ import Table from "react-bootstrap/Table";
 import { Component } from "react";
 import MyApp from "../pages/_app";
 import apiService from "../services/apiService";
+import Accountlist from "./AccountList.js";
 
 export default class Dashboard extends Component {
   constructor() {
@@ -37,10 +38,11 @@ export default class Dashboard extends Component {
       )
       .then((response) => {
        console.log("success");
-       console.log(response.data);
+       console.log(response.data + 'AAAAAAA');
          this.setState({
-           account: response.data,
+           account: Object.values(response.data),
          });
+         console.log(this.state.account + 'BBBBBB')
        })
        .catch((error) => {
          console.log(error);
@@ -48,14 +50,16 @@ export default class Dashboard extends Component {
   }
 
   DataTable() {
+    
     return this.state.account.map((res, i) => {
-      return <accountlist obj={res} key={i} />;
+     return(
+      <Accountlist obj={res} key={i} />
+     );
     });
   }
 
   render() {
     return (
-      <div>
         <div className="table-wrapper">
           <Table striped bordered hover>
             <thead>
@@ -67,7 +71,6 @@ export default class Dashboard extends Component {
             <tbody>{this.DataTable()}</tbody>
           </Table>
         </div>
-      </div>
     );
   }
 

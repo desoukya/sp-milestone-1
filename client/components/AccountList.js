@@ -5,21 +5,31 @@ import Button from "react-bootstrap/Button";
 import transactions from "../pages/transactions";
 
 export default class accountlist extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
   }
+
+
+
+ /* currentacc = this.props.obj.accountNumber;
+
+
+  handleClick = () => {
+    this.window.localStorage.setItem("currentAccount",this.currentacc);
+    this.window.location = "http://localhost:3000/transactions"
+    };
+  
+*/
 
   render() {
     return (
       <tr>
-        <td>{this.props.obj.id}</td>
+        <td>{this.props.obj.accountNumber}</td>
         <td>{this.props.obj.balance}</td>
         <td>
-          <Link  to={"/transactions"}>
-            transactions
-          </Link>
+          <Button color="primary">View Transactions</Button>
         </td>
-     </tr>
+      </tr>
     );
-    }
+  }
 }
