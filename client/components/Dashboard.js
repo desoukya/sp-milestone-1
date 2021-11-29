@@ -5,6 +5,7 @@ import { Component } from "react";
 import MyApp from "../pages/_app";
 import apiService from "../services/apiService";
 import Accountlist from "./AccountList.js";
+import Navbar from "./Navbar";
 
 export default class Dashboard extends Component {
   constructor() {
@@ -18,48 +19,43 @@ export default class Dashboard extends Component {
     const currentID = "";
     const currentUser = JSON.parse(window.localStorage.getItem("myUser"));
     const email = encodeURI(currentUser.email);
-    
 
     const url = `http://localhost:8000/users/email/${email}`;
-    
-    await axios.get(url).then((response) => { 
-      currentID = response.data[0].studentId;
-    }).catch((error) => console.log(error));
 
-    
+    await axios
+      .get(url)
+      .then((response) => {
+        currentID = response.data[0].studentId;
+      })
+      .catch((error) => console.log(error));
+
     console.log(currentID);
 
-    
-
-     axios
-      .get(
-        "http://localhost:8000/accounts/accountList/" +
-          currentID
-      )
+    axios
+      .get("http://localhost:8000/accounts/accountList/" + currentID)
       .then((response) => {
-       console.log("success");
-       console.log(response.data + 'AAAAAAA');
-         this.setState({
-           account: Object.values(response.data),
-         });
-         console.log(this.state.account + 'BBBBBB')
-       })
-       .catch((error) => {
-         console.log(error);
-       });
+        console.log("success");
+        console.log(response.data + "AAAAAAA");
+        this.setState({
+          account: Object.values(response.data),
+        });
+        console.log(this.state.account + "BBBBBB");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   DataTable() {
-    
     return this.state.account.map((res, i) => {
-     return(
-      <Accountlist obj={res} key={i} />
-     );
+      return <Accountlist obj={res} key={i} />;
     });
   }
 
   render() {
     return (
+      <div>
+        <Navbar />
         <div className="table-wrapper">
           <Table striped bordered hover>
             <thead>
@@ -71,6 +67,7 @@ export default class Dashboard extends Component {
             <tbody>{this.DataTable()}</tbody>
           </Table>
         </div>
+      </div>
     );
   }
 

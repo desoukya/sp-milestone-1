@@ -1,8 +1,17 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
+import TransactionList from "../components/TransactionList";
+import Table from "react-bootstrap/Table";
+import axios from "axios";
+import { renderMatches } from "react-router";
+
+
+
 
 
 export default function transactions() {
+      
+ 
   return (
   <div>
     
@@ -10,11 +19,11 @@ export default function transactions() {
     <h1 style = {{textAlign:"center"}}className="p-3 mb-2 bg-info text-white">Account Transcations</h1>
     
     <p className="text-info">Account Id: </p>
-    <input type="Account ID" class="form-control" id="exampleInputID" aria-describedby="IDHelp" placeholder="123an"/>
+    <input type="Account ID" className="form-control" id="exampleInputID" aria-describedby="IDHelp" placeholder="123an"/>
     <p className="text-info">Name: </p>
-    <input type="Name" class="form-control" id="exampleInputName" aria-describedby="IDHelp" placeholder="alina"/>
+    <input type="Name" className="form-control" id="exampleInputName" aria-describedby="IDHelp" placeholder="alina"/>
     <p className="text-info" >Balance: </p>
-    <input type="Balance" class="form-control" id="exampleInputBalance" aria-describedby="IDHelp" placeholder="1500"/>
+    <input type="Balance" className="form-control" id="exampleInputBalance" aria-describedby="IDHelp" placeholder="1500"/>
     
     
     
@@ -60,5 +69,4 @@ export default function transactions() {
     
     
     
-    );
-}
+    );}
