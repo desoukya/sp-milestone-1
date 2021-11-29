@@ -12,21 +12,68 @@ import { useMutateRegisterUser } from "../adapters/user";
 
 
 export default function Register() {
-  
-  const [firstName,setFirstName]=useState("");
-  const [lastName,setLastName]=useState("");
+
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [userId, setUserId] = useState("");
-  const [phone,SetPhone]=useState("");
+  const [phone, SetPhone] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [firstNameState, setFirstNameState] = useState("");
+  const [lastNameState, setLastNameState] = useState("");
+  const [userIdState, setIdState] = useState("");
+  const [phoneState, setPhoneState] = useState("");
   const [emailState, setEmailState] = useState("");
   const [passwordState, setPasswordState] = useState("");
   const [confirmPasswordState, setConfirmPasswordState] = useState("");
-  const useRegisterMutation=useMutateRegisterUser();
+  const useRegisterMutation = useMutateRegisterUser();
+
+  const validateFirstName = (value) => {
+    let firstNameState;
+    if (value.length > 2) {
+      firstNameState = "has-success";
+    }
+    else {
+      firstNameState = "has-danger";
+    }
+    setFirstNameState(firstNameState);
+  }
 
 
-  
+  const validateLastName = (value) => {
+    let lastNameState;
+    if (value.length > 2) {
+      lastNameState = "has-success";
+    }
+    else {
+      lastNameState = "has-danger";
+    }
+    setLastNameState(lastNameState);
+  }
+
+  const validateuserId = (value) => {
+    let userIdState;
+    if (value.length == 7 && (!isNaN(value))) {
+      userIdState = "has-success";
+    }
+    else {
+      userIdState = "has-danger";
+    }
+    setIdState(userIdState);
+  }
+
+
+  const validatePhone = (value) => {
+    let phoneState;
+    if (value.length = 11 && (!isNaN(value))) {
+      phoneState = "has-success";
+    }
+    else {
+      phoneState = "has-danger";
+    }
+    setPhoneState(phoneState);
+  }
 
 
   const validateEmail = (value) => {
@@ -66,7 +113,7 @@ export default function Register() {
 
 
 
-  
+
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -76,26 +123,30 @@ export default function Register() {
     } else if (name === "confirm_password") {
       validateConfirmPassword(value);
       setConfirmPassword(value);
-    } else if( name ==="userId"){
+    } else if (name === "userId") {
+      validateuserId(value);
       setUserId(value);
     }
 
-    else if( name ==="firstName"){
+    else if (name === "firstName") {
+      validateFirstName(value);
       setFirstName(value);
     }
 
-    else if( name ==="lastName"){
+    else if (name === "lastName") {
+      validateLastName(value);
       setLastName(value);
     }
 
-    else if( name ==="phone"){
+    else if (name === "phone") {
+      validatePhone(value);
       SetPhone(value);
     }
-    
-    
-    
-    
-      else {
+
+
+
+
+    else {
       validatePassword(value);
       setPassword(value);
     }
@@ -114,13 +165,13 @@ export default function Register() {
     ) {
       // Call User Register Adapter
       useRegisterMutation.mutate(
-        { 
-          "firstName":firstName,
-          "lastName":lastName,
-          "userId":Number(userId),
-          "email" : email,
-          "password" : password,
-          "phone":Number(phone)
+        {
+          "firstName": firstName,
+          "lastName": lastName,
+          "userId": Number(userId),
+          "email": email,
+          "password": password,
+          "phone": Number(phone)
         }
       );
     }
@@ -160,7 +211,7 @@ export default function Register() {
             invalid={passwordState === "has-danger"}
           />
           <FormFeedback>
-            Password must be at least 6 characters long. 
+            Password must be at least 6 characters long.
           </FormFeedback>
         </FormGroup>
         <FormGroup>
