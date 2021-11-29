@@ -10,6 +10,6 @@ export default function Home() {
     const token = localStorage.getItem("jwt");
     setAccessToken(token);
   }, []);
-  return <Dashboard/>
- // return accessToken ? <Dashboard /> : <Login />;
+  //return <Login/>
+  return accessToken ? <Dashboard /> : <Login />;
 }

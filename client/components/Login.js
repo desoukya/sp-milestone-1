@@ -14,6 +14,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailState, setEmailState] = useState("");
+  const useLoginMutations = useMutateLoginUser();
 
   const validateEmail = (value) => {
     const emailRegex =
@@ -39,12 +40,15 @@ export default function Login() {
   };
 
   const handleSubmit = (event) => {
-    event.preventDefault();
     // Call User Login Adapter
-    useMutateLoginUser({email,password});
+    event.preventDefault();
+    useLoginMutations.mutate({
+      "email" : email,
+      "password" : password
+    });
+    
   };
-
-  return (
+     return (
     <div className={styles.App}>
       <h2>Sign In</h2>
       <Form className={styles.form} onSubmit={handleSubmit}>
@@ -52,7 +56,6 @@ export default function Login() {
           <Label className={styles.label} for="email">
             Username
           </Label>
-
           <Input
             type="text"
             name="email"
@@ -76,7 +79,7 @@ export default function Login() {
             onChange={handleChange}
           />
         </FormGroup>
-        <Button color="primary">Submit</Button>
+        <Button color="primary" onClick={handleSubmit}>Submit</Button>
       </Form>
     </div>
   );

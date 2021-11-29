@@ -2,6 +2,7 @@ import { Body, Controller, Get, Post, Request, UseGuards,Param } from '@nestjs/c
 import { AuthGuard } from '@nestjs/passport';
 import { TransactionService } from './transaction.service';
 import {TransactionDto} from './dto/transaction.dto'
+import {ObjectId} from 'mongoose';
 
 
 @Controller('transactions')
@@ -12,37 +13,25 @@ export class TransactionController {
   /**
    * API endpoint handler returns the authenticated user from JWT payload
    */    
+
   //@UseGuards(AuthGuard('jwt'))
+
+
+
+@Get()
+getAll():any{
+  return this.transactionService.getAll();
+}
+
+
   @Get(':accountId')
-  transaction(@Param() accountId: string): any {
+  transaction(@Param('accountId') accountId: string): any {
     return this.transactionService.getTrancation(accountId);
   }
 
-  /**
-   * API endpoint handler returns all users from mongo database
-   */
-  //@UseGuards(AuthGuard('jwt'))
-  
-  //@UseGuards(AuthGuard('jwt'))
-  // @Post()
-  // PostTransaction(Display_date: string, name: string, debit: number, credit: number, amount: number, accountid: string): any {
-  //   return this.transactionService.PostTransaction(Display_date, name, debit, credit, amount, accountid);
-  // }
-
-  // @Post()
-  // addTransaction(
-	//   @Body('transactionDate') trDate:string,
-	//   @Body('transactionName') trName:string,
-	//   @Body('debit') debit:number,
-	//   @Body('credit')credit:number,
-	//   @Body('amount') amount:number,
-  //   @Body('accounid') accountid:string,
-	// ){
-	//   const newTransaction=this.transactionService.PostTransaction(trDate,trName,debit,credit,amount,accountid)
-	// }
-  @UseGuards(AuthGuard('jwt'))
-  @Post()
+  @Post('')
   CreateTransaction(@Body() dto:TransactionDto):any{
-      const accountId = this.transactionService.createTransaction(dto);
+      const transaction = this.transactionService.createTransaction(dto);
+      return transaction;
   }
 }
