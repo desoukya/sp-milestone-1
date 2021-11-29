@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
-import transactions from "../pages/transactions";
+import Transactions from "../pages/Transactions";
 
 export default class accountlist extends Component {
   constructor(props) {
@@ -17,7 +17,7 @@ export default class accountlist extends Component {
   handleClick = () => {
     const currentacc = this.props.obj.accountNumber;
     window.localStorage.setItem("currentAccount",JSON.stringify(currentacc));
-    window.location = "http://localhost:3000/transactions"
+    window.location = "http://localhost:3000/Transactions"
     };
   
 

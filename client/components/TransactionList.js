@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
-import transactions from "../pages/transactions";
+import Transactions from "../pages/Transactions";
 
 export default class TransactionList extends Component {
   constructor(props) {
@@ -24,6 +24,7 @@ export default class TransactionList extends Component {
         <td>{this.props.obj.debit}</td>
         <td>{this.props.obj.credit}</td>
         <td>{this.props.obj.totalAmount}</td>
+        <td>{this.props.obj.accountNumber} </td>
         <td>
         </td>
       </tr>

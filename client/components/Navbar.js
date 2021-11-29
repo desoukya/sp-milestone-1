@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import home from "../pages/home";
 import Button from "react-bootstrap/Button";
-import transactions from "../pages/transactions";
+import Transactions from "../pages/Transactions";
 
 export default function Navbar() {
   function signout(){
@@ -20,7 +20,7 @@ export default function Navbar() {
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/transactions">
+          <a class="nav-link" href="/Transactions">
             Transactions
           </a>
         </li>
