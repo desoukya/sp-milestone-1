@@ -13,4 +13,8 @@ export class UserService {
   findAll(): Promise<User[]> {
     return this.userModel.find().exec();
   }
+  createUser(req):any{
+    //add the users to database
+  }
+
 }
