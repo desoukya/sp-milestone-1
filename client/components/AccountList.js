@@ -11,15 +11,16 @@ export default class accountlist extends Component {
 
 
 
- /* currentacc = this.props.obj.accountNumber;
+
 
 
   handleClick = () => {
-    this.window.localStorage.setItem("currentAccount",this.currentacc);
-    this.window.location = "http://localhost:3000/transactions"
+    const currentacc = this.props.obj.accountNumber;
+    window.localStorage.setItem("currentAccount",JSON.stringify(this.currentacc));
+    window.location = "http://localhost:3000/transactions"
     };
   
-*/
+
 
   render() {
     return (
@@ -27,7 +28,7 @@ export default class accountlist extends Component {
         <td>{this.props.obj.accountNumber}</td>
         <td>{this.props.obj.balance}</td>
         <td>
-          <Button color="primary">View Transactions</Button>
+          <Button color="primary" onClick= {this.handleClick}>View Transactions</Button>
         </td>
       </tr>
     );
