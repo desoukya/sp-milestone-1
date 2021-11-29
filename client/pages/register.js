@@ -12,13 +12,22 @@ import { useMutateRegisterUser } from "../adapters/user";
 
 
 export default function Register() {
+  
+  const [firstName,setFirstName]=useState("");
+  const [lastName,setLastName]=useState("");
   const [email, setEmail] = useState("");
-  const [giuId, setGiuId] = useState("");
+  const [userId, setUserId] = useState("");
+  const [phone,SetPhone]=useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [emailState, setEmailState] = useState("");
   const [passwordState, setPasswordState] = useState("");
   const [confirmPasswordState, setConfirmPasswordState] = useState("");
+  const useRegisterMutation=useMutateRegisterUser();
+
+
+  
+
 
   const validateEmail = (value) => {
     const emailRegex =
@@ -53,6 +62,12 @@ export default function Register() {
     setConfirmPasswordState(confirmPasswordState);
   };
 
+
+
+
+
+  
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     if (name === "email") {
@@ -61,9 +76,26 @@ export default function Register() {
     } else if (name === "confirm_password") {
       validateConfirmPassword(value);
       setConfirmPassword(value);
-    } else if( name ==="giuId"){
-      setGiuId(value);
-    }else {
+    } else if( name ==="userId"){
+      setUserId(value);
+    }
+
+    else if( name ==="firstName"){
+      setFirstName(value);
+    }
+
+    else if( name ==="lastName"){
+      setLastName(value);
+    }
+
+    else if( name ==="phone"){
+      SetPhone(value);
+    }
+    
+    
+    
+    
+      else {
       validatePassword(value);
       setPassword(value);
     }
@@ -81,7 +113,16 @@ export default function Register() {
       confirmPasswordState === "has-success"
     ) {
       // Call User Register Adapter
-      useMutateRegisterUser();
+      useRegisterMutation.mutate(
+        { 
+          "firstName":firstName,
+          "lastName":lastName,
+          "userId":Number(userId),
+          "email" : email,
+          "password" : password,
+          "phone":Number(phone)
+        }
+      );
     }
   };
 
@@ -135,12 +176,12 @@ export default function Register() {
             valid={confirmPasswordState === "has-success"}
             invalid={confirmPasswordState === "has-danger"}
           />
-          <Label className={styles.label} for="giuId">
+          <Label className={styles.label} for="userId">
             Enter Giu Id
           </Label>
           <Input
             type="text"
-            name="giuId"
+            name="userId"
             id="text"
             onChange={handleChange}
           />
