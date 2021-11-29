@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from 'react';
-//import axios from 'axios';
-import {axios} from '../services/apiService'
-import {apiService} from '../services/apiService';
-
+import apiService from "../services/apiService";
 
 
 export default function Dashboard() {
   const [accounts, viewAccounts] = useState([]);
-  useEffect(() => {
+  useEffect(async () => {
     console.log("Mounting!");
-    const userid="12";
-    axios.get(`http://localhost:5000/accounts/${userid}`)
-         .then(res => viewAccounts(res.data));
+    const response = await apiService.get('http://localhost:5000/accounts/15')
+    console.log(response)
+    viewAccounts(response.data)
 },[]);
  
   return (

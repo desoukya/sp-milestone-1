@@ -20,6 +20,11 @@ export class TransactionService {
     return this.transactionModel.find({accountid:aid}).exec();
   }
 
+
+  getAll():any{
+    return this.transactionModel.find().exec(); 
+   }
+
   
   createTransaction(dto: TransactionDto):Promise<Transaction>{     
     const newTransaction = new this.transactionModel(dto);

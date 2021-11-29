@@ -13,6 +13,7 @@ import { useMutateRegisterUser } from "../adapters/user";
 
 export default function Register() {
   const [email, setEmail] = useState("");
+  const [giuId, setGiuId] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [emailState, setEmailState] = useState("");
@@ -60,7 +61,9 @@ export default function Register() {
     } else if (name === "confirm_password") {
       validateConfirmPassword(value);
       setConfirmPassword(value);
-    } else {
+    } else if( name ==="giuId"){
+      setGiuId(value);
+    }else {
       validatePassword(value);
       setPassword(value);
     }
@@ -132,7 +135,15 @@ export default function Register() {
             valid={confirmPasswordState === "has-success"}
             invalid={confirmPasswordState === "has-danger"}
           />
-          <FormFeedback>Passwords don't match.</FormFeedback>
+          <Label className={styles.label} for="giuId">
+            Enter Giu Id
+          </Label>
+          <Input
+            type="text"
+            name="giuId"
+            id="text"
+            onChange={handleChange}
+          />
         </FormGroup>
         <Button color="primary">Submit</Button>
       </Form>

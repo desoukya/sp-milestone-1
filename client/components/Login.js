@@ -40,12 +40,13 @@ export default function Login() {
   };
 
   const handleSubmit = (event) => {
+    // Call User Login Adapter
     event.preventDefault();
     useLoginMutations.mutate({
       "email" : email,
       "password" : password
     });
-    // Call User Login Adapter
+    
   };
      return (
     <div className={styles.App}>
@@ -55,7 +56,6 @@ export default function Login() {
           <Label className={styles.label} for="email">
             Username
           </Label>
-
           <Input
             type="text"
             name="email"
@@ -79,7 +79,7 @@ export default function Login() {
             onChange={handleChange}
           />
         </FormGroup>
-        <Button color="primary">Submit</Button>
+        <Button color="primary" onClick={handleSubmit}>Submit</Button>
       </Form>
     </div>
   );

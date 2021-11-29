@@ -3,48 +3,44 @@ import { useQuery, useQueryClient, useMutation } from "react-query";
 
 export  function useFetchUser(userId) {
   return useQuery(["userData", userId], () =>
-    apiService.get(`user/${userId}`).then(({ data }) => data)
+  apiService.get(`user/${userId}`).then(({ data }) => data)
   );
 }
 
   export function useMutateLoginUser() {
-    const tmp= useMutation(user => {
-        const data = new FormData();
-        data.append("email", user.email);
-        data.append("password", user.password);
-        return apiService.post(`auth/login`, data);
+      return useMutation(user => {
+        return apiService.post(`http://localhost:5000/auth/login`, user);
       },
       {
         // When mutate is called:
         onSuccess: (responseData) => {
+          console.log(responseData.data.token)
           // Store Token in local storage  
-          const mytoken= window.localStorage.setItem("jwt", user);
-
+          localStorage.setItem("jwt", responseData.data.token);
         },
         onError: (e) => console.log(e.message),
       }
     );
-    return tmp;
+    
   }
   
 
 export function useMutateRegisterUser() {
-  const tmp=useMutation(user => {
+      return useMutation(user => {
       const data = new FormData();
-      data.append("email", user.email);
-      data.append("password", user.password);
+      data.set("email",user.email);
+      //data.append("email", user.email);
+      data.set("password", user.password);
       return apiService.post(`user/register`, data);
     },
     {
       // When mutate is called:
       onSuccess: (responseData) => {
         // Redirect to login page------------>
-        
-
+        window.location.replace("http://localhost:3000/login");
       },
       onError: (e) => console.log(e.message),
     });
-  return tmp;
   
 }
 
