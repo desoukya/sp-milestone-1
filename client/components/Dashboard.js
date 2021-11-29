@@ -27,7 +27,10 @@ export default function Dashboard() {
            <><th scope="row">{key}</th>
              <td>{account.id}</td>
              <td>{account.status}</td>
-             <td>{account.balance}</td></>
+             <td>{account.balance}</td>
+             <button>Transactions </button>
+             </>
+
         ))}
         </tr>
         </tbody>

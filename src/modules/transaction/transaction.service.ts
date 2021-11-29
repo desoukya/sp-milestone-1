@@ -16,13 +16,14 @@ export class TransactionService {
   /**
    * Returns all users from mongo database
    */
-   getTrancation(aid:string): Promise<Transaction[]> {
-    return this.transactionModel.find({accountid:aid}).exec();
-  }
+
+   async getTrancation(accountid:string): Promise<Transaction[]> {
+    return await this.transactionModel.find({accountid:accountid}).exec();
+   }
 
 
-  getAll():any{
-    return this.transactionModel.find().exec(); 
+  async getAll():Promise<any>{
+    return await this.transactionModel.find().exec(); 
    }
 
   
