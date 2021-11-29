@@ -28,10 +28,11 @@ export  function useFetchUser(userId) {
 export function useMutateRegisterUser() {
       return useMutation(user => {
       const data = new FormData();
-      data.set("email",user.email);
+      //data.set("email",user.email);
       //data.append("email", user.email);
-      data.set("password", user.password);
-      return apiService.post(`user/register`, data);
+      //data.set("password", user.password);
+      console.log(user)
+      return apiService.post(`http://localhost:5000/user/register`, user);
     },
     {
       // When mutate is called:

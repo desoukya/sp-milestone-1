@@ -9,7 +9,7 @@ export class UserDto {
   lastName:string;
 
   @IsNumber()
-  userId:Number;
+  userId:number;
 
   @IsEmail()
   email: string;
@@ -17,25 +17,7 @@ export class UserDto {
   @IsNotEmpty()
   password: string;
 
-  @IsNumber()
-  phone: number;
-  //@IsNotEmpty()
-  //name: string;
-
- 
-
-  // @IsNotEmpty()
-  // userName: string;
-
-
-
-  //@IsNotEmpty()
-  //phone: Number;
-
-  //@IsEmail()
-  //giuEmail: string;
-
-  //@IsNotEmpty()
-  //giuId: Number;
+  @IsNotEmpty()
+  phone: string;
 
 }

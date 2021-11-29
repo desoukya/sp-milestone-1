@@ -12,7 +12,7 @@ import { useMutateRegisterUser } from "../adapters/user";
 
 
 export default function Register() {
-
+  //properties
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -20,13 +20,16 @@ export default function Register() {
   const [phone, SetPhone] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  //states
   const [firstNameState, setFirstNameState] = useState("");
   const [lastNameState, setLastNameState] = useState("");
-  const [userIdState, setIdState] = useState("");
+  const [userIdState, setUserIdState] = useState("");
   const [phoneState, setPhoneState] = useState("");
   const [emailState, setEmailState] = useState("");
   const [passwordState, setPasswordState] = useState("");
   const [confirmPasswordState, setConfirmPasswordState] = useState("");
+
+
   const useRegisterMutation = useMutateRegisterUser();
 
   const validateFirstName = (value) => {
@@ -52,25 +55,31 @@ export default function Register() {
     setLastNameState(lastNameState);
   }
 
-  const validateuserId = (value) => {
+  const validateUserId = (value) => {
     let userIdState;
-    if (value.length == 7 && (!isNaN(value))) {
+    
+    if (value.length == 7 && !isNaN(Number(value))) {
       userIdState = "has-success";
     }
     else {
       userIdState = "has-danger";
     }
-    setIdState(userIdState);
+    setUserIdState(userIdState);
   }
 
 
   const validatePhone = (value) => {
     let phoneState;
-    const prefix = values.substring(0,3) ; 
-    if (value.length = 11 && (!isNaN(value)) && (prefix === "010" || prefix ===  "012" || prefix === "015")) {
-      phoneState = "has-success";
+    if(value.length>=3){
+      const prefix = value.substring(0,3) ; 
+      if (value.length == 11 && !isNaN(Number(value)) && (prefix === "010" || prefix === "011" || prefix ===  "012" || prefix === "015")) {
+        phoneState = "has-success";
+      }
+      else {
+        phoneState = "has-danger";
+      }
     }
-    else {
+    else{
       phoneState = "has-danger";
     }
     setPhoneState(phoneState);
@@ -114,51 +123,69 @@ export default function Register() {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    if (name === "email") {
-      validateEmail(value);
-      setEmail(value);
-    } else if (name === "confirm_password") {
-      validateConfirmPassword(value);
-      setConfirmPassword(value);
-    } else if (name === "userId") {
-      validateuserId(value);
-      setUserId(value);
-    }
-
-    else if (name === "firstName") {
+    
+    if (name === "firstName") {
       validateFirstName(value);
       setFirstName(value);
     }
-
+    
     else if (name === "lastName") {
       validateLastName(value);
       setLastName(value);
     }
 
-    else if (name === "phone") {
+    else if (name === "userId") {
+      validateUserId(value);
+      setUserId(value);
+    }
+    
+    else if (name === "email") {
+      validateEmail(value);
+      setEmail(value);
+    }
+    
+    else if(name === "password") {
+      validatePassword(value);
+      setPassword(value);
+    }
+
+    else if (name === "confirm_password") {
+      validateConfirmPassword(value);
+      setConfirmPassword(value);
+      
+    } 
+
+    else {
       validatePhone(value);
       SetPhone(value);
     }
 
-
-
-
-    else {
-      validatePassword(value);
-      setPassword(value);
-    }
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    validateFirstName(firstName);
+    validateLastName(lastName);
+    validateUserId(userId);
     validateEmail(email);
     validatePassword(password);
     validateConfirmPassword(confirmPassword);
+    validatePhone(phone);
+
+    
+    
 
     if (
+      firstNameState==="has-success"&&
+      lastNameState==="has-success"&&
+      userIdState==="has-success"&&
       emailState === "has-success" &&
       passwordState === "has-success" &&
-      confirmPasswordState === "has-success"
+      confirmPasswordState === "has-success"&&
+      phoneState==="has-success"
+
+
     ) {
       // Call User Register Adapter
       useRegisterMutation.mutate(
@@ -168,7 +195,7 @@ export default function Register() {
           "userId": Number(userId),
           "email": email,
           "password": password,
-          "phone": Number(phone)
+          "phone": phone
         }
       );
     }
@@ -180,13 +207,13 @@ export default function Register() {
       <Form className={styles.form} onSubmit={handleSubmit}>
 
       <FormGroup>
-          <Label className={styles.label} for="firstname">
+          <Label className={styles.label} for="firstName">
             First Name: 
           </Label>
           <Input
             type="text"
-            name="firstname"
-            id="firstname"
+            name="firstName"
+            id="firstName"
             placeholder="Enter First Name"
             onChange={handleChange}
             valid={firstNameState === "has-success"}
@@ -197,13 +224,13 @@ export default function Register() {
         
 
         <FormGroup>
-          <Label className={styles.label} for="LastName">
+          <Label className={styles.label} for="lastName">
             Last Name: 
           </Label>
           <Input
             type="text"
-            name="LastName"
-            id="LastName"
+            name="lastName"
+            id="lastName"
             placeholder="Enter Last Name "
             onChange={handleChange}
             valid={lastNameState === "has-success"}
@@ -211,15 +238,17 @@ export default function Register() {
           />
           <FormFeedback>Please don't leave it empty</FormFeedback>
 
+          </FormGroup>
+
           <FormGroup>
           <Label className={styles.label} for="userId">
-            Username ID: 
+            GIU ID: 
           </Label>
           <Input
             type="text"
-            name="LastName"
-            id="LastName"
-            placeholder="Enter User ID "
+            name="userId"
+            id="userId"
+            placeholder="Enter User ID"
             onChange={handleChange}
             valid={userIdState === "has-success"}
             invalid={userIdState === "has-danger"}
@@ -228,6 +257,8 @@ export default function Register() {
 
 
         </FormGroup>
+
+        <FormGroup>
           <Label className={styles.label} for="email">
             Email: 
           </Label>
