@@ -66,7 +66,8 @@ export default function Register() {
 
   const validatePhone = (value) => {
     let phoneState;
-    if (value.length = 11 && (!isNaN(value))) {
+    const prefix = values.substring(0,3) ; 
+    if (value.length = 11 && (!isNaN(value)) && (prefix === "010" || prefix ===  "012" || prefix === "015")) {
       phoneState = "has-success";
     }
     else {
@@ -108,10 +109,6 @@ export default function Register() {
     }
     setConfirmPasswordState(confirmPasswordState);
   };
-
-
-
-
 
 
 
@@ -181,11 +178,59 @@ export default function Register() {
     <div className={styles.App}>
       <h2>Register</h2>
       <Form className={styles.form} onSubmit={handleSubmit}>
-        <FormGroup>
-          <Label className={styles.label} for="email">
-            Username
-          </Label>
 
+      <FormGroup>
+          <Label className={styles.label} for="firstname">
+            First Name: 
+          </Label>
+          <Input
+            type="text"
+            name="firstname"
+            id="firstname"
+            placeholder="Enter First Name"
+            onChange={handleChange}
+            valid={firstNameState === "has-success"}
+            invalid={firstNameState === "has-danger"}
+          />
+          <FormFeedback>Please don't leave it empty</FormFeedback>
+        </FormGroup>
+        
+
+        <FormGroup>
+          <Label className={styles.label} for="LastName">
+            Last Name: 
+          </Label>
+          <Input
+            type="text"
+            name="LastName"
+            id="LastName"
+            placeholder="Enter Last Name "
+            onChange={handleChange}
+            valid={lastNameState === "has-success"}
+            invalid={lastNameState === "has-danger"}
+          />
+          <FormFeedback>Please don't leave it empty</FormFeedback>
+
+          <FormGroup>
+          <Label className={styles.label} for="userId">
+            Username ID: 
+          </Label>
+          <Input
+            type="text"
+            name="LastName"
+            id="LastName"
+            placeholder="Enter User ID "
+            onChange={handleChange}
+            valid={userIdState === "has-success"}
+            invalid={userIdState === "has-danger"}
+          />
+          <FormFeedback>Please don't leave it empty</FormFeedback>
+
+
+        </FormGroup>
+          <Label className={styles.label} for="email">
+            Email: 
+          </Label>
           <Input
             type="text"
             name="email"
@@ -197,9 +242,10 @@ export default function Register() {
           />
           <FormFeedback>Please input a correct email.</FormFeedback>
         </FormGroup>
+
         <FormGroup>
           <Label className={styles.label} for="password">
-            Password
+            Password:
           </Label>
           <Input
             type="password"
@@ -211,12 +257,13 @@ export default function Register() {
             invalid={passwordState === "has-danger"}
           />
           <FormFeedback>
-            Password must be at least 6 characters long.
+            Password must be at least 6 characters long. 
           </FormFeedback>
         </FormGroup>
+        
         <FormGroup>
           <Label className={styles.label} for="password">
-            Confirm Password
+            Confirm Password:
           </Label>
           <Input
             type="password"
@@ -227,16 +274,30 @@ export default function Register() {
             valid={confirmPasswordState === "has-success"}
             invalid={confirmPasswordState === "has-danger"}
           />
-          <Label className={styles.label} for="userId">
-            Enter Giu Id
+           <FormFeedback>
+            Please make sure it's matching the password above.
+          </FormFeedback>
+        </FormGroup>
+
+        <FormGroup>
+          <Label className={styles.label} for="phone">
+            Phone Number: 
           </Label>
           <Input
-            type="text"
-            name="userId"
-            id="text"
+            pattern =  "/^-?(|[0-9]\d*)?$/"
+            type="number"
+            name="phone"
+            id="phone"
+            placeholder = "Enter Phone Number"
             onChange={handleChange}
+            valid={phoneState === "has-success"}
+            invalid={phoneState === "has-danger"}
           />
+           <FormFeedback>
+            Phone number must be 11 numbers long.
+          </FormFeedback>
         </FormGroup>
+
         <Button color="primary">Submit</Button>
       </Form>
     </div>
