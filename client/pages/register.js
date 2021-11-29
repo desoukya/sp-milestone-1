@@ -85,9 +85,54 @@ export default function Register() {
     <div className={styles.App}>
       <h2>Register</h2>
       <Form className={styles.form} onSubmit={handleSubmit}>
+      <FormGroup>
+          <Label className={styles.label} for="name">
+            Name
+          </Label>
+
+          <Input
+            type="text"
+            name="name"
+            id="name"
+            placeholder="name"
+            onChange={handleChange}
+            valid={emailState === "has-success"}
+            invalid={emailState === "has-danger"}
+          />
+        </FormGroup>
+        <FormGroup>
+          <Label className={styles.label} for="phone">
+            Phone
+          </Label>
+
+          <Input
+            type="text"
+            name="phone"
+            id="phone"
+            placeholder="phone number"
+            onChange={handleChange}
+            valid={emailState === "has-success"}
+            invalid={emailState === "has-danger"}
+          />
+        </FormGroup>
+        <FormGroup>
+          <Label className={styles.label} for="username">
+            Username
+          </Label>
+
+          <Input
+            type="text"
+            name="username"
+            id="username"
+            placeholder="username"
+            onChange={handleChange}
+            valid={emailState === "has-success"}
+            invalid={emailState === "has-danger"}
+          />
+        </FormGroup>
         <FormGroup>
           <Label className={styles.label} for="email">
-            Username
+            Email
           </Label>
 
           <Input
@@ -133,6 +178,22 @@ export default function Register() {
           />
           <FormFeedback>Passwords don't match.</FormFeedback>
         </FormGroup>
+        <FormGroup>
+          <Label className={styles.label} for="giu_id">
+            GIU ID
+          </Label>
+          <Input
+            type="password"
+            name="giu_id"
+            id="giu_id"
+            placeholder="********"
+            onChange={handleChange}
+            valid={confirmPasswordState === "has-success"}
+            invalid={confirmPasswordState === "has-danger"}
+          />
+          <FormFeedback>Passwords don't match.</FormFeedback>
+        </FormGroup>
+        
         <Button color="primary">Submit</Button>
       </Form>
     </div>
