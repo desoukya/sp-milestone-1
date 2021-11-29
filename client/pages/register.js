@@ -17,6 +17,7 @@ export default function Register() {
   const [emailState, setEmailState] = useState("");
   const [passwordState, setPasswordState] = useState("");
   const [confirmPasswordState, setConfirmPasswordState] = useState("");
+  const registerUser = useMutateRegisterUser();
 
   const validateEmail = (value) => {
     const emailRegex =
@@ -76,7 +77,7 @@ export default function Register() {
       passwordState === "has-success" &&
       confirmPasswordState === "has-success"
     ) {
-      useMutateRegisterUser({email, password, confirmPassword});
+      registerUser.mutate({email, password, confirmPassword});
     }
   };
 

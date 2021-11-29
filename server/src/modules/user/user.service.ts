@@ -14,6 +14,7 @@ export class UserService {
     return this.userModel.find().exec();
   }
   createUser(req):any{
+    
     //add the users to database
   }
 

@@ -28,15 +28,12 @@ export function useMutateLoginUser() {
 export function useMutateRegisterUser() {
   return useMutation(
     (user) => {
-      const data = new FormData();
-      data.append("email", user.email);
-      data.append("password", user.password);
-      return apiService.post(`user/register`, data);
+      return apiService.post(`user/register`, user);
     },
     {
       // When mutate is called:
       onSuccess: (responseData) => {
-        <form action="/home" class="inline"></form>
+        <form action="/home" class="inline"></form>;
       },
       onError: (e) => console.log(e.message),
     }
