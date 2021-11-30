@@ -6,8 +6,8 @@ export default function Dashboard() {
   const [Transactions, viewTransactions] = useState([]);
   useEffect(async () => {
     console.log("Mounting!");
-    const accountId = "61516"
-    const response = await apiService.get(`http://localhost:5000/transactions/12`)
+    const accountId = localStorage.getItem("account")
+    const response = await apiService.get(`http://localhost:5000/transactions/${accountId}`)
     console.log(response)
     viewTransactions(response.data)
 },[]);

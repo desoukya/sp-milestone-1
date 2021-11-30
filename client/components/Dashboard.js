@@ -19,6 +19,7 @@ export default function Dashboard() {
           <th scope="col">#</th>
           <th scope="col">Status</th>
           <th scope="col">Balance</th>
+          <th scope="col">Transactions</th>
         </tr>
       </thead>
       <tbody>
@@ -28,9 +29,11 @@ export default function Dashboard() {
              <td>{account.id}</td>
              <td>{account.status}</td>
              <td>{account.balance}</td>
-             <button>Transactions </button>
+              <button onClick={
+                  localStorage.setItem("accountid", account.accountid),
+                  window.location.replace("http://localhost:3000/transactions")
+                }>View Transactions</button>
              </>
-
         ))}
         </tr>
         </tbody>
