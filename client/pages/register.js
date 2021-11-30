@@ -69,16 +69,15 @@ export default function Register() {
   };
 
   const handleChange = (event) => {
-    const { name_, value } = event.target;
+    const { name, value } = event.target;
     /*if(name === "name"){
       validateName(value);
       setName(value);
     }*/
-    if (name_ === "email") {
+    if (name === "email") {
       validateEmail(value);
       setEmail(value);
-    } 
-    if (name === "confirm_password") {
+    } else if (name === "confirm_password") {
       validateConfirmPassword(value);
       setConfirmPassword(value);
     } else {
@@ -108,11 +107,10 @@ export default function Register() {
     <div className={styles.App}>
       <h2>Register</h2>
       <Form className={styles.form} onSubmit={handleSubmit}>
-      <FormGroup>
+        <FormGroup>
           <Label className={styles.label} for="name">
             Name
           </Label>
-
           <Input
             type="text"
             name="name"
@@ -127,12 +125,11 @@ export default function Register() {
           <Label className={styles.label} for="phone">
             Phone
           </Label>
-
           <Input
             type="number"
             name="phone"
             id="phone"
-            placeholder="phone number"
+            placeholder="please enter your phone number"
             onChange={handleChange}
           />
         </FormGroup>
@@ -140,7 +137,6 @@ export default function Register() {
           <Label className={styles.label} for="username">
             Username
           </Label>
-
           <Input
             type="text"
             name="username"
@@ -198,13 +194,13 @@ export default function Register() {
           <FormFeedback>Passwords don't match.</FormFeedback>
         </FormGroup>
         <FormGroup>
-          <Label className={styles.label} for="giu_id">
+          <Label className={styles.label} for="GIU_id">
             GIU ID
           </Label>
           <Input
             type="number"
-            name="giu_id"
-            id="giu_id"
+            name="GIU_id"
+            id="GIU_id"
             placeholder="XXXXXXX"
             onChange={handleChange}
           />

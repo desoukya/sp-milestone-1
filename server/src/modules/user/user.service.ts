@@ -14,7 +14,7 @@ export class UserService {
     return this.userModel.find().exec();
   }
   private sanitizedUser(user: User){
-    return user.validatePassword('password');
+   // return user.validatePassword('password');
   }
    createUser(req):any{
     const username = req;
