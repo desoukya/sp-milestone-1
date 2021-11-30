@@ -122,18 +122,6 @@ export default function Register() {
           />
         </FormGroup>
         <FormGroup>
-          <Label className={styles.label} for="phone">
-            Phone
-          </Label>
-          <Input
-            type="number"
-            name="phone"
-            id="phone"
-            placeholder="please enter your phone number"
-            onChange={handleChange}
-          />
-        </FormGroup>
-        <FormGroup>
           <Label className={styles.label} for="username">
             Username
           </Label>
@@ -192,6 +180,18 @@ export default function Register() {
             invalid={confirmPasswordState === "has-danger"}
           />
           <FormFeedback>Passwords don't match.</FormFeedback>
+        </FormGroup>
+        <FormGroup>
+          <Label className={styles.label} for="phone">
+            Phone
+          </Label>
+          <Input
+            type="number"
+            name="phone"
+            id="phone"
+            placeholder="phone number"
+            onChange={handleChange}
+          />
         </FormGroup>
         <FormGroup>
           <Label className={styles.label} for="GIU_id">
