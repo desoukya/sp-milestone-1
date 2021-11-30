@@ -10,6 +10,8 @@ export default function Dashboard() {
     console.log(response)
     viewAccounts(response.data)
 },[]);
+    const calculateBalance = (accountid) => {const response = await apiService.post('http://localhost:5000/user/balance', accountid)}
+    
  
   return (
     <div>
@@ -28,7 +30,7 @@ export default function Dashboard() {
            <><th scope="row">{key}</th>
              <td>{account.id}</td>
              <td>{account.status}</td>
-             <td>{account.balance}</td>
+             <td>{calculateBalance(account.accountid)}</td>
               <button onClick={()=>{
                   localStorage.setItem("accountid", account.accountid),
                   window.location.replace("http://localhost:3000/transactions")
