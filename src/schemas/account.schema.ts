@@ -21,6 +21,7 @@ export class Account {
   
   @Prop({ required: true })
   accountid: string;
+
   
 }
 

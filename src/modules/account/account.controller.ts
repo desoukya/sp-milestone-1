@@ -39,10 +39,9 @@ export class AccountController {
     return accountId;
   }
 
-  @Get("/user/balance")
-  getAccountBalance(@Body() reqBody: any) {
-    console.log(reqBody.accountid)
-    console.log("Money");
-    return this.accountService.calculateBalance(reqBody.accountid);
+  @Get("user/balance/:accountid")
+  getAccountBalance(@Param("accountid") accountid: any) :any{
+    const balance=this.accountService.calculateBalance(accountid);
+    return balance;
   }
 }

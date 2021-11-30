@@ -1,45 +1,49 @@
 import React, { useEffect, useState } from 'react';
 import apiService from "../services/apiService";
+import Table from 'react-bootstrap/Table'
 
 
 export default function Dashboard() {
   const [accounts, viewAccounts] = useState([]);
+
   useEffect(async () => {
     console.log("Mounting!");
     const response = await apiService.get('http://localhost:5000/accounts/15')
-    console.log(response)
     viewAccounts(response.data)
 },[]);
-    const calculateBalance = (accountid) => {const response = await apiService.post('http://localhost:5000/user/balance', accountid)}
+
+
+  //   const calculateBalance = (accountid) => {
+  //     const response =  apiService.get(`http://localhost:5000/accounts/user/balance/${accountid}`);
+  //     setBalance(response);
+  //     console.log(response?"not empty":"empty");
+  // }
     
  
   return (
     <div>
-      <table className="table">
+      <Table  striped bordered hover>
       <thead className="thead-dark">
         <tr>
           <th scope="col">#</th>
           <th scope="col">Status</th>
-          <th scope="col">Balance</th>
           <th scope="col">Transactions</th>
         </tr>
       </thead>
-      <tbody>
-        <tr>  {
+      <tbody>{
         accounts.map((account , key) => (
-           <><th scope="row">{key}</th>
-             <td>{account.id}</td>
+        <tr>  
+           <><td>{key}</td>
              <td>{account.status}</td>
-             <td>{calculateBalance(account.accountid)}</td>
               <button onClick={()=>{
                   localStorage.setItem("accountid", account.accountid),
                   window.location.replace("http://localhost:3000/transactions")
-                }}>View Transactions</button>
+                }}>View Details</button>
              </>
-        ))}
-        </tr>
+      
+        </tr>  ))}
         </tbody>
-      </table>
+      </Table>
       </div>
     );
     
