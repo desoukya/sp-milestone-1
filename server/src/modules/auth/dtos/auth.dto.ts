@@ -6,4 +6,9 @@ export class AuthDto {
 
   @IsNotEmpty()
   password: string;
+
+}
+export interface RegisterDTO{
+  username: string;
+  password: string;
 }

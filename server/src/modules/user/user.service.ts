@@ -3,8 +3,10 @@ import { InjectModel } from '@nestjs/mongoose';
 import { User, UserDocument } from '@sp/schemas';
 import { Model } from 'mongoose';
 import { MongooseModule } from '@nestjs/mongoose';
+import { RegisterDTO } from '../auth/dtos/auth.dto';
 @Injectable()
 export class UserService {
+  create: any;
   constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
   /**
@@ -13,17 +15,17 @@ export class UserService {
   findAll(): Promise<User[]> {
     return this.userModel.find().exec();
   }
-  private sanitizedUser(user: User){
-   // return user.validatePassword('password');
+  private sanitizedUser(user: any){
+   return user.depopulate('password');
   }
-   createUser(req):any{
-    const username = req;
-    const user = this.userModel.findOne({username});
+   async createUser(userDto: RegisterDTO){
+    const username = userDto;
+    const user = await this.userModel.findOne({username});
     if(user){
       throw new HttpException('user already exist', HttpStatus.BAD_REQUEST);
     }
-    const createUser = new this.userModel(req);
-    createUser.save();
+    const createUser = new this.userModel(userDto);
+    await createUser.save();
     return this.sanitizedUser(createUser);
     //add the users to database
   }
