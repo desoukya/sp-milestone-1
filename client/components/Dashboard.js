@@ -29,10 +29,10 @@ export default function Dashboard() {
              <td>{account.id}</td>
              <td>{account.status}</td>
              <td>{account.balance}</td>
-              <button onClick={
+              <button onClick={()=>{
                   localStorage.setItem("accountid", account.accountid),
                   window.location.replace("http://localhost:3000/transactions")
-                }>View Transactions</button>
+                }}>View Transactions</button>
              </>
         ))}
         </tr>
