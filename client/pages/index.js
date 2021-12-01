@@ -11,6 +11,7 @@ export default function Home() {
   useEffect(() => {
     const token = localStorage.getItem("jwt");
     setAccessToken(token);
+    console.log(accessToken);
   }, []);
   return accessToken ? <Dashboard /> : <Login />;
 }

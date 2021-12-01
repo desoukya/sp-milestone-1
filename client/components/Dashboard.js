@@ -8,7 +8,8 @@ export default function Dashboard() {
 
   useEffect(async () => {
     console.log("Mounting!");
-    const response = await apiService.get('http://localhost:5000/accounts/15')
+    //maybe after logining in also get user and get his id and store it and get it here
+    const response = await apiService.get('http://localhost:5000/accounts/1001234')
     viewAccounts(response.data)
 },[]);
 

@@ -17,6 +17,8 @@ export  function useFetchUser(userId) {
           console.log(responseData.data.token)
           // Store Token in local storage  
           localStorage.setItem("jwt", responseData.data.token);
+          window.location.replace("http://localhost:3000")
+
         },
         onError: (e) => console.log(e.message),
       }
@@ -38,7 +40,7 @@ export function useMutateRegisterUser() {
       // When mutate is called:
       onSuccess: (responseData) => {
         // Redirect to login page------------>
-        window.location.replace("http://localhost:3000/index");
+        window.location.replace("http://localhost:3000")
 
 
 
