@@ -7,10 +7,13 @@ import {UserDto} from './dtos/user.dto';
 import { AuthDto } from '../auth/dtos/auth.dto';
 import { AnyFilesInterceptor } from '@nestjs/platform-express';
 import { Console } from 'console';
+import { AccountService } from '../account/account.service';
+import { TransactionService } from '../transaction/transaction.service';
+import { TransactionDto } from '../transaction/dto/transaction.dto';
 
 @Injectable()
 export class UserService {
-  constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
+  constructor(@InjectModel(User.name) private userModel: Model<UserDocument>,private accountService:AccountService,private transactionService:TransactionService) {}
 
 
 
@@ -30,11 +33,12 @@ export class UserService {
     return this.userModel.find().exec();
   }
 
-  createUser(dto: UserDto):Promise<User>{
+  async createUser(dto: UserDto):Promise<User>{
      
     const newUser = new this.userModel(dto);
-    //const newAccount = accountService.createAccount({"userid":newUser.id});
-    //const newTransaction = transactionService.createTransaction({"accountid":newAccount.id});
+    const newAccount = await this.accountService.createAccount(newUser.userId.toString());
+    const tdto:TransactionDto = {accountid:(newAccount).accountid.toString(),amount:100,credit:1,debit:0,Display_date:"",name:"Initial deposit"}
+    const newTransaction = this.transactionService.createTransaction(tdto);
     return newUser.save();  
   }
 
