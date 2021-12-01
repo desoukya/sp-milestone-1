@@ -6,6 +6,7 @@ export default function Logout() {
     const handleLogout= ()=>{
         window.localStorage.removeItem("jwt");
         window.localStorage.removeItem("user");
+        window.localStorage.removeItem("accountid");
         window.location.reload();
     };
 
