@@ -2,18 +2,17 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { User, UserDocument } from '@sp/schemas';
 import { Model } from 'mongoose';
-import passport from 'passport';
 import {UserDto} from './dtos/user.dto';
 import { AuthDto } from '../auth/dtos/auth.dto';
-import { AnyFilesInterceptor } from '@nestjs/platform-express';
-import { Console } from 'console';
 import { AccountService } from '../account/account.service';
 import { TransactionService } from '../transaction/transaction.service';
 import { TransactionDto } from '../transaction/dto/transaction.dto';
 
 @Injectable()
 export class UserService {
-  constructor(@InjectModel(User.name) private userModel: Model<UserDocument>,private accountService:AccountService,private transactionService:TransactionService) {}
+  constructor(@InjectModel(User.name) private userModel: Model<UserDocument>,
+  private accountService:AccountService,
+  private transactionService:TransactionService) {}
 
 
 

@@ -20,18 +20,19 @@ export class AuthService {
   async login(dto: AuthDto, res: Res) {
     if (dto.email != null && dto.password != null) {
       var payload: User = await this.userService.findOneUser(dto);
-      console.log(payload);
+      //console.log(payload);
       if (payload != null) {
         const myToken = { email: payload.email, sub: payload.userId };
-        console.log(myToken);
+        //console.log(myToken);
         //const payload = { username: user.username, sub: user.userId };
         const access_token = this.jwtService.sign(myToken, {
           secret: process.env.JWT_SECRET,
           expiresIn: "1h",
         });
-        console.log(access_token);
+        //console.log(access_token);
         let response: object = { ...payload, token: access_token };
         res.json(response);
+        console.log(response);
         return res;
       }
     }
