@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Label } from 'reactstrap';
 import apiService from "../services/apiService";
 import Table from 'react-bootstrap/Table'
+import Logout from '../components/Logout';
+
 
 export default function Dashboard() {
   const [Transactions, viewTransactions] = useState([]);
@@ -22,6 +24,7 @@ const calculateBalance = async(accountid) => {
  
   return (
     <div>
+      <Logout/>
       <Label>Account Balance: {balance}</Label>
       <Table  striped bordered hover>
       <thead className="thead-dark">

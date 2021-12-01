@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import apiService from "../services/apiService";
 import Table from 'react-bootstrap/Table'
+import Logout from './Logout';
 
 
 export default function Dashboard() {
@@ -23,6 +24,7 @@ export default function Dashboard() {
  
   return (
     <div>
+      <Logout/>
       <Table  striped bordered hover>
       <thead className="thead-dark">
         <tr>
