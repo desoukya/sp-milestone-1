@@ -36,8 +36,14 @@ export class UserService {
      
     const newUser = new this.userModel(dto);
     const newAccount = await this.accountService.createAccount(newUser.userId.toString());
-    const tdto:TransactionDto = {accountid:(newAccount).accountid.toString(),amount:100,credit:1,debit:0,Display_date:"",name:"Initial deposit"}
-    const newTransaction = this.transactionService.createTransaction(tdto);
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, '0');
+    let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    let yyyy = today.getFullYear();
+
+    
+    const tdto:TransactionDto = {accountid:(newAccount).accountid.toString(),amount:100,credit:1,debit:0,Display_date:today.toDateString(),name:"Initial deposit"}
+    const newTransaction = await this.transactionService.createTransaction(tdto);
     return newUser.save();  
   }
 
