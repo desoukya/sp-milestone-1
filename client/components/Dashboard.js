@@ -5,11 +5,11 @@ import Table from 'react-bootstrap/Table'
 
 export default function Dashboard() {
   const [accounts, viewAccounts] = useState([]);
-
+  
   useEffect(async () => {
     console.log("Mounting!");
-    //maybe after logining in also get user and get his id and store it and get it here
-    const response = await apiService.get('http://localhost:5000/accounts/1001234')
+    const user = JSON.parse(localStorage.getItem("user")).userId;
+    const response = await apiService.get(`http://localhost:5000/accounts/${user}`)
     viewAccounts(response.data)
 },[]);
 

@@ -13,10 +13,10 @@ export  function useFetchUser(userId) {
       },
       {
         // When mutate is called:
-        onSuccess: (responseData) => {
-          console.log(responseData.data.token)
-          // Store Token in local storage  
-          localStorage.setItem("jwt", responseData.data.token);
+        onSuccess: (responseData) => {   
+
+          localStorage.setItem("jwt", responseData.data.token);  
+          localStorage.setItem("user",JSON.stringify(responseData.data._doc));
           window.location.replace("http://localhost:3000")
 
         },
@@ -30,9 +30,6 @@ export  function useFetchUser(userId) {
 export function useMutateRegisterUser() {
       return useMutation(user => {
       const data = new FormData();
-      //data.set("email",user.email);
-      //data.append("email", user.email);
-      //data.set("password", user.password);
       console.log(user)
       return apiService.post(`http://localhost:5000/user/register`, user);
     },
@@ -41,10 +38,6 @@ export function useMutateRegisterUser() {
       onSuccess: (responseData) => {
         // Redirect to login page------------>
         window.location.replace("http://localhost:3000")
-
-
-
-
       },
       onError: (e) => console.log(e.message),
     });
