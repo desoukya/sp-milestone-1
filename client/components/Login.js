@@ -50,6 +50,7 @@ export default function Login() {
   };
      return (
     <div className={styles.App}>
+     
       <h2>Sign In</h2>
       <Form className={styles.form} onSubmit={handleSubmit}>
         <FormGroup>
@@ -80,6 +81,9 @@ export default function Login() {
           />
         </FormGroup>
         <Button color="primary" onClick={handleSubmit}>Submit</Button>
+        &nbsp;
+
+        <Button color="primary" onClick={() => {window.location.replace("http://localhost:3000/register")} }>Sign Up</Button>
       </Form>
     </div>
   );
