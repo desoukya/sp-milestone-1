@@ -38,7 +38,7 @@ export function useMutateRegisterUser() {
       // When mutate is called:
       onSuccess: (responseData) => {
         // Redirect to login page------------>
-        window.location.replace("http://localhost:3000/login");
+        window.location.replace("http://localhost:3000/index");
 
 
 
