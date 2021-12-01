@@ -47,7 +47,7 @@ const calculateBalance = async(accountid) => {
       </Table>
      
       function Backtodashboard() {
-          location.replace("http://localhost:3000")
+          window.location.replace("http://localhost:3000")
         }
       <button onClick = "Backtodashboard()">Back to dashboard</button>
       </div>
