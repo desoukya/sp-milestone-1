@@ -17,6 +17,7 @@ export  function useFetchUser(userId) {
           console.log(responseData.data.token)
           // Store Token in local storage  
           localStorage.setItem("jwt", responseData.data.token);
+          localStorage.setItem("user", responseData.data.userId);
           window.location.replace("http://localhost:3000")
 
         },
