@@ -11,14 +11,14 @@ import styles from "../styles/Home.module.css";
 import { useMutateRegisterUser } from "../adapters/user.js";
 
 export default function Register() {
-  const [name,setName] = useState("");
+  //const [name,setName] = useState("");
   //const [phone,setPhone] = useState("");
   //const [username,setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   //const [giu_id,setGIU_id] = useState("");
-  const [nameState,setNameState] = useState("");
+  //const [nameState,setNameState] = useState("");
   const [emailState, setEmailState] = useState("");
   const [passwordState, setPasswordState] = useState("");
   const [confirmPasswordState, setConfirmPasswordState] = useState("");
@@ -26,7 +26,7 @@ export default function Register() {
   const registerUser = useMutateRegisterUser();
 
 
-  const validateName = (value) => {
+  /*const validateName = (value) => {
     let nameState;
     if (value.length >= 3) {
       nameState = "has-success";
@@ -34,7 +34,7 @@ export default function Register() {
       nameState = "has-danger";
     }
     setNameState(nameState);
-  };
+  };*/
   const validateEmail = (value) => {
     const emailRegex =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -70,10 +70,6 @@ export default function Register() {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    if(name === "name"){
-      validateName(value);
-      setName(value);
-    }
     if (name === "email") {
       validateEmail(value);
       setEmail(value);
@@ -91,10 +87,10 @@ export default function Register() {
     validateEmail(email);
     validatePassword(password);
     validateConfirmPassword(confirmPassword);
-    validateName(name);
+    //validateName(name);
 
     if (
-      nameState === "has-success" &&
+      //nameState === "has-success" &&
       emailState === "has-success" &&
       passwordState === "has-success" &&
       confirmPasswordState === "has-success"
@@ -117,8 +113,8 @@ export default function Register() {
             id="name"
             placeholder="name"
             onChange={handleChange}
-            valid={nameState === "has-success"}
-            invalid={nameState === "has-danger"}
+            //valid={nameState === "has-success"}
+            //invalid={nameState === "has-danger"}
           />
         </FormGroup>
         
