@@ -53,7 +53,7 @@ export default function Login() {
      
       <h2>Sign In</h2>
       <Form className={styles.form} onSubmit={handleSubmit}>
-        <FormGroup>
+        <FormGroup >
           <Label className={styles.label} for="email">
             Username
           </Label>
