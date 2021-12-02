@@ -80,8 +80,8 @@ export default function Register() {
     } else if (name === "confirm_password") {
       validateConfirmPassword(value);
       setConfirmPassword(value);
-    } else {
-      validatePassword(value);
+    } else if  (name === "password") {
+      validatePassword(value)
       setPassword(value);
     }
   };
@@ -121,18 +121,7 @@ export default function Register() {
             invalid={nameState === "has-danger"}
           />
         </FormGroup>
-        <FormGroup>
-          <Label className={styles.label} for="username">
-            Username
-          </Label>
-          <Input
-            type="text"
-            name="username"
-            id="username"
-            placeholder="username"
-            onChange={handleChange}
-          />
-        </FormGroup>
+        
         <FormGroup>
           <Label className={styles.label} for="email">
             Email

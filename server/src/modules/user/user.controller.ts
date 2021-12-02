@@ -4,20 +4,20 @@ import { RegisterDTO } from '../auth/dtos/auth.dto';
 import { UserService } from './user.service';
 //import { createUser } from './user.service';
 
-@Controller('users')
+@Controller('user')
 export class UserController {
   constructor(private userService: UserService) {}
   
   /**
    * API endpoint handler returns the authenticated user from JWT payload
    */    
-  @UseGuards(AuthGuard('jwt'))
-  @Get()
+  
   /*
   user(@Request() req: any): any {
     return req.user;
   }
   */
+  @Post('register')
   user(@Body() req: any):any{
     return this.userService.createUser(req);
   }
@@ -29,8 +29,9 @@ export class UserController {
   users(): any {
     return this.userService.findAll();
   }
-  @Post('register')
-  async register(userDto: RegisterDTO){
-    return await this.userService.createUser(userDto);
-  }
+
+  
+  // async register(userDto: RegisterDTO){
+  //   return await this.userService.createUser(userDto);
+  // }
 }
