@@ -1,27 +1,29 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { AuthDto } from './dtos/auth.dto';
+import  users  from './users.json';
+
+//const users = require ('./users.json');
 
 @Injectable()
 export class AuthService {
   constructor(private jwtService: JwtService) {}
 
-  /**
-   * Determines if the user credentials provided are correct
-   * @param dto
-   */
   login(dto: AuthDto) {
-    /* 
-      TODO: Add your login logic here to return
-      appropriate exceptions when a user/password
-      is incorrect. In addition, if a user is found
-      and credentials are correct, create a JWT token
-      with the entire user object as the payload.
-      
-      Note: JWT open standard RFC 7519 recommends
-      a payload object contain certain "claims".
-      As such, it's recommended to create a property
-      called "sub" in payload which maps to the user id.
-    */
+    //retrieve user
+    const user = users.find(_user => user.email === dto.email);
+    if(!user) throw new UnauthorizedException('user does not exist');
+    if(user.pasword !== dto.password) 
+      throw new UnauthorizedException('incorrect password');
+
+    return this.signuser(user.id, user.email, 'user');
+  }
+  
+  signuser(userid: number, email: string, type: string){
+    return this.jwtService.sign({
+      sub: userid,
+      email,
+      type: type
+  });
   }
 }

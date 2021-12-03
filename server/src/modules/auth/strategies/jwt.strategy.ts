@@ -17,19 +17,7 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
    * @param payload
    */
   async validate(payload: any) {
-    /*
-      Each JWT has a "payload" section, which includes 
-      the data we insert into the JWT object when
-      creating and signing it (auth.service.ts)
-
-      If the JWT bearer header auth token is not valid
-      an exception is thrown
-
-      Otherwise, the JWT payload is returned.
-      More specifically, Passport will create a "user" property
-      on the Express HTTP Request object and assign whatever 
-      is returned here to req.user
-    */
+    console.log('valoidate()', payload);
     return payload;
   }
 }
