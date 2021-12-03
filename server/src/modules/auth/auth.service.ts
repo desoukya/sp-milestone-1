@@ -31,13 +31,11 @@ export class AuthService {
 
     return new Promise((resolve) => {
 
-      // Check the supplied password against the hash stored for this email address
       userLogin.checkPassword(dto.password, (err, isMatch) => {
 
         if (err) throw new UnauthorizedException();
 
         if (isMatch) {
-          // If there is a successful match, generate a JWT for the user
           resolve(this.createJwtPayload(userLogin));
 
         } else {
@@ -51,7 +49,6 @@ export class AuthService {
 
   async validateUserByJwt(payload: JwtPayload) {
 
-    // This will be used when the user has already logged in and has a JWT
     let user = await this.usersService.findOneByEmail(payload.email);
 
     if (user) {

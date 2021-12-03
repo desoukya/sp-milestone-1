@@ -8,7 +8,6 @@ export interface Transaction {
   id: [
       {
           type: Number
-          //type: mongoose.Schema.Types.ObjectId, ref: 'User'
       }
   ]
 

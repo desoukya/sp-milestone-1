@@ -15,31 +15,6 @@ import * as mongoose from 'mongoose';
   For additional info, visit: https://docs.nestjs.com/techniques/mongodb
 */
 
-/*@Schema()
-export class User {
-  @Prop({ required: true })
-  name: String;
-
-  @Prop({ required: true })
-  username: String;
-
-  @Prop({ required: true })
-  email: String;
-
-  @Prop({ required: true })
-  password: String;
-
-  @Prop({ required: true })
-  phone: Number;
-
-  @Prop({ required: true })
-  id: Number;
-
-  
-}
-*/
-
-
 export const UserSchema = new mongoose.Schema({
   fullName: {
     type: String,
