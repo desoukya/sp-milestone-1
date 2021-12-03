@@ -117,7 +117,18 @@ export default function Register() {
             //invalid={nameState === "has-danger"}
           />
         </FormGroup>
-        
+        <FormGroup>
+          <Label className={styles.label} for="username">
+            username
+          </Label>
+          <Input
+            type="text"
+            name="username"
+            id="username"
+            placeholder="username"
+            onChange={handleChange}
+          />
+        </FormGroup>
         <FormGroup>
           <Label className={styles.label} for="email">
             Email

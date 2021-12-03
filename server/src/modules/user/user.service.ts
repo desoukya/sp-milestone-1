@@ -2,7 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { User, UserDocument } from '@sp/schemas';
 import { Model } from 'mongoose';
-import { RegisterDTO } from '../auth/dtos/auth.dto';
+import { RegisterDTO } from './dto/user.dto';
 @Injectable()
 export class UserService {
   create: any;

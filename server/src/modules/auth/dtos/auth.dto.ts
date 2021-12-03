@@ -8,7 +8,3 @@ export class AuthDto {
   password: string;
 
 }
-export interface RegisterDTO{
-  username: string;
-  password: string;
-}
