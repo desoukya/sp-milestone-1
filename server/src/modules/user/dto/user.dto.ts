@@ -1,29 +1,31 @@
 import { } from 'class-validator'
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { IsEmail, IsNotEmpty, IsNumber, isPhoneNumber } from 'class-validator';
 
 
 @Schema()
 export class User {
-    @Prop({ required: true })
-    name: string;
 
-    @Prop({ required: true })
-    username: string;
+    @IsNotEmpty()
+    name:string;
 
-    @Prop({ required: true })
+    @IsNotEmpty()
+    username:string;
+
+    @IsEmail()
     email: string;
 
-    @Prop({ required: true })
+    @IsNotEmpty()
     password: string;
 
-    @Prop({ required: true })
+    @IsNotEmpty()
     confirm_password: string;
 
-    @Prop({ required: true })
-    phone: number;
+    @IsNotEmpty()
+    phone: string;
 
-    @Prop({ required: true })
-    GIU_id: number;
+    @IsNumber()
+    userId:number;
 }
 export interface RegisterDTO{
     username: string;

@@ -24,33 +24,30 @@ export function useMutateLoginUser() {
     }
   );
 }
-//router.post('/', function(req, res) {
-  // do something w/ req.body or req.files 
-//});
 export function useMutateRegisterUser() {
-  return useMutation(
-    (user) => {
-      return apiService.post(`http://localhost:3000/user/register`, user);
-    },
-    {
-      // When mutate is called:
-      onSuccess: (responseData) => {
-        window.location.replace("http://localhost:3000/");
-      },
-      onError: (e) => console.log(e.message),
-    }
-  );
+  return useMutation(user => {
+  const data = new FormData();
+  console.log(user)
+  return apiService.post(`user/register`, user);
+},
+{
+  // When mutate is called:
+  onSuccess: (responseData) => {
+    window.location.replace("http://localhost:3000")
+  },
+  onError: (e) => console.log(e.message),
+});
+
 }
 
 export function useMutateUpdateUser(userId) {
   const queryClint = useQueryClient();
   return useMutation(
     (user) => {
-      //const data = new FormData();
-      //data.append("email", user.email);
-      //data.append("password", user.password);
-      //return apiService.post(`user/${userId}`, data);
-      return apiService.post(`user/register`, user);
+      const data = new FormData();
+      data.append("email", user.email);
+      data.append("password", user.password);
+      return apiService.post(`user/${userId}`, data);
     },
     {
       // When mutate is called:

@@ -182,7 +182,7 @@ export default function Register() {
             Phone
           </Label>
           <Input
-            type="number"
+            type="text"
             name="phone"
             id="phone"
             placeholder="phone number"
@@ -190,13 +190,13 @@ export default function Register() {
           />
         </FormGroup>
         <FormGroup>
-          <Label className={styles.label} for="GIU_id">
-            GIU ID
+          <Label className={styles.label} for="user_id">
+            User ID
           </Label>
           <Input
             type="number"
-            name="GIU_id"
-            id="GIU_id"
+            name="user_id"
+            id="user_id"
             placeholder="XXXXXXX"
             onChange={handleChange}
           />

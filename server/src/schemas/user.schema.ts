@@ -32,7 +32,7 @@ export class User {
   phone: number;
 
   @Prop({ required: true })
-  GIU_id: number;
+  user_id: number;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
