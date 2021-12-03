@@ -6,9 +6,12 @@ import {
   Label,
   FormFeedback,
 } from "reactstrap";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import styles from "../styles/Home.module.css";
 import { useMutateRegisterUser } from "../adapters/user";
+
+import axios from "axios";
+
 
 
 export default function Register() {
@@ -31,6 +34,20 @@ export default function Register() {
 
 
   const useRegisterMutation = useMutateRegisterUser();
+  const defaultId="100";
+  const [useFetch,setUseFetch]=useState([]);
+
+
+  if(userId.length==0||isNaN(Number(userId))){setUserId(defaultId)};
+  
+  useEffect(() => {
+    axios.get(`http://localhost:5000/user/${userId}`).then((myUser)=>{
+      setUseFetch(myUser.data);
+    })
+},[userId])
+  
+  
+    
 
   const validateFirstName = (value) => {
     let firstNameState;
@@ -58,7 +75,13 @@ export default function Register() {
   const validateUserId = (value) => {
     let userIdState;
     
-    if (value.length == 7 && !isNaN(Number(value))) {
+      // Call User Register Adapter
+      let alreadyUser=  useFetch;
+      console.log(alreadyUser);
+  
+    
+    
+    if (value.length == 7 && !isNaN(Number(value)) && alreadyUser.length==0) {
       userIdState = "has-success";
     }
     else {
@@ -172,6 +195,8 @@ export default function Register() {
     validatePassword(password);
     validateConfirmPassword(confirmPassword);
     validatePhone(phone);
+    console.log(userIdState);
+    console.log(userId);
 
     
     
@@ -256,7 +281,7 @@ export default function Register() {
             valid={userIdState === "has-success"}
             invalid={userIdState === "has-danger"}
           />
-          <FormFeedback>Please don't leave it empty</FormFeedback>
+          <FormFeedback>ID is incorrect or has been registered with before.</FormFeedback>
 
 
         </FormGroup>
