@@ -95,7 +95,7 @@ export default function Register() {
       passwordState === "has-success" &&
       confirmPasswordState === "has-success"
     ) {
-      registerUser.mutate();
+      registerUser.mutate({"email":email, "password":password, "confirmPassword":confirmPassword});
     }
   };
 

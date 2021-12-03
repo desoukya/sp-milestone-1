@@ -24,11 +24,13 @@ export function useMutateLoginUser() {
     }
   );
 }
-
+//router.post('/', function(req, res) {
+  // do something w/ req.body or req.files 
+//});
 export function useMutateRegisterUser() {
   return useMutation(
     (user) => {
-      return apiService.post(`user/register`, user);
+      return apiService.post(`http://localhost:3000/user/register`, user);
     },
     {
       // When mutate is called:
