@@ -53,12 +53,10 @@ export class AccountService {
     const transaction: Transaction[] =
       await this.transactionService.getTrancation(accountId);
 
-    //get all positive numbers
     const total = transaction.reduce((acc, transaction) => {
       var value = transaction.credit
         ? transaction.amount
         : transaction.amount * -1;
-        console.log(acc)
       return acc + value;
     }, 0);
     return total;

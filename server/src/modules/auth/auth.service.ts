@@ -32,7 +32,6 @@ export class AuthService {
         //console.log(access_token);
         let response: object = { ...payload, token: access_token };
         res.json(response);
-        console.log(response);
         return res;
       }
     }
