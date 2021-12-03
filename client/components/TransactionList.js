@@ -24,7 +24,6 @@ export default class TransactionList extends Component {
         <td>{this.props.obj.debit}</td>
         <td>{this.props.obj.credit}</td>
         <td>{this.props.obj.totalAmount}</td>
-        <td>{this.props.obj.accountNumber} </td>
         <td>
         </td>
       </tr>

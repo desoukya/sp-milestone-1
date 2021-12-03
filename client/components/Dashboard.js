@@ -6,6 +6,7 @@ import MyApp from "../pages/_app";
 import apiService from "../services/apiService";
 import Accountlist from "./AccountList.js";
 import Navbar from "./Navbar";
+import background from "../public/Logomaske_384x215_blue_light.jpg"
 
 export default class Dashboard extends Component {
   constructor() {
@@ -44,6 +45,7 @@ export default class Dashboard extends Component {
       .catch((error) => {
         console.log(error);
       });
+    
   }
 
   DataTable() {
@@ -54,8 +56,9 @@ export default class Dashboard extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{backgroundImage: `url(${background})`}}>
         <Navbar />
+        <h1 style = {{textAlign:"center"}}className="p-3 mb-2 bg-dark text-white">Welcome to SafeMonii</h1>
         <div className="table-wrapper">
           <Table striped bordered hover>
             <thead>

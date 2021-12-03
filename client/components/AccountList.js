@@ -17,6 +17,8 @@ export default class accountlist extends Component {
   handleClick = () => {
     const currentacc = this.props.obj.accountNumber;
     window.localStorage.setItem("currentAccount",JSON.stringify(currentacc));
+    const currentbalance = this.props.obj.balance;
+    window.localStorage.setItem("currentBalance",JSON.stringify(currentbalance));
     window.location = "http://localhost:3000/Transactions"
     };
   

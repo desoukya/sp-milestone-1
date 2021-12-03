@@ -6,7 +6,7 @@ import Transactions from "../pages/Transactions";
 
 export default function Navbar() {
   function signout(){
-    window.localStorage.clear(), (window.location = "http://localhost:3000/"),window.location.reload(false);
+    window.localStorage.clear(), (window.location.replace("http://localhost:3000"));
   };
   return (
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark justify-content-center">
@@ -15,17 +15,12 @@ export default function Navbar() {
       </ul>
       <u1 class="navbar-nav ">
         <li class="nav-item">
-          <a class="nav-link" href="/home">
+          <a class="nav-link" href="/">
             Dashboard
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/Transactions">
-            Transactions
-          </a>
-        </li>
-        <li class="nav-item">
-          <Button onClick={signout}>Signout</Button>
+          <a class="nav-link" href='#' onClick={signout}>Signout</a>
         </li>
       </u1>
     </nav>

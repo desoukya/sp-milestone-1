@@ -48,6 +48,10 @@ export default function Login() {
     });
   };
 
+  function Onregister(){
+    window.location.replace("http://localhost:3000/register");
+  };
+
   return (
     <div className={styles.App}>
       <h2>Sign In</h2>
@@ -82,6 +86,11 @@ export default function Login() {
         </FormGroup>
         <Button color="primary" onSubmit={handleSubmit}>
           Submit
+        </Button>
+        <br></br>
+        <br></br>
+        <Button color="primary" onClick={Onregister}>
+          Don't have an account? Register here
         </Button>
       </Form>
     </div>
