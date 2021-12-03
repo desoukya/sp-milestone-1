@@ -33,7 +33,7 @@ export function useMutateRegisterUser() {
     {
       // When mutate is called:
       onSuccess: (responseData) => {
-        <form action="/home" class="inline"></form>;
+        window.location.replace("http://localhost:3000/");
       },
       onError: (e) => console.log(e.message),
     }
@@ -44,10 +44,11 @@ export function useMutateUpdateUser(userId) {
   const queryClint = useQueryClient();
   return useMutation(
     (user) => {
-      const data = new FormData();
-      data.append("email", user.email);
-      data.append("password", user.password);
-      return apiService.post(`user/${userId}`, data);
+      //const data = new FormData();
+      //data.append("email", user.email);
+      //data.append("password", user.password);
+      //return apiService.post(`user/${userId}`, data);
+      return apiService.post(`user/register`, user);
     },
     {
       // When mutate is called:

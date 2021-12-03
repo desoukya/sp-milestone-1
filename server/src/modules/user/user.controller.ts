@@ -11,22 +11,8 @@ export class UserController {
   /**
    * API endpoint handler returns the authenticated user from JWT payload
    */    
-  
-  /*
-  user(@Request() req: any): any {
-    return req.user;
-  }
-  */
   @Post('register')
-  user(@Body() req: any):any{
-    return this.userService.createUser(req);
+  async register(@Body()userDto: RegisterDTO){
+    return await this.userService.createUser(userDto);
   }
-  /**
-   * API endpoint handler returns all users from mongo database
-   
-  @UseGuards(AuthGuard('jwt'))
-  @Get('list')
-  users(): any {
-    return this.userService.findAll();
-  }*/
 }

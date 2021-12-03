@@ -18,7 +18,8 @@ export class UserService {
    return user.depopulate('password');
   }
    async createUser(userDto: RegisterDTO){
-    const username = userDto;
+    console.log(userDto);
+    const {username} = userDto;
     const user = await this.userModel.findOne({username});
     if(user){
       throw new HttpException('user already exist', HttpStatus.BAD_REQUEST);
