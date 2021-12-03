@@ -3,6 +3,12 @@ import { Label } from "reactstrap";
 import apiService from "../services/apiService";
 import Table from 'react-bootstrap/Table'
 import Logout from '../components/Logout';
+import styles from "../styles/Home.module.css";
+import {
+  Form,
+  FormGroup,
+  Button,
+} from "reactstrap";
 
 
 export default function Dashboard() {
@@ -25,23 +31,26 @@ export default function Dashboard() {
     );
     setBalance(response.data);
   };
+  const handleLogout= ()=>{
+    window.localStorage.removeItem("jwt");
+    window.localStorage.removeItem("user");
+    window.localStorage.removeItem("accountid");
+    window.location.replace("http://localhost:3000");
+};
 
   return (
-    <div>
+    <div className={styles.border}>
+      
       <Logout/>
-      <button
-        onClick={() => {
-          window.location.replace("http://localhost:3000");
-        }}
-      >
-        Back to dashboard
-      </button>
+      <Button style={{justifyContent: 'right'}} color="primary" className="float-right" onClick={() => {
+        window.location.replace("http://localhost:3000"); }}> Back </Button> 
       <br></br>
-      <Label>Account Balance: {balance}</Label>
-
+      <h2 >Account Balance: {balance}</h2>
+      <Form className={styles.form}>
+      <FormGroup >
       <Table striped bordered hover>
         <thead className="thead-dark">
-          <tr>
+          <tr align='center'>
             <th scope="col">Date</th>
             <th scope="col">Transaction name</th>
             <th scope="col">Credit</th>
@@ -52,7 +61,7 @@ export default function Dashboard() {
         <tbody>
           {" "}
           {Transactions.map((Transaction, key) => (
-            <tr>
+            <tr align='center'>
               <td>{Transaction.Display_date}</td>
               <td>{Transaction.name}</td>
               <td>{Transaction.credit ? Transaction.amount : "  "}</td>
@@ -62,6 +71,8 @@ export default function Dashboard() {
           ))}
         </tbody>
       </Table>
+      </FormGroup>
+      </Form>
     </div>
   );
 }

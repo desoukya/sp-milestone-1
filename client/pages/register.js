@@ -203,9 +203,12 @@ export default function Register() {
 
   return (
     <div className={styles.App}>
+      <Button color="outline-primary"  onClick={() => {      
+             window.location.replace("http://localhost:3000");    
+       }} >Return to Sign in</Button>
       <h2>Register</h2>
       <Form className={styles.form} onSubmit={handleSubmit}>
-
+      
       <FormGroup>
           <Label className={styles.label} for="firstName">
             First Name: 

@@ -20,7 +20,7 @@ export  function useFetchUser(userId) {
           window.location.replace("http://localhost:3000")
 
         },
-        onError: (e) => console.log(e.message),
+        onError: (e) => {alert('Invalid password or email')},
       }
     );
     

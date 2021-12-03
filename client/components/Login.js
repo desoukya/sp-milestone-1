@@ -16,6 +16,8 @@ export default function Login() {
   const [emailState, setEmailState] = useState("");
   const useLoginMutations = useMutateLoginUser();
 
+  
+
   const validateEmail = (value) => {
     const emailRegex =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -50,18 +52,17 @@ export default function Login() {
   };
      return (
     <div className={styles.App}>
-     
       <h2>Sign In</h2>
       <Form className={styles.form} onSubmit={handleSubmit}>
-        <FormGroup>
+        <FormGroup >
           <Label className={styles.label} for="email">
-            Username
+            Email
           </Label>
           <Input
             type="text"
             name="email"
             id="email"
-            placeholder="example@example.com"
+            placeholder="example@email.com"
             onChange={handleChange}
             valid={emailState === "has-success"}
             invalid={emailState === "has-danger"}
@@ -81,9 +82,9 @@ export default function Login() {
           />
         </FormGroup>
         <Button color="primary" onClick={handleSubmit}>Submit</Button>
-        &nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-        <Button color="primary" onClick={() => {window.location.replace("http://localhost:3000/register")} }>Sign Up</Button>
+        <Button color="success" onClick={() => {window.location.replace("http://localhost:3000/register")} }>Sign Up</Button>
       </Form>
     </div>
   );
