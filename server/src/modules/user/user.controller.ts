@@ -1,4 +1,4 @@
-import { Controller, Get, Request, UseGuards,Post, Body } from '@nestjs/common';
+import { Controller, Get, Request, UseGuards,Post, Body,Param } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { UserDto } from './dtos/user.dto';
 import { UserService } from './user.service';
@@ -9,7 +9,7 @@ export class UserController {
   
   /**
    * API endpoint handler returns the authenticated user from JWT payload
-   */    
+   */
   @UseGuards(AuthGuard('jwt'))
   @Get()
   user(@Request() req: any): any {
@@ -31,6 +31,12 @@ export class UserController {
       return this.userService.createUser(dto);
       
   }
+
+  @Get(':userId')
+  exists(@Param('userId') userId: string):any{
+    return this.userService.findUserbyId(userId);
+  }
+
 
   
 }

@@ -47,4 +47,9 @@ export class UserService {
     return newUser.save();  
   }
 
+  async findUserbyId(userId:string):Promise <any>{
+
+    return await this.userModel.findOne({ userId:Number(userId)}).exec();
+  }
+
 }
