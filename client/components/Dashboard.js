@@ -1,14 +1,61 @@
 import React, { useEffect, useState } from 'react';
-import apiService from "../services/apiService";
+import Table from 'react-bootstrap/Table'
 
-export default function Dashboard() {
-  const [accounts, viewAccounts] = useState([]);
+export default function Dashboard() { //return <div>DASHBOARD</div>;
 
-  //trying to link backend with front end
-  useEffect(async () => {
-    console.log("Mounting!");
-    const user = JSON.parse(localStorage.getItem("user")).userid;
-    const response = await apiService.get(`http://localhost:5000/accounts/${user}`)
-    viewAccounts(response.data)
-  }, []);
+
+  //backend is working but couldnt connect it with the front end
+
+
+  const accounts=[
+        {id:1, balance:2000,statuss:"active"},
+        {id:2, balance:50000,statuss:"active"},
+        {id:3, balance:22000,statuss:"active"},
+        {id:4, balance:0,statuss:"inactive"},
+        {id:5, balance:10000,statuss:"active"},
+        {id:6, balance:0,statuss:"inactive"},
+        {id:7, balance:24000,statuss:"active"},
+
+    ]
+    const renderAccount =(account,index)=>{
+      return(
+        <tr key={index}>
+          <td>{account.id}</td>          <td>{account.balance}</td>
+          <td>{account.statuss}</td>
+          </tr>
+      )
+    }
+    const handleLogout= ()=>{
+      window.localStorage.removeItem("jwt"),
+      window.localStorage.removeItem("user"),
+      window.localStorage.removeItem("accountid"),
+      window.location.replace("http://localhost:3000/");
+  };
+
+
+  return (
+    <div> DASHBOARD
+
+      <Table striped bordered hover>
+        <thead className="Dash">
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">balance</th>
+            <th scope="col">status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {accounts.map(renderAccount)}
+
+
+        </tbody>
+      </Table>
+      <a href = "http://localhost:3000/">Logout</a> 
+    </div>
+  );
+
 }
+
+
+ 
+
