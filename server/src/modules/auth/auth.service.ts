@@ -21,12 +21,20 @@ export class AuthService {
   }
 
   async login(dto: AuthDto) {
-    const payload: User = 
+    const payload = 
       await this.UserService.findOne(dto);
-    if( User == null) 
+    if( payload == null) 
       throw new UnauthorizedException('can not find user');
     else {
-      return { access_token: this.jwtService.sign(payload), };
+      let user = {email: payload.email}
+      let jwt = this.jwtService.sign(user);
+
+      return {
+        expiresIn: 3600,
+        token: jwt
+      }
+
+     // return this.jwtService.sign(payload) ;
     }
   }
 }
