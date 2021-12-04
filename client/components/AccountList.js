@@ -4,14 +4,10 @@ import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Transactions from "../pages/Transactions";
 
-export default class accountlist extends Component {
+export default class AccountList extends Component {
   constructor(props) {
     super(props);
   }
-
-
-
-
 
 
   handleClick = () => {
@@ -30,7 +26,7 @@ export default class accountlist extends Component {
         <td>{this.props.obj.accountNumber}</td>
         <td>{this.props.obj.balance}</td>
         <td>
-          <Button color="primary" onClick= {this.handleClick}>View Transactions</Button>
+          <Button className="btn-success" onClick= {this.handleClick}>View Transactions</Button>
         </td>
       </tr>
     );

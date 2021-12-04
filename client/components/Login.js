@@ -48,14 +48,19 @@ export default function Login() {
     });
   };
 
-  function Onregister(){
+  function OnRegister(){
     window.location.replace("http://localhost:3000/register");
   };
 
   return (
+    
     <div className={styles.App}>
       <h2>Sign In</h2>
+      
       <Form className={styles.form} onSubmit={handleSubmit}>
+      <div style={{display : "none"}} id="wrongCredentials" className="alert alert-danger" role="alert">
+            "Wrong Credentials"
+      </div>
         <FormGroup>
           <Label className={styles.label} for="email">
             Username
@@ -89,7 +94,7 @@ export default function Login() {
         </Button>
         <br></br>
         <br></br>
-        <Button color="primary" onClick={Onregister}>
+        <Button color="primary" onClick={OnRegister}>
           Don't have an account? Register here
         </Button>
       </Form>

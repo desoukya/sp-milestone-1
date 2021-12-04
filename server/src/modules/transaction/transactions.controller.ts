@@ -13,6 +13,7 @@ export class TransactionController {
       return await this.transactionService.newTransaction(transaction);
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Get('/transactionList/:id')
   async transaction(@Param('id') id: Number){
     return await this.transactionService.findTransaction(id);

@@ -10,20 +10,17 @@ export class UserController {
   /**
    * API endpoint handler returns the authenticated user from JWT payload
    */    
-  @UseGuards(AuthGuard('jwt'))
-  @Get()
-  user(@Request() req: any): any {
-    return req.user;
-  }
+  
 
   /**
    * API endpoint handler returns all users from mongo database
    */
+  
   //@UseGuards(AuthGuard('jwt'))
-  @Get('list')
-  users(): any {
-    return this.userService.findAll();
-  }
+  // @Get('list')
+  // users(): any {
+  //   return this.userService.findAll();
+  // }
 
   @Get('/email/:email')
   async getByEmail(@Param('email') email: String) {

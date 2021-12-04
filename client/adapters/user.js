@@ -23,7 +23,8 @@ export function useMutateLoginUser() {
       const data = new FormData();
       data = {
         email: user.email,
-        password: user.password
+        password: user.password,
+        
       }
       const myUser = window.localStorage.setItem("myUser",JSON.stringify(user));
       return apiService.post(`http://localhost:8000/auth/login`, data);
@@ -31,13 +32,14 @@ export function useMutateLoginUser() {
       // When mutate is called:
       onSuccess: (responseData) => {
         // Store Token in local storage
-        const user = JSON.parse(window.localStorage.getItem("myUser")); ;
-        const myToken = window.localStorage.setItem("jwt", user);
-        //window.localStorage.getItem("jwt");
+        console.log("sdfvsdgs ",responseData)
+        const myToken = window.localStorage.setItem("jwt",JSON.stringify(responseData.data.token));
         window.location.reload(false);
         
       },
-      onError: (e) => console.log(e.message),
+      onError: (e) => {
+        document.querySelector("#wrongCredentials").style.display = "block";
+      },
     }
   );
 }
@@ -56,11 +58,7 @@ export function useMutateRegisterUser() {
         fullName: user.fullName
 
       }
-      //const myUser = window.localStorage.setItem("myUser", user);
       return apiService.post(`http://localhost:8000/users/register`, data);
-      //data.append("email", user.email);
-      //data.append("password", user.password);
-      //return apiService.post(`user/register`, data);
     }, {
       // When mutate is called:
       onSuccess: (responseData) => {

@@ -4,22 +4,22 @@ import Button from "react-bootstrap/Button";
 import Transactions from "../pages/Transactions";
 
 export default function Navbar() {
-  function signout(){
+  function signOut(){
     window.localStorage.clear(), (window.location.replace("http://localhost:3000"));
   };
   return (
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark justify-content-center">
-      <ul class="navbar-nav ">
-        <a class="navbar-brand">SafeMonii</a>
+    <nav className="navbar navbar-expand-sm navbar-dark bg-dark justify-content-center">
+      <ul className="navbar-nav ">
+        <a className="navbar-brand">SafeMonii</a>
       </ul>
-      <u1 class="navbar-nav ">
-        <li class="nav-item">
-          <a class="nav-link" href="/">
+      <u1 className="navbar-nav ">
+        <li className="nav-item">
+          <a className="nav-link" href="/">
             Dashboard
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href='#' onClick={signout}>Signout</a>
+        <li className="nav-item">
+          <a className="nav-link" href='#' onClick={signOut}>Sign Out</a>
         </li>
       </u1>
     </nav>

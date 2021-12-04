@@ -58,6 +58,7 @@ export class AuthService {
     }
 
   }
+
   createJwtPayload(user) {
 
     let data: JwtPayload = {

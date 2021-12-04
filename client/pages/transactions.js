@@ -13,7 +13,7 @@ export default class Transactions extends Component {
     this.state = {
       transactions: [],
       currentNum: [],
-      currentBalnce: [],
+      currentBalance: [],
     };
   }
 
@@ -23,16 +23,17 @@ export default class Transactions extends Component {
       currentNum: currentNum,
     });
 
-    const currentbalance = window.localStorage.getItem("currentBalance");
+    const currentBalance = window.localStorage.getItem("currentBalance");
     this.setState({
-      currentBalance: currentbalance,
+      currentBalance: currentBalance,
     });
 
+    const token = JSON.parse(window.localStorage.getItem("jwt"));
 
     await axios
       .get(
         "http://localhost:8000/transactions/transactionList/" +
-          parseInt(currentNum)
+          parseInt(currentNum),{ headers: { Authorization: `Bearer ${token}` } } 
       )
       .then((response) => {
         console.log("success");
@@ -54,7 +55,7 @@ export default class Transactions extends Component {
     return (
       <div>
         <Navbar />
-        <h1 style = {{textAlign:"center"}}className="p-3 mb-2 bg-dark text-white">Account Transcations</h1>
+        <h1 style = {{textAlign:"center"}}className="p-3 mb-2 bg-dark text-white">Account Transactions</h1>
         <div className={styles.App}>
           <p style = {{textAlign:"center"}}>Account Number: {this.state.currentNum}</p>
           <p style = {{textAlign:"center"}}>Account Balance: {this.state.currentBalance}</p>

@@ -4,7 +4,7 @@ import Table from "react-bootstrap/Table";
 import { Component } from "react";
 import MyApp from "../pages/_app";
 import apiService from "../services/apiService";
-import Accountlist from "./AccountList.js";
+import AccountList from "./AccountList.js";
 import Navbar from "./Navbar";
 import background from "../public/Logomaske_384x215_blue_light.jpg"
 
@@ -22,6 +22,8 @@ export default class Dashboard extends Component {
     const email = encodeURI(currentUser.email);
 
     const url = `http://localhost:8000/users/email/${email}`;
+    const token = JSON.parse(window.localStorage.getItem("jwt"));
+
 
     await axios
       .get(url)
@@ -30,17 +32,12 @@ export default class Dashboard extends Component {
       })
       .catch((error) => console.log(error));
 
-    console.log(currentID);
-
     axios
-      .get("http://localhost:8000/accounts/accountList/" + currentID)
+      .get("http://localhost:8000/accounts/accountList/" + currentID,{ headers: { Authorization: `Bearer ${token}` } })
       .then((response) => {
-        console.log("success");
-        console.log(response.data + "AAAAAAA");
         this.setState({
           account: Object.values(response.data),
         });
-        console.log(this.state.account + "BBBBBB");
       })
       .catch((error) => {
         console.log(error);
@@ -50,7 +47,7 @@ export default class Dashboard extends Component {
 
   DataTable() {
     return this.state.account.map((res, i) => {
-      return <Accountlist obj={res} key={i} />;
+      return <AccountList obj={res} key={i} />;
     });
   }
 
@@ -65,6 +62,7 @@ export default class Dashboard extends Component {
               <tr>
                 <th>ID</th>
                 <th>Balance</th>
+                <th>Transactions</th>
               </tr>
             </thead>
             <tbody>{this.DataTable()}</tbody>

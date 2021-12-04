@@ -28,7 +28,7 @@ import { PassportModule } from '@nestjs/passport';
   imports: [
     PassportModule.register({ defaultStrategy: 'jwt', session: false }),
     JwtModule.register({
-      secretOrPrivateKey: 'poweredByThisSecretKey',
+      secretOrPrivateKey: "spSecretKeyProv",
       signOptions: {
         expiresIn: 3600
       }
@@ -36,6 +36,10 @@ import { PassportModule } from '@nestjs/passport';
     UsersModule
   ],
   controllers: [AuthController],
-  providers: [AuthService, JwtStrategy]
+  providers: [AuthService, JwtStrategy],
+  exports: [
+    PassportModule, 
+    JwtModule
+],
 })
 export class AuthModule {}

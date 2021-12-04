@@ -1,4 +1,5 @@
-import { Controller, Post, Body, Get, Param} from '@nestjs/common';
+import { Controller, Post, Body, Get, Param, UseGuards} from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { accountDto } from './account.dto'
 import { AccountService } from './account.service';
 
@@ -11,6 +12,7 @@ export class AccountController {
       return await this.accountService.newAccount(account);
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Get('/accountList/:id')
   async transaction(@Param('id') id: Number){
     return await this.accountService.findAccountById(id);
