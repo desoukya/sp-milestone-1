@@ -10,5 +10,9 @@ export default function Home() {
     setAccessToken(token);
   }, []);
 
+<<<<<<< HEAD
   return accessToken ?  <Login />:<Dashboard />;
+=======
+  return accessToken ? <Login />:<Dashboard />;
+>>>>>>> 9d0fb713c8da7e0cc810da86287d54c11c8981ec
 }
