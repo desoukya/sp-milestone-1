@@ -1,44 +1,49 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Param,
-  Request,
-  UseGuards,
-  Post,
-} from "@nestjs/common";
-import { AuthGuard } from "@nestjs/passport";
-import { TransactionService } from "../transaction/transaction.service";
+import { Controller, Get, Param, Post,} from "@nestjs/common";
 import { AccountService } from "./account.service";
-import { AccountDto } from "./dtos/account.dto";
-import {
-  Account,
-  AccountDocument,
-  Transaction,
-  TransactionSchema,
-} from "@sp/schemas";
+
 
 @Controller("accounts")
 export class AccountController {
-  // TODO: Define your account Endpoints
   constructor(private accountService: AccountService) {}
-
+ 
+   /**
+   * API endpoint handler for getting all accounts in the database
+   * @return array of all accounts
+   */
   @Get()
   findAll(): any {
     return this.accountService.findAll();
   }
+
+
+  /**
+   * API endpoint handler for getting all accounts in the database that has userid === userid given
+   * @param userid the id of the user that is retrieving the accounts that belongs to them
+   * @return array of accounts that have the userid required
+   */  
   @Get(":userid")
   GetAccount(@Param("userid") userid: string): any {
     return this.accountService.findAccounts(userid);
   }
 
-  //@UseGuards(AuthGuard('jwt'))
+
+  /**
+   * API endpoint handler for creating an account
+   * @param userid the id of the user that is creating the account
+   * @return created account
+   */ 
   @Post(":userid")
   CreateAccount(@Param("userid") userid: string): any {
-    const accountId = this.accountService.createAccount(userid);
-    return accountId;
+    const account = this.accountService.createAccount(userid);
+    return account;
   }
 
+
+  /**
+   * API endpoint handler for getting the balance of an account
+   * @param accountid the id of the account we want the balance of
+   * @return balance
+   */ 
   @Get("user/balance/:accountid")
   getAccountBalance(@Param("accountid") accountid: any) :any{
     const balance=this.accountService.calculateBalance(accountid);
