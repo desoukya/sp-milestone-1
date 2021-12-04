@@ -24,28 +24,12 @@ export function useMutateLoginUser() {
     }
   );
 }
-export function useMutateRegisterUser() {
-  return useMutation(user => {
-  const data = new FormData();
-  console.log(user)
-  return apiService.post(`http://localhost:3000/user/register`, user);
-},
-{
-  // When mutate is called:
-  onSuccess: (responseData) => {
-    // Redirect to login page------------>
-    window.location.replace("http://localhost:3000");
-  },
-  onError: (e) => console.log(e.message),
-});
 
-}
-/*
 export function useMutateRegisterUser() {
   return useMutation(user => {
   const data = new FormData();
   console.log(user)
-  return apiService.post(`http://localhost:3000/user/register`, user);
+  return apiService.post(`http://localhost:5000/user/register`, user);
 },
 {
   // When mutate is called:
@@ -56,7 +40,7 @@ export function useMutateRegisterUser() {
 });
 
 }
-*/
+
 export function useMutateUpdateUser(userId) {
   const queryClint = useQueryClient();
   return useMutation(
