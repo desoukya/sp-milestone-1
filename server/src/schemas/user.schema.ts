@@ -12,8 +12,16 @@ export const UserSchema = new mongoose.Schema({
 
 });
 
+<<<<<<< Updated upstream
 export interface User {
     name: string;
     email: string;
     password: string;
+=======
+  @Prop({ required: true })
+  email: string;
+
+  @Prop({ required: true })
+  password: string;
+>>>>>>> Stashed changes
 }
