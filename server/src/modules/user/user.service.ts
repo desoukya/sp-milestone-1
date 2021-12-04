@@ -3,6 +3,11 @@ import { InjectModel } from '@nestjs/mongoose';
 import { User, UserDocument } from '@sp/schemas';
 import { Model } from 'mongoose';
 import { RegisterDTO } from './dto/user.dto';
+import { AuthDto } from '../auth/dtos/auth.dto';
+
+import { JwtService } from '@nestjs/jwt';
+
+
 @Injectable()
 export class UserService {
   create: any;
@@ -11,6 +16,12 @@ export class UserService {
   /**
    * Returns all users from mongo database
    */
+ 
+   // async find(dto:AuthDto):Promise<User>{
+   //   return await this.userModel.findOne({ email: dto.email, password: dto.password}).exec();
+   // }
+ 
+   
   findAll(): Promise<User[]> {
     return this.userModel.find().exec();
   }
@@ -30,4 +41,7 @@ export class UserService {
     //add the users to database
   }
 
+  async findOne(dto:AuthDto, email:string, password:string):Promise <any>{
+    return await this.userModel.findOne({ email: dto.email, password: dto.password }).exec();
+  }
 }

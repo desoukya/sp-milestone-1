@@ -237,6 +237,9 @@ export default function Register() {
             valid={PhoneState === "has-success"}
             invalid={PhoneState === "has-danger"}
           />
+          <FormFeedback>
+            Phone number must be 11 numbers long.
+          </FormFeedback>
         </FormGroup>
         <FormGroup>
           <Label className={styles.label} for="user_id">
@@ -246,14 +249,11 @@ export default function Register() {
             type="number"
             name="user_id"
             id="user_id"
-            placeholder=""
+            placeholder="user id"
             onChange={handleChange}
             valid={User_idState === "has-success"}
             invalid={User_idState === "has-danger"}
           />
-          <FormFeedback>
-            Phone number must be 11 numbers long.
-          </FormFeedback>
         </FormGroup>
         <Button color="primary">Submit</Button>
       </Form>
