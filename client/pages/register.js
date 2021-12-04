@@ -33,7 +33,7 @@ export default function Register() {
   const [confirmPasswordState, setConfirmPasswordState] = useState("");
   const [userIds, setIds] = useState([]);
   const [userEmails, setEmails] = useState([]);
-  const [userPhones, setPhones] = useState([]);
+  const [userPhones, setUserPhones] = useState([]);
 
 
   const useRegisterMutation = useMutateRegisterUser();
@@ -42,6 +42,7 @@ export default function Register() {
 
 
   if(userId.length==0||isNaN(Number(userId))){setUserId(defaultId)};
+  
   
   useEffect(() => {
     axios.get(`http://localhost:5000/user/list`).then((myUser)=>{
@@ -54,6 +55,14 @@ export default function Register() {
       },[])
 
       setIds(ids);
+
+      //get all phone nos. of users to prevent registering using the same phone no.
+      var phones = useFetch.reduce((acc,user)=>{
+        acc.push(user.phone);
+        return acc;
+      },[])
+
+      setUserPhones(phones);
      
       //get all emails of users to prevent registering using the same email
       var emails = useFetch.reduce((acc,user)=>{
@@ -67,7 +76,10 @@ export default function Register() {
 },[userId])
   
   
-
+/**
+ * Checks if the first name the user typed is valid or not.
+ * @param {string} value -The first name of the user trying to register.
+ */
 
   const validateFirstName = (value) => {
     let firstNameState;
@@ -80,6 +92,10 @@ export default function Register() {
     setFirstNameState(firstNameState);
   }
 
+  /**
+ * Checks if the last name the user typed is valid or not.
+ * @param {string} value -The last name of the user trying to register.
+ */
 
   const validateLastName = (value) => {
     let lastNameState;
@@ -92,8 +108,15 @@ export default function Register() {
     setLastNameState(lastNameState);
   }
 
+  /**
+ * Checks if the GIU ID the user typed is valid or not.
+ * The ID must contain 7 numbers.
+ * @param {string} value -The GIU ID of the user trying to register.
+ */
+
   const validateUserId = (value) => {
     let userIdState;
+    //checks if this id is already registerd or not.
     var prevId=userIds.filter( id=> {return id === Number(value)});
 
 
@@ -107,12 +130,17 @@ export default function Register() {
     setUserIdState(userIdState);
   }
 
+  /**
+ * Checks if the Phone no. the user typed is valid or not.
+ * The Phone no. must be a valid Egyptain one.
+ * @param {string} value -The phone no. of the user trying to register.
+ */
 
   const validatePhone = (value) => {
     let phoneState;
     if(value.length>=3){
       const prefix = value.substring(0,3) ; 
-      if (value.length == 11 && !isNaN(Number(value)) && (prefix === "010" || prefix === "011" || prefix ===  "012" || prefix === "015")) {
+      if (value.length == 11 && !isNaN(Number(value)) && (prefix === "010" || prefix === "011" || prefix ===  "012" || prefix === "015") && !userPhones.find( phone=> phone===value)) {
         phoneState = "has-success";
       }
       else {
@@ -125,13 +153,16 @@ export default function Register() {
     setPhoneState(phoneState);
   }
 
-
+/**
+ * Checks if the email the user typed is valid or not.
+ * @param {string} value -The giu email of the user trying to register.
+ */
   const validateEmail = (value) => {
     const emailRegex =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     let emailState;
-    let alreadyUser=  useFetch;
+  //checks if this email is already registerd or not.
     if (emailRegex.test(value) && !userEmails.find( email=> email===value)) {
       emailState = "has-success";
     } else {
@@ -140,6 +171,11 @@ export default function Register() {
     setEmailState(emailState);
   };
 
+  /**
+ * Checks if the password the user typed is valid or not.
+ * The password must be 6 characters long.
+ * @param {string} value -The new password of the user trying to register.
+ */
   const validatePassword = (value) => {
     let PasswordState;
     if (value.length > 5) {
@@ -149,6 +185,11 @@ export default function Register() {
     }
     setPasswordState(PasswordState);
   };
+
+   /**
+ * Confirms the new password of the user.
+ * @param {string} value -The confirmed new password of the user trying to register.
+ */
 
   const validateConfirmPassword = (value) => {
     let confirmPasswordState;
@@ -213,11 +254,7 @@ export default function Register() {
     validatePassword(password);
     validateConfirmPassword(confirmPassword);
     validatePhone(phone);
-    console.log(userIdState);
-    console.log(userId);
 
-    
-    
 
     if (
       firstNameState==="has-success"&&
@@ -292,7 +329,7 @@ export default function Register() {
             type="Number"
             name="userId"
             id="userId"
-            placeholder="Enter User ID"
+            placeholder="Enter User ID (7 numbers)"
             onChange={handleChange}
             valid={userIdState === "has-success"}
             invalid={userIdState === "has-danger"}
@@ -369,7 +406,7 @@ export default function Register() {
             invalid={phoneState === "has-danger"}
           />
            <FormFeedback>
-            Phone number must be 11 numbers long.
+            Enter a valid phone no. or this phone has been used before.
           </FormFeedback>
         </FormGroup>
 

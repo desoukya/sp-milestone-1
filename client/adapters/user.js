@@ -1,5 +1,11 @@
 import apiService from "../services/apiService";
-import { useQuery, useQueryClient, useMutation } from "react-query";
+import { useQuery, useMutation } from "react-query";
+
+/**
+ * Retrieves a user by ID
+ * @param {string} userId - User's ID
+ * @returns {User} User object
+ */
 
 export  function useFetchUser(userId) {
   return useQuery(["userData", userId], () =>
@@ -7,14 +13,22 @@ export  function useFetchUser(userId) {
   );
 }
 
+/**
+ * Retrieves the authenticated user from the users DB
+ * if the user was found registerd his token and his data are saved in the local storage
+ * Otherwise, an alert is displayed
+ * @returns {useMutation} Axios Response that conatins the authinticated user.
+ */
+
   export function useMutateLoginUser() {
+    
       return useMutation(user => {
         return apiService.post(`http://localhost:5000/auth/login`, user);
       },
       {
         // When mutate is called:
         onSuccess: (responseData) => {   
-
+          //save the token and userData in localStorage 
           localStorage.setItem("jwt", responseData.data.token);  
           localStorage.setItem("user",JSON.stringify(responseData.data._doc));
           window.location.replace("http://localhost:3000")
@@ -26,11 +40,14 @@ export  function useFetchUser(userId) {
     
   }
   
+/**
+ * Registers the new User and redirect him to the login page
+ * @returns {useMutation} Axios Response that add the newely registerd user to the DB.
+ */
 
 export function useMutateRegisterUser() {
       return useMutation(user => {
       const data = new FormData();
-      console.log(user)
       return apiService.post(`http://localhost:5000/user/register`, user);
     },
     {
@@ -42,34 +59,4 @@ export function useMutateRegisterUser() {
       onError: (e) => console.log(e.message),
     });
   
-}
-
-export  function useMutateUpdateUser(userId) {
-  const queryClint = useQueryClient();
-  return useMutation(
-    (user) => {
-      const data = new FormData();
-      data.append("email", user.email);
-      data.append("password", user.password);
-      return apiService.post(`user/${userId}`, data);
-    },
-    {
-      // When mutate is called:
-      onSuccess: (responseData) => {
-        return queryClint.setQueryData(
-          ["userData", userId],
-          (data) => {
-            return [
-              {
-                email: responseData.data.body.email,
-                password: responseData.data.body.password,
-              },
-              ...data,
-            ];
-          }
-        );
-      },
-      onError: (e) => console.log(e.message),
-    }
-  );
 }

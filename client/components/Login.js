@@ -11,13 +11,17 @@ import styles from "../styles/Home.module.css";
 import {useMutateLoginUser} from '../adapters/user'
 
 export default function Login() {
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailState, setEmailState] = useState("");
   const useLoginMutations = useMutateLoginUser();
 
   
-
+/**
+ * Checks if the email the user typed is valid or not.
+ * @param {string} value -The giu email of the user
+ */
   const validateEmail = (value) => {
     const emailRegex =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
