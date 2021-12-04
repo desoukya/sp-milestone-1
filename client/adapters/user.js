@@ -8,13 +8,11 @@ export function useFetchUser(userId) {
 }
 
 export function useMutateLoginUser() {
-  return useMutation(
-    (user) => {
-      const data = new FormData();
-      data.append("email", user.email);
-      data.append("password", user.password);
-      return apiService.post(`user/login`, data);
-    },
+  return useMutation(user => {
+    const data = new FormData();
+    console.log(user)
+    return apiService.post(`http://localhost:5000/auth/login`, user);
+  },
     {
       // When mutate is called:
       onSuccess: (responseData) => {

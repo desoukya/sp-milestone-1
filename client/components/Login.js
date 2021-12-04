@@ -15,6 +15,8 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [emailState, setEmailState] = useState("");
 
+  const LoginUser = useMutateLoginUser();
+
   const validateEmail = (value) => {
     const emailRegex =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -42,6 +44,10 @@ export default function Login() {
     event.preventDefault();
     //Call User Login Adapter
     //useMutateLoginUser({ email, password });
+    LoginUser.mutate({
+      "email":email,
+      "password":password
+    })
   };
 
   return (
@@ -76,7 +82,9 @@ export default function Login() {
             onChange={handleChange}
           />
         </FormGroup>
+        
         <Button color="primary">Submit</Button>
+        
       </Form>
     </div>
   );
