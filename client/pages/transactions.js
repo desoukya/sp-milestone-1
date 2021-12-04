@@ -21,22 +21,19 @@ export default function Dashboard() {
     const response = await apiService.get(
       `http://localhost:5000/transactions/${accountId}`
     );
+
     viewTransactions(response.data);
     calculateBalance(accountId);
+
   }, []);
 
+  //getting the balance of the account
   const calculateBalance = async (accountid) => {
     const response = await apiService.get(
       `http://localhost:5000/accounts/user/balance/${accountid}`
     );
     setBalance(response.data);
   };
-  const handleLogout= ()=>{
-    window.localStorage.removeItem("jwt");
-    window.localStorage.removeItem("user");
-    window.localStorage.removeItem("accountid");
-    window.location.replace("http://localhost:3000");
-};
 
   return (
     <div className={styles.border}>
