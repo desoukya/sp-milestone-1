@@ -31,6 +31,9 @@ export default function Register() {
   const [emailState, setEmailState] = useState("");
   const [passwordState, setPasswordState] = useState("");
   const [confirmPasswordState, setConfirmPasswordState] = useState("");
+  const [userIds, setIds] = useState([]);
+  const [userEmails, setEmails] = useState([]);
+  const [userPhones, setPhones] = useState([]);
 
 
   const useRegisterMutation = useMutateRegisterUser();
@@ -41,13 +44,30 @@ export default function Register() {
   if(userId.length==0||isNaN(Number(userId))){setUserId(defaultId)};
   
   useEffect(() => {
-    axios.get(`http://localhost:5000/user/${userId}`).then((myUser)=>{
+    axios.get(`http://localhost:5000/user/list`).then((myUser)=>{
       setUseFetch(myUser.data);
+
+      //get all ids of users to prevent registering using the same id
+      var ids = useFetch.reduce((acc,user)=>{
+        acc.push(user.userId);
+        return acc;
+      },[])
+
+      setIds(ids);
+     
+      //get all emails of users to prevent registering using the same email
+      var emails = useFetch.reduce((acc,user)=>{
+        acc.push(user.email);
+        return acc;
+      },[]);
+
+      setEmails(emails);
+      
     })
 },[userId])
   
   
-    
+
 
   const validateFirstName = (value) => {
     let firstNameState;
@@ -74,14 +94,11 @@ export default function Register() {
 
   const validateUserId = (value) => {
     let userIdState;
+    var prevId=userIds.filter( id=> {return id === Number(value)});
+
+
     
-      // Call User Register Adapter
-      let alreadyUser=  useFetch;
-      console.log(alreadyUser);
-  
-    
-    
-    if (value.length == 7 && !isNaN(Number(value)) && alreadyUser.length==0) {
+    if (value.length == 7 && !isNaN(Number(value)) && prevId.length === 0) {
       userIdState = "has-success";
     }
     else {
@@ -114,7 +131,8 @@ export default function Register() {
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     let emailState;
-    if (emailRegex.test(value)) {
+    let alreadyUser=  useFetch;
+    if (emailRegex.test(value) && !userEmails.find( email=> email===value)) {
       emailState = "has-success";
     } else {
       emailState = "has-danger";
@@ -209,8 +227,6 @@ export default function Register() {
       passwordState === "has-success" &&
       confirmPasswordState === "has-success"&&
       phoneState==="has-success"
-
-
     ) {
       // Call User Register Adapter
       useRegisterMutation.mutate(
@@ -273,7 +289,7 @@ export default function Register() {
             GIU ID: 
           </Label>
           <Input
-            type="text"
+            type="Number"
             name="userId"
             id="userId"
             placeholder="Enter User ID"
