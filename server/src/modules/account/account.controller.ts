@@ -1,16 +1,18 @@
-import { Body, Controller, Get, Request, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Request, UseGuards,Headers } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { accountService } from './account.service';
 
-@Controller("accounts")
+@Controller('accounts')
 export class AccountController {
   constructor(private accountService: accountService) {}
 
- 
-  @UseGuards(AuthGuard('jwt'))
+ @UseGuards(AuthGuard('jwt'))
+  @Get('lists')
+  users(): any {
+    return this.accountService.findAll();}
+
   @Get()
-  getAccouts(@Body() req:any){
-    console.log(req);
+  getAccouts(@Headers() req:any){
     return this.accountService.getAll(req);
     }
 }
