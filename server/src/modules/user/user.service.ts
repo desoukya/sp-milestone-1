@@ -15,16 +15,18 @@ export class UserService {
   private transactionService:TransactionService) {}
 
 
-
+  /**
+   * Gets the user from the mongo database
+   * @param {AuthDto} dto checks if user has entered an email and a password 
+   * @return {User} the user from the mongo database
+   */
    async findOneUser(dto:AuthDto):Promise<User>{
-     
-     // const yallaUser=this.userModel.find({ email: dto.email,password:dto.password}).exec();
      
       return await this.userModel.findOne({ email: dto.email,password:dto.password}).exec();
      
    }
-    
 
+    
   /**
    * Returns all users from mongo database
    */
@@ -32,6 +34,12 @@ export class UserService {
     return this.userModel.find().exec();
   }
 
+  
+  /**
+   * Creates a user in the mongo database  
+   * @param {UserDto} dto checks that the user filled the register 
+   * @return {User} the created user object
+   */
   async createUser(dto: UserDto):Promise<User>{
      
     const newUser = new this.userModel(dto);
@@ -40,16 +48,23 @@ export class UserService {
     let dd = String(today.getDate()).padStart(2, '0');
     let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     let yyyy = today.getFullYear();
-
     
     const tdto:TransactionDto = {accountid:(newAccount).accountid.toString(),amount:100,credit:1,debit:0,Display_date:today.toDateString(),name:"Initial deposit"}
     const newTransaction = await this.transactionService.createTransaction(tdto);
     return newUser.save();  
+
   }
 
+
+   /**
+   * Gets user by id from the mongo database  
+   * @param userId the id of the user to find
+   * @return user object
+   */
   async findUserbyId(userId:string):Promise <any>{
 
     return await this.userModel.findOne({ userId:Number(userId)}).exec();
+
   }
 
 }
