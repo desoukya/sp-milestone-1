@@ -18,7 +18,7 @@ export function useMutateLoginUser() {
       onSuccess: (responseData) => {
         localStorage.setItem("jwt", responseData.data.token);
         localStorage.setItem("user",JSON.stringify(responseData.data._doc));
-        window.location.replace("http://localhost:3000/");
+        window.location.replace("http://localhost:3000/Dashboard");
       },
       onError: (e) => console.log(e.message),
     }

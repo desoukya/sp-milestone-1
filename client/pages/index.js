@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Login from "../components/Login";
-import Dashboard from "../components/Dashboard";
+import Dashboard from "./Dashboard";
 
 export default function Home() {
   const [accessToken, setAccessToken] = useState("");
