@@ -12,13 +12,11 @@ export function useMutateLoginUser() {
     const data = new FormData();
     console.log(user)
     return apiService.post(`http://localhost:5000/auth/login`, user);
-   },
+  },
     {
       // When mutate is called:
       onSuccess: (responseData) => {
-        localStorage.setItem("jwt", responseData.data.token);  
-        localStorage.setItem("user",JSON.stringify(responseData.data._doc));
-        window.location.replace("http://localhost:3000")
+        // Store Token in local storage
       },
       onError: (e) => console.log(e.message),
     }
@@ -26,24 +24,19 @@ export function useMutateLoginUser() {
 }
 
 export function useMutateRegisterUser() {
-  return useMutation(
-    (user) => {
-      const data = new FormData();
-     // data.append("email", user.email);
-     // data.append("password", user.password);
-      console.log(user);
-      return apiService.post(`http://localhost:5000/user/register`, user);
-    },
-    {
-      // When mutate is called:
-      onSuccess: (responseData) => {
-        // Redirect to login page
-        window.location.replace("http://localhost:3000")
+  return useMutation(user => {
+  const data = new FormData();
+  console.log(user)
+  return apiService.post(`http://localhost:5000/user/register`, user);
+},
+{
+  // When mutate is called:
+  onSuccess: (responseData) => {
+    window.location.replace("http://localhost:3000")
+  },
+  onError: (e) => console.log(e.message),
+});
 
-      },
-      onError: (e) => console.log(e.message),
-    }
-  );
 }
 
 export function useMutateUpdateUser(userId) {
