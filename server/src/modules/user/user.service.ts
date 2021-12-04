@@ -42,7 +42,7 @@ export class UserService {
     let yyyy = today.getFullYear();
 
     
-    const tdto:TransactionDto = {accountid:(newAccount).accountid.toString(),amount:100,credit:1,debit:0,Display_date:today.toDateString(),name:"Initial deposit"}
+    const tdto:TransactionDto = {from_To:"Bank",accountid:(newAccount).accountid.toString(),amount:100,credit:1,debit:0,Display_date:today.toDateString(),name:"Initial deposit"}
     const newTransaction = await this.transactionService.createTransaction(tdto);
     return newUser.save();  
   }

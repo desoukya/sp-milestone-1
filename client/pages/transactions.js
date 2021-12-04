@@ -51,17 +51,20 @@ export default function Dashboard() {
       <Table striped bordered hover>
         <thead className="thead-dark">
           <tr align='center'>
+          <th scope="col">From/To</th>
             <th scope="col">Date</th>
             <th scope="col">Transaction name</th>
             <th scope="col">Credit</th>
             <th scope="col">Debit</th>
             <th scope="col">Amount</th>
+
           </tr>
         </thead>
         <tbody>
           {" "}
           {Transactions.map((Transaction, key) => (
             <tr align='center'>
+              <td>{Transaction.from_To}</td>
               <td>{Transaction.Display_date}</td>
               <td>{Transaction.name}</td>
               <td>{Transaction.credit ? Transaction.amount : "  "}</td>

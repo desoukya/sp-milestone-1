@@ -10,6 +10,17 @@ export type AccountDocument = Account & Document;
   name will be users.
 
   For additional info, visit: https://docs.nestjs.com/techniques/mongodb
+
+  * @property {string}  userid       -displays user's id 
+  * @property {string}  status       -displays status of account wether active / inactive 
+  * @property {string}  accountid    -displays account's 
+  
+  for account to be made it must have 
+  userid:"1001619",
+  status:"Active",
+  accountid:"50100111130"
+
+
 */
 @Schema()
 export class Account {
