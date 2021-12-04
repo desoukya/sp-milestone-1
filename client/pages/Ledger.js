@@ -16,7 +16,7 @@ this.state = {
 componentDidMount() {
 console.log("Mounting!");
 const accountid = localStorage.getItem("accountid");
-axios.get("http://localhost:5000/transaction/${accountid}").then((response) => this.setState({ transactions: response.data }));
+axios.get('http://localhost:5000/transaction/${accountid}').then((response) => this.setState({ transactions: response.data }));
 }
 // viewTransactions(response.data);
 // Runs when the component is updated
