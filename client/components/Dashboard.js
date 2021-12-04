@@ -21,13 +21,6 @@ export default function Dashboard() {
     viewAccounts(response.data)
 },[]);
 
-
-  //   const calculateBalance = (accountid) => {
-  //     const response =  apiService.get(`http://localhost:5000/accounts/user/balance/${accountid}`);
-  //     setBalance(response);
-  //     console.log(response?"not empty":"empty");
-  // }
-    
  
   return (
     <div className={styles.border}>
@@ -67,6 +60,5 @@ export default function Dashboard() {
     }
   
 
-  //return <div>DASHBOARD</div>;
 
 

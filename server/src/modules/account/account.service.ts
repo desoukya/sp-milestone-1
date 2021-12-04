@@ -53,7 +53,7 @@ export class AccountService {
   /**
    * It calculates the balance of user by adding credit and subtracting debit
    * where credit and debit are numbers that are considered boolean (1 is true and 0 is false)
-   * @param accountid the id of the account you want to get the balance for
+   * @param accountid the id of the account you want to get the balance 
    * @return the balance of the account
    */
 
