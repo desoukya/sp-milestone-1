@@ -12,7 +12,7 @@ export class AuthService {
   constructor(private readonly UserService: UserService,private readonly jwtService: JwtService) {}
 
   async validateUser(dto: AuthDto, email: string, pass: string): Promise<any> {
-    const user = await this.UserService.findOne(dto);
+    const user = await this.UserService.findOne(dto, dto.email, dto.password);
     if (user && user.password === pass) {
       const { password, ...result } = user;
       return result;
@@ -22,7 +22,7 @@ export class AuthService {
 
   async login(dto: AuthDto) {
     const payload = 
-      await this.UserService.findOne(dto);
+      await this.UserService.findOne(dto, dto.email, dto.password);
     if( payload == null) 
       throw new UnauthorizedException('can not find user');
     else {

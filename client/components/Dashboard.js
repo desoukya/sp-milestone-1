@@ -1,9 +1,5 @@
 import React from "react";
 
-<<<<<<< Updated upstream
-export default function Dashboard() {
-  return <div>DASHBOARD</div>;
-=======
 
 export default function Dashboard() { //return <div>DASHBOARD</div>;
 
@@ -15,5 +11,4 @@ export default function Dashboard() { //return <div>DASHBOARD</div>;
    </div>
    );
 
->>>>>>> Stashed changes
 }
