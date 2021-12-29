@@ -1,19 +1,19 @@
 import { IsNotEmpty } from 'class-validator';
 export class Transactiondata{
 
-    //@IsNotEmpty()
+    @IsNotEmpty()
     Display_date: string;
 
-    //@IsNotEmpty()
+    @IsNotEmpty()
     debit: number;
 
 
     credit: number;
 
-    //@IsNotEmpty()
+    @IsNotEmpty()
     amount: number;
 
-    //@IsNotEmpty()
+    @IsNotEmpty()
     accountid: string;
 
   }
