@@ -1,57 +1,60 @@
 import React, { useEffect, useState } from 'react';
+import apiService from "../services/apiService";
 import Table from 'react-bootstrap/Table'
+import {
+  Form,
+  FormGroup,
+  Button
+} from "reactstrap";
+import styles from "../styles/Home.module.css";
 
-export default function Dashboard() { //return <div>DASHBOARD</div>;
+export default function Dashboard() {
+  const [accounts, viewAccounts] = useState([]);
+  
+  //useEffect(async () => {
+    //console.log("Mounting!");
+    //const user = JSON.parse(localStorage.getItem("user")).userId;
+    //const response = await apiService.get(`http://localhost:5000/accounts/${user}`)
+    //viewAccounts(response.data)
+  //},[]);
 
-
-  //backend is working but couldnt connect it with the front end
-
-
-  const accounts=[
-        {id:1, balance:2000,statuss:"active"},
-        {id:2, balance:50000,statuss:"active"},
-        {id:3, balance:22000,statuss:"active"},
-        {id:4, balance:0,statuss:"inactive"},
-        {id:5, balance:10000,statuss:"active"},
-        {id:6, balance:0,statuss:"inactive"},
-        {id:7, balance:24000,statuss:"active"},
-
-    ]
-    const renderAccount =(account,index)=>{
-      return(
-        <tr key={index}>
-          <td>{account.id}</td>          <td>{account.balance}</td>
-          <td>{account.statuss}</td>
-          </tr>
-      )
-    }
-    const handleLogout= ()=>{
-      window.localStorage.removeItem("jwt"),
-      window.localStorage.removeItem("user"),
-      window.localStorage.removeItem("accountid"),
-      window.location.replace("http://localhost:3000/");
-  };
-
-
+ 
   return (
-    <div> DASHBOARD
-
-      <Table striped bordered hover>
-        <thead className="Dash">
-          <tr>
-            <th scope="col">id</th>
-            <th scope="col">balance</th>
-            <th scope="col">status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {accounts.map(renderAccount)}
-
-
+    <div className={styles.border}>
+      <h1 >Accounts</h1>
+       <Form className={styles.form}>
+      <FormGroup >
+      <Table  striped bordered hover >
+      <thead className="thead-dark">
+        <tr align='center'>
+          <th align='center' scope="col">#</th>
+          <th align='center' scope="col">Status</th>
+          <th align='center' scope="col">Transactions</th>
+        </tr>
+      </thead>
+      <tbody>{
+        accounts.map((account , key) => (
+        <tr>  
+           <><td align='center'>{key}</td>
+             <td align='center'>{account.status}</td>
+             <td align='center'>
+              <Button color="outline-info" size="sm"  onClick={()=>{
+                  localStorage.setItem("accountid", account.accountid),
+                  window.location.replace("http://localhost:3000/transactions")
+                }}>View Details</Button></td>
+             </>
+      
+        </tr>  ))}
         </tbody>
+        
       </Table>
-      <a href = "http://localhost:3000/">Logout</a> 
-    </div>
+      </FormGroup>
+     </Form>
+     <a href = "http://localhost:3000/">Logout</a>
+     
+     <a href = "http://localhost:3000/InnerT">Inner Transactions</a>  
+      </div>
+      
   );
 
 }

@@ -4,7 +4,8 @@ import { UsersModule } from "./modules/user/user.module";
 import { AuthModule } from "./modules/auth/auth.module";
 import { TransactionModule } from "./modules/transaction/transaction.module";
 import { ConfigModule } from "@nestjs/config";
-import { accountModule } from "./modules/account/account.module";
+import { AccountsModule } from "./modules/account/account.module";
+import { InnerTModule } from "./modules/InnerT/InnerT.module";
 
 @Module({
   imports: [
@@ -13,7 +14,8 @@ import { accountModule } from "./modules/account/account.module";
     MongooseModule.forRoot(process.env.MONGO_URL),
     TransactionModule,
     UsersModule,
-    accountModule
+    AccountsModule,
+    InnerTModule
   ],
 })
 export class AppModule {}

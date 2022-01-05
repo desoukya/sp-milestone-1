@@ -1,26 +1,37 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import {transcations, transcationsDocument } from './transaction.schema';
-import { Model } from 'mongoose';
-import { Transactiondata } from './transaction.data';
+import { Transaction,TransactionDocument } from "src/schemas/transaction.schema";
+import { Model, ObjectId } from 'mongoose';
+import internal from 'stream';
+import { TransactionDto } from './dto/transaction.dto';
 
 
 @Injectable()
-export class transactionService {
-  constructor(@InjectModel(transcations.name) private transcationsModel: Model<transcationsDocument>) {}
+export class TransactionService {
+  // TODO: Define your Transaction Service Logic
+
+  //getTrancation(takes the accountId)
+  constructor(@InjectModel(Transaction.name) private transactionModel: Model<TransactionDocument>) {}
 
   /**
    * Returns all users from mongo database
    */
-    getTranscation(accountid:string): Promise<any[]> {
-    return this.transcationsModel.find({accountid:accountid}).exec();
+
+   async getTrancation(accountid:string): Promise<Transaction[]> {
+    return await this.transactionModel.find({accountid:accountid}).exec();
    }
 
-  findAll(): Promise<any> {
-    return this.transcationsModel.find().exec();
+
+  async getAll():Promise<any>{
+    return await this.transactionModel.find().exec(); 
+   }
+
+  
+  createTransaction(dto: TransactionDto):Promise<Transaction>{     
+    const newTransaction = new this.transactionModel(dto);
+    return newTransaction.save();  
   }
-  createTransaction(data: Transactiondata):Promise<transcations>{
-    const newTransaction = new this.transcationsModel();
-    return newTransaction.save();
-  }
+  
+  
+
 }

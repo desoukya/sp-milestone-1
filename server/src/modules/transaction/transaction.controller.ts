@@ -1,38 +1,37 @@
-import { Body, Controller, Get, Param, Post, Request } from '@nestjs/common';
+import { Body, Controller, Get, Post, Request, UseGuards,Param } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { transactionService  } from './transaction.service';
+import { TransactionService } from './transaction.service';
+import {TransactionDto} from './dto/transaction.dto'
 import {ObjectId} from 'mongoose';
-import { Transactiondata } from './transaction.data';
-import { transcations } from './transaction.schema';
 
 
-@Controller('transaction')
-export class TransactionController  {
-  constructor(private transactionService: transactionService ) {}
+@Controller('transactions')
+export class TransactionController {
+  // TODO: Define your Transaction Endpoints
+  constructor(private transactionService: TransactionService) {}
 
-  /*
+  /**
    * API endpoint handler returns the authenticated user from JWT payload
    */
-  // @UseGuards(AuthGuard('jwt'))
-  @Get()
-  transcations(@Request() req: any): any {
-    return req.transcations;
+
+  //@UseGuards(AuthGuard('jwt'))
+
+
+
+@Get()
+getAll():any{
+  return this.transactionService.getAll();
+}
+
+
+  @Get(':accountId')
+  transaction(@Param('accountId') accountId: string): any {
+    return this.transactionService.getTrancation(accountId);
   }
 
-  /*
-   * API endpoint handler returns all users from mongo database
-   */
-  // @UseGuards(AuthGuard('jwt'))
- 
-  @Get('accountid')
-  transactions(@Param('accountid') accountid: string): any {
-    return this.transactionService. getTranscation(accountid);
-
-
-  }
-  @Post(':accountid')
-  CreateTransaction(@Body() data:Transactiondata):any{
-      const transaction = this.transactionService.createTransaction(data);
+  @Post('')
+  CreateTransaction(@Body() dto:TransactionDto):any{
+      const transaction = this.transactionService.createTransaction(dto);
       return transaction;
   }
 }
