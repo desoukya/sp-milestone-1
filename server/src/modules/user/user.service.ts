@@ -42,8 +42,8 @@ export class UserService {
     }
     const createUser = new this.userModel(userDto);
     createUser.balance = 100;
-    const tdto:TransactionDto = {accountid:(newAccount).accountid.toString(),credit:1,amount:100,name:"Initial deposit"}
-    const newTransaction = await this.transactionService.createTransaction(tdto);
+    const tdto:TransactionDto = {accountid:(newAccount).accountid.toString(),credit:1,amount:100,name:"any"}
+    const newTransaction = await this.transactionService.createSenderTransaction(tdto);
     await createUser.save();
     return this.sanitizedUser(createUser);
     //add the users to database

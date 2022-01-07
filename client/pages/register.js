@@ -6,8 +6,8 @@ import {
   Label,
   FormFeedback,
 } from "reactstrap";
-import { useState } from "react";
 import styles from "../styles/Home.module.css";
+import { useState } from "react";
 import { useMutateRegisterUser } from "../adapters/user.js";
 
 export default function Register() {

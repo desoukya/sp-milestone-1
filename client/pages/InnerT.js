@@ -6,8 +6,9 @@ import {
     Label,
     FormFeedback,
   } from "reactstrap";
-  import styles from "../styles/Home.module.css";
-  import { useState } from "react";
+import styles from "../styles/Home.module.css";
+import { useState } from "react";
+import { useMutateTransaction } from "../adapters/user";
 
 export default function InnerTrans() {
   const [name,setName] = useState("");
@@ -16,6 +17,8 @@ export default function InnerTrans() {
   const [nameState,setNameState] = useState("");
   const [valueState,setValueState] = useState("");
   const [useridState,setUseridState] = useState("");
+
+  const InnerTransaction = useMutateTransaction();
 
   const validateName = (value) => {
     let nameState;
@@ -52,12 +55,10 @@ export default function InnerTrans() {
     if(name === "name"){
       validateName(value);
       setName(value);
-    }
-    if(name === "value"){
+    }else if(name === "value"){
       validateValue(value);
       setValue(value);
-    }
-    if(name === "userid"){
+    }else if(name === "userid"){
       validateUserid(value);
       setUserid(value);
     }
@@ -66,12 +67,18 @@ export default function InnerTrans() {
   const handleSubmit = (event) => {
     event.preventDefault();
     validateName(name);
+    validateUserid(userid);
+    validateValue(value);
     if(
       nameState === "has-success" &&
       valueState === "has-success" &&
       useridState === "has-success"
     ){
-
+      InnerTransaction.mutate({
+        "name":name,
+        "value":value,
+        "userid":userid
+      })
     }
   };
   

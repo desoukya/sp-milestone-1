@@ -67,3 +67,17 @@ export function useMutateUpdateUser(userId) {
     }
   );
 }
+export function useMutateTransaction(){
+  return useMutation(transferUser => {
+    const data = new FormData();
+    console.log(transferUser)
+    return apiService.post(`http://localhost:5000/transaction/inner`, transferUser);
+  },
+  {
+    // When mutate is called:
+    onSuccess: (responseData) => {
+      window.location.replace("http://localhost:3000/Dashboard")
+    },
+    onError: (e) => console.log(e.message),
+  });
+}

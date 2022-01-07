@@ -4,34 +4,19 @@ import { TransactionService } from './transaction.service';
 import {TransactionDto} from './dto/transaction.dto'
 import {ObjectId} from 'mongoose';
 
-
 @Controller('transaction')
 export class TransactionController {
-  // TODO: Define your Transaction Endpoints
   constructor(private transactionService: TransactionService) {}
 
-  /**
-   * API endpoint handler returns the authenticated user from JWT payload
-   */
-
-  //@UseGuards(AuthGuard('jwt'))
-
-
-
-@Get()
-getAll():any{
-  return this.transactionService.getAll();
-}
-
-
-  @Get(':accountId')
-  transaction(@Param('accountId') accountId: string): any {
-    return this.transactionService.getTrancation(accountId);
+  @Get()
+  getAll():any{
+    return this.transactionService.getAll();
   }
 
-  @Post('')
-  CreateTransaction(@Body() dto:TransactionDto):any{
-      const transaction = this.transactionService.createTransaction(dto);
-      return transaction;
+  @Post('inner')
+  inner(@Body() senderDto:TransactionDto):any{
+      const sender = this.transactionService.createSenderTransaction(senderDto);
+      const reciever = this.transactionService.createRecieverTransaction(senderDto);
+      return [sender,reciever];
   }
 }

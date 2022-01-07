@@ -50,23 +50,4 @@ export class AccountService {
     });
     return createdAccount.save();
   }
-
-  /**
-   * It calculates the balance of user by adding credit and subtracting debit
-   * where credit and debit are numbers that are considered boolean (1 is true and 0 is false)
-   * @param accountid the id of the account you want to get the balance 
-   * @return the balance of the account
-   */
-
-  async calculateBalance(accountId: string): Promise<any> {
-    const transaction: Transaction[] =
-      await this.transactionService.getTrancation(accountId);
-    const total = transaction.reduce((acc, transaction) => {
-      var value = transaction.credit
-        ? transaction.amount
-        : transaction.amount * -1;
-      return acc + value;
-    }, 0);
-    return total;
-  }
 }

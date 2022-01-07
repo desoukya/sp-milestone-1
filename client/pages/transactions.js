@@ -13,25 +13,15 @@ import {
 export default function Dashboard() {
   const [Transactions, viewTransactions] = useState([]);
   const [balance, setBalance] = useState(" ");
-  const [data, dataSet] = useState("")
-  /*useEffect(() => {
+  useEffect(() => {
     (async function(){
       console.log("Mounting!");
       const accountId = localStorage.getItem("accountid");
-      const response = await apiService.get(`http://localhost:5000/transactions/${accountId}`);
+      const response = await apiService.get(`http://localhost:5000/transaction/${accountId}`);
       viewTransactions(response.data);
       calculateBalance(accountId);
     })
-  }, []);*/
-  useEffect(() => {
-    async function fetchMyAPI() {
-      let response = await fetch('http://localhost:5000/transactions')
-      response = await response.json()
-      dataSet(response)
-    }
-
-    fetchMyAPI()
-  }, [])
+  }, []);
   //getting the balance of the account
   const calculateBalance = async (accountid) => {
     const response = await apiService.get(
@@ -45,7 +35,7 @@ export default function Dashboard() {
       <br></br>
       <h2 >Account Balance: {balance}$</h2>
       <Form className={styles.form}>
-      <FormGroup >
+      <FormGroup>
       <Table striped bordered hover>
         <thead className="thead-dark">
           <tr align='center'>
@@ -59,7 +49,7 @@ export default function Dashboard() {
           {Transactions.map((Transaction, key) => (
             <tr align='center'>
               <td>{Transaction.name}</td>
-              <td>{Transaction.credit ? Transaction.amount : "  "}</td>
+              <td>{Transaction.credit}</td>
               <td>{Transaction.amount}</td>
             </tr>
           ))}
