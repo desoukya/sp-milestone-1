@@ -29,17 +29,9 @@ export type TransactionDocument = Transaction & Document;
 */
 @Schema()
 export class Transaction {
-  @Prop({ required: true })
-  from_To: string;
-
-  @Prop({ required: true })
-  Display_date: string;
 
   @Prop({ required: true })
   name: string;
-
-  @Prop({ required: false })
-  debit: number;
 
   @Prop({ required: false })
   credit: number;

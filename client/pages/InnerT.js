@@ -131,6 +131,8 @@ export default function InnerTrans() {
           </FormFeedback>
         </FormGroup>
         <Button color="primary">Submit</Button>
+      </Form>
+      <Form className={styles.form} onSubmit={handleSubmit}>
         <a href = "http://localhost:3000/Dashboard">Transactions</a>
       </Form>
     </div>
