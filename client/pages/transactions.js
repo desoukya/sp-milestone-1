@@ -13,15 +13,25 @@ import {
 export default function Dashboard() {
   const [Transactions, viewTransactions] = useState([]);
   const [balance, setBalance] = useState(" ");
-
-  useEffect(() => {
+  const [data, dataSet] = useState("")
+  /*useEffect(() => {
     (async function(){
-    console.log("Mounting!");
-    const accountId = localStorage.getItem("accountid");
-    const response = await apiService.get(`http://localhost:5000/transactions/${accountId}`);
-    viewTransactions(response.data);
-    calculateBalance(accountId);})
-  }, []);
+      console.log("Mounting!");
+      const accountId = localStorage.getItem("accountid");
+      const response = await apiService.get(`http://localhost:5000/transactions/${accountId}`);
+      viewTransactions(response.data);
+      calculateBalance(accountId);
+    })
+  }, []);*/
+  useEffect(() => {
+    async function fetchMyAPI() {
+      let response = await fetch('http://localhost:5000/transactions')
+      response = await response.json()
+      dataSet(response)
+    }
+
+    fetchMyAPI()
+  }, [])
   //getting the balance of the account
   const calculateBalance = async (accountid) => {
     const response = await apiService.get(
@@ -40,6 +50,7 @@ export default function Dashboard() {
         <thead className="thead-dark">
           <tr align='center'>
             <th scope="col">Transaction name</th>
+            <th scope="col">Credit</th>
             <th scope="col">Amount</th>
           </tr>
         </thead>
@@ -48,6 +59,7 @@ export default function Dashboard() {
           {Transactions.map((Transaction, key) => (
             <tr align='center'>
               <td>{Transaction.name}</td>
+              <td>{Transaction.credit ? Transaction.amount : "  "}</td>
               <td>{Transaction.amount}</td>
             </tr>
           ))}

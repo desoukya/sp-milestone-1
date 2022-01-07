@@ -29,7 +29,7 @@ export class User {
   phone: number;
 
   @Prop({ required: true })
-  user_id: number;
+  userId: number;
 
   @Prop({ required: true })
   balance: number;

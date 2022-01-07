@@ -14,7 +14,7 @@ export default function Dashboard() {
   useEffect(() => {
     (async function(){
     console.log("Mounting!");
-    const user = JSON.parse(localStorage.getItem("user")).userId;
+    const user = JSON.parse(localStorage.getItem("user")).user_id;
     const response = await apiService.get(`http://localhost:5000/accounts/${user}`)
     viewAccounts(response.data)
     })
@@ -55,6 +55,9 @@ export default function Dashboard() {
       </Form>
       <Form>
         <a href = "http://localhost:3000/InnerT">Inner Transactions</a>
+      </Form>
+      <Form>
+        <a href = "http://localhost:3000/transactions">Transactions</a>
       </Form>
     </div>   
   );

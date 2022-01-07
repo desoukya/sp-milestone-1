@@ -36,7 +36,7 @@ export class UserService {
     const {username} = userDto;
     const user = await this.userModel.findOne({username});
     const newUser = new this.userModel(userDto);
-    const newAccount = await this.accountService.createAccount(newUser.user_id.toString());
+    const newAccount = await this.accountService.createAccount(newUser.userId.toString());
     if(user){
       throw new HttpException('user already exist', HttpStatus.BAD_REQUEST);
     }
