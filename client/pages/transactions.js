@@ -45,7 +45,7 @@ export default function Dashboard() {
           </tr>
         </thead>
         <tbody>
-          {" "}
+          
           {Transactions.map((Transaction, key) => (
             <tr align='center'>
               <td>{Transaction.name}</td>

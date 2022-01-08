@@ -11,24 +11,12 @@ import { useState } from "react";
 import { useMutateTransaction } from "../adapters/user";
 
 export default function InnerTrans() {
-  const [name,setName] = useState("");
   const [value,setValue] = useState("");
   const [userid,setUserid] = useState("");
-  const [nameState,setNameState] = useState("");
   const [valueState,setValueState] = useState("");
   const [useridState,setUseridState] = useState("");
 
   const InnerTransaction = useMutateTransaction();
-
-  const validateName = (value) => {
-    let nameState;
-    if (value.length >= 2) {
-      nameState = "has-success";
-    } else {
-      nameState = "has-danger";
-    }
-    setNameState(nameState);
-  };
 
   const validateValue = (value) => {
     let valueState;
@@ -52,10 +40,7 @@ export default function InnerTrans() {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    if(name === "name"){
-      validateName(value);
-      setName(value);
-    }else if(name === "value"){
+    if(name === "value"){
       validateValue(value);
       setValue(value);
     }else if(name === "userid"){
@@ -66,16 +51,13 @@ export default function InnerTrans() {
   
   const handleSubmit = (event) => {
     event.preventDefault();
-    validateName(name);
     validateUserid(userid);
     validateValue(value);
     if(
-      nameState === "has-success" &&
       valueState === "has-success" &&
       useridState === "has-success"
     ){
       InnerTransaction.mutate({
-        "name":name,
         "value":value,
         "userid":userid
       })
@@ -86,23 +68,6 @@ export default function InnerTrans() {
     <div className={styles.App}>
       <h2>Inner Transactions</h2>
       <Form className={styles.form} onSubmit={handleSubmit}>
-        <FormGroup>
-          <Label className={styles.label} for="name">
-          Name
-          </Label>
-          <Input
-            type="text"
-            name="name"
-            id="name"
-            placeholder="name"
-            onChange={handleChange}
-            valid={nameState === "has-success"}
-            invalid={nameState === "has-danger"}
-          />
-          <FormFeedback>
-                
-          </FormFeedback>
-        </FormGroup>
         <FormGroup>
           <Label className={styles.label} for="value">
           Value
@@ -130,11 +95,11 @@ export default function InnerTrans() {
             id="userid"
             placeholder="Enter the ID"
             onChange={handleChange}
-            valid={nameState === "has-success"}
-            invalid={nameState === "has-danger"}
+            valid={useridState === "has-success"}
+            invalid={useridState === "has-danger"}
           />
           <FormFeedback>
-                
+          
           </FormFeedback>
         </FormGroup>
         <Button color="primary">Submit</Button>

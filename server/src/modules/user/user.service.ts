@@ -41,9 +41,8 @@ export class UserService {
       throw new HttpException('user already exist', HttpStatus.BAD_REQUEST);
     }
     const createUser = new this.userModel(userDto);
-    createUser.balance = 100;
-    const tdto:TransactionDto = {accountid:(newAccount).accountid.toString(),credit:1,amount:100,name:"any"}
-    const newTransaction = await this.transactionService.createSenderTransaction(tdto);
+    const tdto:TransactionDto = {accountid:(newAccount).accountid,credit:1,amount:100}
+    const newTransaction = await this.transactionService.createTransaction(tdto);
     await createUser.save();
     return this.sanitizedUser(createUser);
     //add the users to database

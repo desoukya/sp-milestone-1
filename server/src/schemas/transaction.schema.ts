@@ -6,9 +6,6 @@ export type TransactionDocument = Transaction & Document;
 @Schema()
 export class Transaction {
 
-  @Prop({ required: true })
-  name: string;
-
   @Prop({ required: false })
   credit: number;
 
