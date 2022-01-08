@@ -51,6 +51,7 @@ export default function Dashboard() { //return <div>DASHBOARD</div>;
         </tbody>
       </Table>
       <a href = "http://localhost:3000/">Logout</a> 
+      <a href = "http://localhost:3000/Ledger/">Ledger</a> 
     </div>
   );
 

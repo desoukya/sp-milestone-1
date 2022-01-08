@@ -30,6 +30,11 @@ export class User {
 
   @Prop({ required: true })
   user_id: number;
+
+  
+  @Prop({ required: true })
+  balance: number;
+
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
