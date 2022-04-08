@@ -1,5 +1,4 @@
 import React from "react";
-
-export default function transactions() {
-  return <div>{/* ADD LOGIC HERE */}</div>;
-}
+import { useState } from "react";
+export default function transactions(props) {
+return <li className="transactions">{props.accountid}</li>;}
